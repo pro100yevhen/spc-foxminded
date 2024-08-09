@@ -1,6 +1,6 @@
 package ua.foxminded.domain.activity.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ua.foxminded.common.model.dto.OwnerDto;
 
 import java.time.LocalDateTime;
@@ -10,23 +10,18 @@ public class ActivityDto {
 
     private Long id;
 
-    @JsonProperty("deal_id")
     private Long dealId;
 
-    @JsonProperty("person_name")
     private String personName;
 
-    @JsonProperty("busy_flag")
     private boolean busy;
 
     private String type;
 
     private OwnerDto owner;
 
-    @JsonProperty("timestamp")
     private LocalDateTime updatedActivityDate;
 
-    @JsonProperty("add_time")
     private LocalDateTime createdActivityDate;
 
     public Long getId() {
