@@ -1,10 +1,12 @@
-package ua.foxminded.infrastructure.config.util.impl;
+package ua.foxminded.infrastructure.util.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 import ua.foxminded.common.exception.JsonParsingException;
-import ua.foxminded.infrastructure.config.util.JsonParser;
+import ua.foxminded.infrastructure.util.JsonParser;
 
+@Component
 public class JacksonJsonParserImpl implements JsonParser {
 
     private final ObjectMapper mapper;

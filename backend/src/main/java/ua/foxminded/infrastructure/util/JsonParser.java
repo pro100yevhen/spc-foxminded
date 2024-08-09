@@ -1,4 +1,4 @@
-package ua.foxminded.infrastructure.config.util;
+package ua.foxminded.infrastructure.util;
 
 import ua.foxminded.common.exception.JsonParsingException;
 
