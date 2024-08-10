@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Activity {
+public class ActivityEventModel {
 
     @JsonProperty("last_notification_time")
     private Long lastNotificationTime;
@@ -156,7 +156,7 @@ public class Activity {
     @JsonProperty("is_recurring")
     private Boolean isRecurring;
 
-    private List<Participant> participants;
+    private List<ParticipantEventModel> participants;
 
     @JsonProperty("location_subpremise")
     private String locationSubpremise;
@@ -197,7 +197,7 @@ public class Activity {
     @JsonProperty("add_time")
     private String addTime;
 
-    private User user;
+    private UserEventModel user;
 
     @JsonProperty("service_reference")
     private List<Object> serviceReference;
@@ -618,11 +618,11 @@ public class Activity {
         isRecurring = recurring;
     }
 
-    public List<Participant> getParticipants() {
+    public List<ParticipantEventModel> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(final List<Participant> participants) {
+    public void setParticipants(final List<ParticipantEventModel> participants) {
         this.participants = participants;
     }
 
@@ -738,11 +738,11 @@ public class Activity {
         this.addTime = addTime;
     }
 
-    public User getUser() {
+    public UserEventModel getUser() {
         return user;
     }
 
-    public void setUser(final User user) {
+    public void setUser(final UserEventModel user) {
         this.user = user;
     }
 

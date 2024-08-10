@@ -2,7 +2,7 @@ package ua.foxminded.domain.activity.model.event;
 
 import java.util.List;
 
-public class MatchesFilters {
+public class MatchesFiltersEventModel {
 
     private List<Object> current;
 

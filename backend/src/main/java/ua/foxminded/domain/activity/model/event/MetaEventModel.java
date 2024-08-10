@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class Meta {
+public class MetaEventModel {
     private String action;
 
     @JsonProperty("change_source")
@@ -21,7 +21,7 @@ public class Meta {
     private boolean isBulkUpdate;
 
     @JsonProperty("matches_filters")
-    private MatchesFilters matchesFilters;
+    private MatchesFiltersEventModel matchesFilters;
 
     private String object;
 
@@ -44,6 +44,7 @@ public class Meta {
 
     @JsonProperty("user_id")
     private Long userId;
+
     private Long v;
 
     @JsonProperty("activity_notifications_language")
@@ -103,11 +104,11 @@ public class Meta {
         isBulkUpdate = bulkUpdate;
     }
 
-    public MatchesFilters getMatchesFilters() {
+    public MatchesFiltersEventModel getMatchesFilters() {
         return matchesFilters;
     }
 
-    public void setMatchesFilters(final MatchesFilters matchesFilters) {
+    public void setMatchesFilters(final MatchesFiltersEventModel matchesFilters) {
         this.matchesFilters = matchesFilters;
     }
 

@@ -2,15 +2,15 @@ package ua.foxminded.domain.activity.model.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class WebhookEvent {
+public class WebhookActivityEventModel {
 
     private Long v;
 
     @JsonProperty("matches_filters")
-    private MatchesFilters matchesFilters;
-    private Meta meta;
-    private Activity current;
-    private Activity previous;
+    private MatchesFiltersEventModel matchesFilters;
+    private MetaEventModel meta;
+    private ActivityEventModel current;
+    private ActivityEventModel previous;
     private Long retry;
     private String event;
 
@@ -34,35 +34,35 @@ public class WebhookEvent {
         this.v = v;
     }
 
-    public MatchesFilters getMatchesFilters() {
+    public MatchesFiltersEventModel getMatchesFilters() {
         return matchesFilters;
     }
 
-    public void setMatchesFilters(final MatchesFilters matchesFilters) {
+    public void setMatchesFilters(final MatchesFiltersEventModel matchesFilters) {
         this.matchesFilters = matchesFilters;
     }
 
-    public Meta getMeta() {
+    public MetaEventModel getMeta() {
         return meta;
     }
 
-    public void setMeta(final Meta meta) {
+    public void setMeta(final MetaEventModel meta) {
         this.meta = meta;
     }
 
-    public Activity getCurrent() {
+    public ActivityEventModel getCurrent() {
         return current;
     }
 
-    public void setCurrent(final Activity current) {
+    public void setCurrent(final ActivityEventModel current) {
         this.current = current;
     }
 
-    public Activity getPrevious() {
+    public ActivityEventModel getPrevious() {
         return previous;
     }
 
-    public void setPrevious(final Activity previous) {
+    public void setPrevious(final ActivityEventModel previous) {
         this.previous = previous;
     }
 
