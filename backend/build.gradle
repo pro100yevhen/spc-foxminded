@@ -11,6 +11,15 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    //Mappers
+    implementation "org.modelmapper:modelmapper:$modelMapperVersion"
+    implementation "org.mapstruct:mapstruct:${mapStructMapperVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructMapperVersion}"
+
+    //Database
+    implementation 'com.h2database:h2'
+
 }
 
 group = 'ua.foxminded'
@@ -21,8 +30,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation "org.junit:junit-bom:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter"
 }
 
 test {

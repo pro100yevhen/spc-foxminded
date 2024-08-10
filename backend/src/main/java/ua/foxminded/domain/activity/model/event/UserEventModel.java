@@ -2,7 +2,7 @@ package ua.foxminded.domain.activity.model.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class User {
+public class UserEventModel {
 
     private String created;
 

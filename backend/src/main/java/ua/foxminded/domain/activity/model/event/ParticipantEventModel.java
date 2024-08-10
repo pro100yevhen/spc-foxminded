@@ -2,7 +2,7 @@ package ua.foxminded.domain.activity.model.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Participant {
+public class ParticipantEventModel {
 
     @JsonProperty("primary_flag")
     private boolean primaryFlag;

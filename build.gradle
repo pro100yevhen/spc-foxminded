@@ -13,6 +13,15 @@ java {
     }
 }
 
+allprojects {
+
+    ext{
+        modelMapperVersion = '3.0.0'
+        mapStructMapperVersion = '1.5.5.Final'
+        junitVersion = '5.10.0'
+    }
+}
+
 
 subprojects {
     apply plugin: 'java'

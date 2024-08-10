@@ -28,10 +28,10 @@ public class Activity extends BaseEntity {
     private String personName;
 
     @Column(name = "busy_flag")
-    private boolean busy;
+    private boolean busyFlag;
 
     @Column(name = "type")
-    private String type;
+    private String typeName;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
@@ -40,8 +40,8 @@ public class Activity extends BaseEntity {
     @Column(name = "updated_activity_date")
     private LocalDateTime updatedActivityDate;
 
-    @Column(name = "created_activity_date")
-    private LocalDateTime createdActivityDate;
+    @Column(name = "marked_as_done_time")
+    private LocalDateTime markedAsDoneTime;
 
     public Long getId() {
         return id;
@@ -67,20 +67,20 @@ public class Activity extends BaseEntity {
         this.personName = personName;
     }
 
-    public boolean isBusy() {
-        return busy;
+    public boolean isBusyFlag() {
+        return busyFlag;
     }
 
-    public void setBusy(final boolean busy) {
-        this.busy = busy;
+    public void setBusyFlag(final boolean busy) {
+        this.busyFlag = busy;
     }
 
-    public String getType() {
-        return type;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setType(final String type) {
-        this.type = type;
+    public void setTypeName(final String type) {
+        this.typeName = type;
     }
 
     public Owner getOwner() {
@@ -99,12 +99,12 @@ public class Activity extends BaseEntity {
         this.updatedActivityDate = updatedActivityDate;
     }
 
-    public LocalDateTime getCreatedActivityDate() {
-        return createdActivityDate;
+    public LocalDateTime getMarkedAsDoneTime() {
+        return markedAsDoneTime;
     }
 
-    public void setCreatedActivityDate(final LocalDateTime createdActivityDate) {
-        this.createdActivityDate = createdActivityDate;
+    public void setMarkedAsDoneTime(final LocalDateTime createdActivityDate) {
+        this.markedAsDoneTime = createdActivityDate;
     }
 
     @Override
@@ -113,11 +113,11 @@ public class Activity extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
 
         final Activity activity = (Activity) o;
-        return busy == activity.busy && Objects.equals(id, activity.id) && Objects.equals(dealId,
+        return busyFlag == activity.busyFlag && Objects.equals(id, activity.id) && Objects.equals(dealId,
                 activity.dealId) && Objects.equals(personName, activity.personName) && Objects.equals(
-                type, activity.type) && Objects.equals(owner, activity.owner) && Objects.equals(
-                updatedActivityDate, activity.updatedActivityDate) && Objects.equals(createdActivityDate,
-                activity.createdActivityDate);
+                typeName, activity.typeName) && Objects.equals(owner, activity.owner) && Objects.equals(
+                updatedActivityDate, activity.updatedActivityDate) && Objects.equals(markedAsDoneTime,
+                activity.markedAsDoneTime);
     }
 
     @Override
