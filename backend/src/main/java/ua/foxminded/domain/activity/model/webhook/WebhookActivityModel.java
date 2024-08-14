@@ -27,7 +27,6 @@ public class WebhookActivityModel {
     @JsonProperty("local_sorting_due_date")
     private String localSortingDueDate;
 
-
     public Long getV() {
         return v;
     }

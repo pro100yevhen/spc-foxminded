@@ -1,6 +1,7 @@
 package ua.foxminded.infrastructure.util.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,8 @@ public class JacksonJsonParserImpl implements JsonParser {
 
     public JacksonJsonParserImpl(final ObjectMapper mapper) {
         this.mapper = mapper;
+        this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // Ignore unknown properties
+
     }
 
     @Override
