@@ -25,4 +25,12 @@ public class ParticipantEventModel {
     public void setPersonId(final Long personId) {
         this.personId = personId;
     }
+
+    @Override
+    public String toString() {
+        return "ParticipantEventModel{" +
+                "primaryFlag=" + primaryFlag +
+                ", personId=" + personId +
+                '}';
+    }
 }

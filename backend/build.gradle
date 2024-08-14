@@ -9,16 +9,29 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.platform:junit-platform-runner'
+    testImplementation 'org.junit.platform:junit-platform-suite'
 
     //Mappers
     implementation "org.modelmapper:modelmapper:$modelMapperVersion"
     implementation "org.mapstruct:mapstruct:${mapStructMapperVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructMapperVersion}"
 
+
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-sqlserver'
+
     //Database
     implementation 'com.h2database:h2'
+
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude group: 'junit', module: 'junit'
+    }
 
 }
 
@@ -27,13 +40,4 @@ version = 'unspecified'
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    testImplementation "org.junit:junit-bom:${junitVersion}"
-    testImplementation "org.junit.jupiter:junit-jupiter"
-}
-
-test {
-    useJUnitPlatform()
 }

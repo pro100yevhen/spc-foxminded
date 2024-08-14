@@ -3,6 +3,7 @@ package ua.foxminded.domain.activity.model.event;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MetaEventModel {
     private String action;
@@ -206,5 +207,55 @@ public class MetaEventModel {
 
     public void setWebhookId(final String webhookId) {
         this.webhookId = webhookId;
+    }
+
+    @Override
+    public String toString() {
+        return "MetaEventModel{" +
+                "action='" + action + '\'' +
+                ", changeSource='" + changeSource + '\'' +
+                ", companyId=" + companyId +
+                ", host='" + host + '\'' +
+                ", id=" + id +
+                ", isBulkUpdate=" + isBulkUpdate +
+                ", matchesFilters=" + matchesFilters +
+                ", object='" + object + '\'' +
+                ", permittedUserIds=" + permittedUserIds +
+                ", pipedriveServiceName='" + pipedriveServiceName + '\'' +
+                ", timestamp=" + timestamp +
+                ", timestampMicro=" + timestampMicro +
+                ", prepublishTimestamp=" + prepublishTimestamp +
+                ", transPending=" + transPending +
+                ", userId=" + userId +
+                ", v=" + v +
+                ", activityNotificationsLanguage='" + activityNotificationsLanguage + '\'' +
+                ", sendActivityNotifications=" + sendActivityNotifications +
+                ", webhookId='" + webhookId + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final MetaEventModel that = (MetaEventModel) o;
+        return isBulkUpdate == that.isBulkUpdate && transPending == that.transPending && sendActivityNotifications == that.sendActivityNotifications && Objects.equals(
+                action, that.action) && Objects.equals(changeSource,
+                that.changeSource) && Objects.equals(companyId, that.companyId) && Objects.equals(host,
+                that.host) && Objects.equals(id, that.id) && Objects.equals(matchesFilters,
+                that.matchesFilters) && Objects.equals(object, that.object) && Objects.equals(
+                permittedUserIds, that.permittedUserIds) && Objects.equals(pipedriveServiceName,
+                that.pipedriveServiceName) && Objects.equals(timestamp,
+                that.timestamp) && Objects.equals(timestampMicro,
+                that.timestampMicro) && Objects.equals(prepublishTimestamp,
+                that.prepublishTimestamp) && Objects.equals(userId, that.userId) && Objects.equals(v,
+                that.v) && Objects.equals(activityNotificationsLanguage,
+                that.activityNotificationsLanguage) && Objects.equals(webhookId, that.webhookId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getClass());
     }
 }
