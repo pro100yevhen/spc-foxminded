@@ -2,7 +2,6 @@
 CREATE TABLE deals
 (
     id                     BIGINT PRIMARY KEY,
-    deal_id                BIGINT,
     person_name            VARCHAR(255),
     stage_id               BIGINT,
     owner_id               BIGINT,

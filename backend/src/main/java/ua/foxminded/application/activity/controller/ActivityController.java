@@ -24,7 +24,7 @@ public class ActivityController {
     private final ActivityService activityService;
     private final TypeMapperFacade mapper;
 
-    public ActivityController(final JsonParser jsonParser, final Filter activityFilter,
+    public ActivityController(final JsonParser jsonParser, final Filter <WebhookActivityModel> activityFilter,
                               final ActivityService activityService, final TypeMapperFacade typeMapperFacade) {
         this.jsonParser = jsonParser;
         this.activityFilter = activityFilter;
@@ -33,9 +33,9 @@ public class ActivityController {
     }
 
     @PostMapping
-    public void test(@RequestBody final String activity) {
+    public void save(@RequestBody final String activity) {
         final WebhookActivityModel webhookEvent = jsonParser.parseJson(activity, WebhookActivityModel.class);
-        LOG.info("Parsed WebhookActivityEventModel: {}", webhookEvent.getEvent());
+        LOG.info("Parsed WebhookActivityModel: {}", webhookEvent.getEvent());
 
         if (activityFilter.apply(webhookEvent)) {
             LOG.info("Activity passed the filter criteria");
