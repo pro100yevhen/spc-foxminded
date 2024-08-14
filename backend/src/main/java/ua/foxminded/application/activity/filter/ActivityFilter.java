@@ -3,12 +3,12 @@ package ua.foxminded.application.activity.filter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.filter.Filter;
-import ua.foxminded.domain.activity.model.event.WebhookActivityEventModel;
+import ua.foxminded.domain.activity.model.event.WebhookActivityModel;
 
 import java.util.List;
 
 @Component
-public class ActivityFilter implements Filter<WebhookActivityEventModel> {
+public class ActivityFilter implements Filter<WebhookActivityModel> {
 
     private final List<Long> allowedUserIds;
 
@@ -17,7 +17,7 @@ public class ActivityFilter implements Filter<WebhookActivityEventModel> {
     }
 
     @Override
-    public boolean apply(final WebhookActivityEventModel eventModel) {
+    public boolean apply(final WebhookActivityModel eventModel) {
         final Long userId = eventModel.getCurrent().getUserId();
         final boolean busyFlag = eventModel.getCurrent().isBusyFlag();
         return true; //allowedUserIds.contains(userId) && busyFlag;
