@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ActivityEventModel {
@@ -752,5 +753,140 @@ public class ActivityEventModel {
 
     public void setServiceReference(final List<Object> serviceReference) {
         this.serviceReference = serviceReference;
+    }
+
+    @Override
+    public String toString() {
+        return "ActivityEventModel{" +
+                "lastNotificationTime=" + lastNotificationTime +
+                ", locationStreetNumber='" + locationStreetNumber + '\'' +
+                ", localSortingDueDate='" + localSortingDueDate + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", referenceId='" + referenceId + '\'' +
+                ", locationRoute='" + locationRoute + '\'' +
+                ", publicDescription='" + publicDescription + '\'' +
+                ", notificationLanguageId='" + notificationLanguageId + '\'' +
+                ", subject='" + subject + '\'' +
+                ", type='" + type + '\'' +
+                ", activityNote='" + activityNote + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", dealTitle='" + dealTitle + '\'' +
+                ", originalStartTime=" + originalStartTime +
+                ", id=" + id +
+                ", dealId=" + dealId +
+                ", busyFlag=" + busyFlag +
+                ", personId=" + personId +
+                ", ownerName='" + ownerName + '\'' +
+                ", attendees='" + attendees + '\'' +
+                ", personName='" + personName + '\'' +
+                ", projectTitle='" + projectTitle + '\'' +
+                ", recRuleExtension='" + recRuleExtension + '\'' +
+                ", priority='" + priority + '\'' +
+                ", done=" + done +
+                ", createdByUserId=" + createdByUserId +
+                ", locationSublocality='" + locationSublocality + '\'' +
+                ", recRule='" + recRule + '\'' +
+                ", locationAdminAreaLevel2='" + locationAdminAreaLevel2 + '\'' +
+                ", userId=" + userId +
+                ", locationAdminAreaLevel1='" + locationAdminAreaLevel1 + '\'' +
+                ", orgId='" + orgId + '\'' +
+                ", conferenceMeetingClient='" + conferenceMeetingClient + '\'' +
+                ", note='" + note + '\'' +
+                ", dueTime='" + dueTime + '\'' +
+                ", recMasterActivityId='" + recMasterActivityId + '\'' +
+                ", isPrivate=" + isPrivate +
+                ", locationCountry='" + locationCountry + '\'' +
+                ", activeFlag=" + activeFlag +
+                ", duration='" + duration + '\'' +
+                ", locationPostalCode='" + locationPostalCode + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", updateUserId=" + updateUserId +
+                ", leadTitle='" + leadTitle + '\'' +
+                ", sourceTimezone='" + sourceTimezone + '\'' +
+                ", personDropboxBcc='" + personDropboxBcc + '\'' +
+                ", conferenceMeetingId='" + conferenceMeetingId + '\'' +
+                ", orgName='" + orgName + '\'' +
+                ", locationLocality='" + locationLocality + '\'' +
+                ", assignedToUserId=" + assignedToUserId +
+                ", leadId='" + leadId + '\'' +
+                ", isRecurring=" + isRecurring +
+                ", participants=" + participants +
+                ", locationSubpremise='" + locationSubpremise + '\'' +
+                ", companyId=" + companyId +
+                ", dueDate='" + dueDate + '\'' +
+                ", lead='" + lead + '\'' +
+                ", referenceType='" + referenceType + '\'' +
+                ", lastNotificationUserId=" + lastNotificationUserId +
+                ", calendarSyncIncludeContext='" + calendarSyncIncludeContext + '\'' +
+                ", markedAsDoneTime='" + markedAsDoneTime + '\'' +
+                ", locationFormattedAddress='" + locationFormattedAddress + '\'' +
+                ", series='" + series + '\'' +
+                ", conferenceMeetingUrl='" + conferenceMeetingUrl + '\'' +
+                ", location='" + location + '\'' +
+                ", dealDropboxBcc='" + dealDropboxBcc + '\'' +
+                ", addTime='" + addTime + '\'' +
+                ", user=" + user +
+                ", serviceReference=" + serviceReference +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final ActivityEventModel that = (ActivityEventModel) o;
+        return busyFlag == that.busyFlag && done == that.done && isPrivate == that.isPrivate && activeFlag == that.activeFlag && Objects.equals(
+                lastNotificationTime, that.lastNotificationTime) && Objects.equals(locationStreetNumber,
+                that.locationStreetNumber) && Objects.equals(localSortingDueDate,
+                that.localSortingDueDate) && Objects.equals(typeName, that.typeName) && Objects.equals(
+                referenceId, that.referenceId) && Objects.equals(locationRoute,
+                that.locationRoute) && Objects.equals(publicDescription,
+                that.publicDescription) && Objects.equals(notificationLanguageId,
+                that.notificationLanguageId) && Objects.equals(subject, that.subject) && Objects.equals(
+                type, that.type) && Objects.equals(activityNote, that.activityNote) && Objects.equals(
+                projectId, that.projectId) && Objects.equals(dealTitle,
+                that.dealTitle) && Objects.equals(originalStartTime,
+                that.originalStartTime) && Objects.equals(id, that.id) && Objects.equals(dealId,
+                that.dealId) && Objects.equals(personId, that.personId) && Objects.equals(ownerName,
+                that.ownerName) && Objects.equals(attendees, that.attendees) && Objects.equals(
+                personName, that.personName) && Objects.equals(projectTitle,
+                that.projectTitle) && Objects.equals(recRuleExtension,
+                that.recRuleExtension) && Objects.equals(priority, that.priority) && Objects.equals(
+                createdByUserId, that.createdByUserId) && Objects.equals(locationSublocality,
+                that.locationSublocality) && Objects.equals(recRule, that.recRule) && Objects.equals(
+                locationAdminAreaLevel2, that.locationAdminAreaLevel2) && Objects.equals(userId,
+                that.userId) && Objects.equals(locationAdminAreaLevel1,
+                that.locationAdminAreaLevel1) && Objects.equals(orgId, that.orgId) && Objects.equals(
+                conferenceMeetingClient, that.conferenceMeetingClient) && Objects.equals(note,
+                that.note) && Objects.equals(dueTime, that.dueTime) && Objects.equals(
+                recMasterActivityId, that.recMasterActivityId) && Objects.equals(locationCountry,
+                that.locationCountry) && Objects.equals(duration, that.duration) && Objects.equals(
+                locationPostalCode, that.locationPostalCode) && Objects.equals(updateTime,
+                that.updateTime) && Objects.equals(updateUserId, that.updateUserId) && Objects.equals(
+                leadTitle, that.leadTitle) && Objects.equals(sourceTimezone,
+                that.sourceTimezone) && Objects.equals(personDropboxBcc,
+                that.personDropboxBcc) && Objects.equals(conferenceMeetingId,
+                that.conferenceMeetingId) && Objects.equals(orgName, that.orgName) && Objects.equals(
+                locationLocality, that.locationLocality) && Objects.equals(assignedToUserId,
+                that.assignedToUserId) && Objects.equals(leadId, that.leadId) && Objects.equals(
+                isRecurring, that.isRecurring) && Objects.equals(participants,
+                that.participants) && Objects.equals(locationSubpremise,
+                that.locationSubpremise) && Objects.equals(companyId, that.companyId) && Objects.equals(
+                dueDate, that.dueDate) && Objects.equals(lead, that.lead) && Objects.equals(
+                referenceType, that.referenceType) && Objects.equals(lastNotificationUserId,
+                that.lastNotificationUserId) && Objects.equals(calendarSyncIncludeContext,
+                that.calendarSyncIncludeContext) && Objects.equals(markedAsDoneTime,
+                that.markedAsDoneTime) && Objects.equals(locationFormattedAddress,
+                that.locationFormattedAddress) && Objects.equals(series, that.series) && Objects.equals(
+                conferenceMeetingUrl, that.conferenceMeetingUrl) && Objects.equals(location,
+                that.location) && Objects.equals(dealDropboxBcc, that.dealDropboxBcc) && Objects.equals(
+                addTime, that.addTime) && Objects.equals(user, that.user) && Objects.equals(
+                serviceReference, that.serviceReference);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getClass());
     }
 }

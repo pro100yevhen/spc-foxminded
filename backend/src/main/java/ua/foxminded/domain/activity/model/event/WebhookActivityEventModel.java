@@ -2,6 +2,8 @@ package ua.foxminded.domain.activity.model.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class WebhookActivityEventModel {
 
     private Long v;
@@ -80,5 +82,37 @@ public class WebhookActivityEventModel {
 
     public void setEvent(final String event) {
         this.event = event;
+    }
+
+    @Override
+    public String toString() {
+        return "WebhookActivityEventModel{" +
+                "v=" + v +
+                ", matchesFilters=" + matchesFilters +
+                ", meta=" + meta +
+                ", current=" + current +
+                ", previous=" + previous +
+                ", retry=" + retry +
+                ", event='" + event + '\'' +
+                ", localSortingDueDate='" + localSortingDueDate + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final WebhookActivityEventModel that = (WebhookActivityEventModel) o;
+        return Objects.equals(v, that.v) && Objects.equals(matchesFilters,
+                that.matchesFilters) && Objects.equals(meta, that.meta) && Objects.equals(current,
+                that.current) && Objects.equals(previous, that.previous) && Objects.equals(retry,
+                that.retry) && Objects.equals(event, that.event) && Objects.equals(localSortingDueDate,
+                that.localSortingDueDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getClass());
     }
 }

@@ -3,6 +3,7 @@ package ua.foxminded.application.activity.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.mapstruct.ReportingPolicy;
 import ua.foxminded.common.mapper.DataMapper;
 import ua.foxminded.domain.activity.model.entity.Activity;
 import ua.foxminded.domain.activity.model.event.WebhookActivityEventModel;
@@ -13,11 +14,11 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring",
-        unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface WebhookActivityEventModelToActivityMapper extends DataMapper<WebhookActivityEventModel, Activity> {
 
     @Override
-    default Class<WebhookActivityEventModel> getSourceClass(){
+    default Class<WebhookActivityEventModel> getSourceClass() {
         return WebhookActivityEventModel.class;
     }
 
@@ -46,6 +47,10 @@ public interface WebhookActivityEventModelToActivityMapper extends DataMapper<We
     @Named("stringToLocalDateTime")
     static LocalDateTime stringToLocalDateTime(String dateTime) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return dateTime != null ? LocalDateTime.parse(dateTime, formatter) : null;
+        if (dateTime == null || dateTime.trim().isEmpty()) {
+            return null;
+        } else {
+            return LocalDateTime.parse(dateTime, formatter);
+        }
     }
 }

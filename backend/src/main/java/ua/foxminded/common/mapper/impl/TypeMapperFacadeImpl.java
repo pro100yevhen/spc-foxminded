@@ -115,7 +115,7 @@ public class TypeMapperFacadeImpl implements TypeMapperFacade {
 
         @Override
         public int hashCode() {
-            return getClass().hashCode();
+            return Objects.hash(srcClz, targetClz);
         }
     }
 }

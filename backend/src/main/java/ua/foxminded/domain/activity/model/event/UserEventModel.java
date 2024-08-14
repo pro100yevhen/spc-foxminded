@@ -162,4 +162,25 @@ public class UserEventModel {
     public void setEmail(final String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "UserEventModel{" +
+                "created='" + created + '\'' +
+                ", lastLogin='" + lastLogin + '\'' +
+                ", hasPic=" + hasPic +
+                ", activeFlag=" + activeFlag +
+                ", locale='" + locale + '\'' +
+                ", picHash='" + picHash + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", roleId='" + roleId + '\'' +
+                ", name='" + name + '\'' +
+                ", timezoneName='" + timezoneName + '\'' +
+                ", modified='" + modified + '\'' +
+                ", id=" + id +
+                ", defaultCurrency='" + defaultCurrency + '\'' +
+                ", addTime='" + addTime + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
