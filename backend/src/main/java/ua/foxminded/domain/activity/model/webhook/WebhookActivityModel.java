@@ -1,4 +1,4 @@
-package ua.foxminded.domain.activity.model.event;
+package ua.foxminded.domain.activity.model.webhook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,10 +9,10 @@ public class WebhookActivityModel {
     private Long v;
 
     @JsonProperty("matches_filters")
-    private MatchesFiltersEventModel matchesFilters;
-    private MetaEventModel meta;
-    private ActivityEventModel current;
-    private ActivityEventModel previous;
+    private ActivityMatchesFiltersModel matchesFilters;
+    private ActivityMetaModel meta;
+    private ActivityDetailsModel current;
+    private ActivityDetailsModel previous;
     private Long retry;
     private String event;
 
@@ -36,35 +36,35 @@ public class WebhookActivityModel {
         this.v = v;
     }
 
-    public MatchesFiltersEventModel getMatchesFilters() {
+    public ActivityMatchesFiltersModel getMatchesFilters() {
         return matchesFilters;
     }
 
-    public void setMatchesFilters(final MatchesFiltersEventModel matchesFilters) {
+    public void setMatchesFilters(final ActivityMatchesFiltersModel matchesFilters) {
         this.matchesFilters = matchesFilters;
     }
 
-    public MetaEventModel getMeta() {
+    public ActivityMetaModel getMeta() {
         return meta;
     }
 
-    public void setMeta(final MetaEventModel meta) {
+    public void setMeta(final ActivityMetaModel meta) {
         this.meta = meta;
     }
 
-    public ActivityEventModel getCurrent() {
+    public ActivityDetailsModel getCurrent() {
         return current;
     }
 
-    public void setCurrent(final ActivityEventModel current) {
+    public void setCurrent(final ActivityDetailsModel current) {
         this.current = current;
     }
 
-    public ActivityEventModel getPrevious() {
+    public ActivityDetailsModel getPrevious() {
         return previous;
     }
 
-    public void setPrevious(final ActivityEventModel previous) {
+    public void setPrevious(final ActivityDetailsModel previous) {
         this.previous = previous;
     }
 

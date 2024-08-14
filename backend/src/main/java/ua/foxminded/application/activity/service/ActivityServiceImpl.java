@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.domain.activity.model.entity.Activity;
 import ua.foxminded.domain.activity.repository.ActivityRepository;
-import ua.foxminded.domain.activity.repository.OwnerRepository;
+import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.activity.service.ActivityService;
 
 @Service
