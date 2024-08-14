@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class WebhookActivityEventModel {
+public class WebhookActivityModel {
 
     private Long v;
 
@@ -103,7 +103,7 @@ public class WebhookActivityEventModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final WebhookActivityEventModel that = (WebhookActivityEventModel) o;
+        final WebhookActivityModel that = (WebhookActivityModel) o;
         return Objects.equals(v, that.v) && Objects.equals(matchesFilters,
                 that.matchesFilters) && Objects.equals(meta, that.meta) && Objects.equals(current,
                 that.current) && Objects.equals(previous, that.previous) && Objects.equals(retry,

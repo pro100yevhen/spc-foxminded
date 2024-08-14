@@ -2,16 +2,14 @@ package ua.foxminded.application.activity.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ua.foxminded.common.filter.Filter;
 import ua.foxminded.common.mapper.TypeMapperFacade;
 import ua.foxminded.domain.activity.model.entity.Activity;
-import ua.foxminded.domain.activity.model.event.WebhookActivityEventModel;
+import ua.foxminded.domain.activity.model.event.WebhookActivityModel;
 import ua.foxminded.domain.activity.service.ActivityService;
 import ua.foxminded.infrastructure.util.JsonParser;
 
@@ -38,7 +36,7 @@ public class ActivityController {
     public void test(@RequestBody final String activity) {
         LOG.info("Received activity data: {}", activity);
 
-        final WebhookActivityEventModel webhookEvent = jsonParser.parseJson(activity, WebhookActivityEventModel.class);
+        final WebhookActivityModel webhookEvent = jsonParser.parseJson(activity, WebhookActivityModel.class);
         LOG.info("Parsed WebhookActivityEventModel: {}", webhookEvent.getEvent());
 
         if (activityFilter.apply(webhookEvent)) {

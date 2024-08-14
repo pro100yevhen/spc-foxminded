@@ -6,7 +6,7 @@ import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import ua.foxminded.common.mapper.DataMapper;
 import ua.foxminded.domain.activity.model.entity.Activity;
-import ua.foxminded.domain.activity.model.event.WebhookActivityEventModel;
+import ua.foxminded.domain.activity.model.event.WebhookActivityModel;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -15,11 +15,11 @@ import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface WebhookActivityEventModelToActivityMapper extends DataMapper<WebhookActivityEventModel, Activity> {
+public interface WebhookActivityEventModelToActivityMapper extends DataMapper<WebhookActivityModel, Activity> {
 
     @Override
-    default Class<WebhookActivityEventModel> getSourceClass() {
-        return WebhookActivityEventModel.class;
+    default Class<WebhookActivityModel> getSourceClass() {
+        return WebhookActivityModel.class;
     }
 
     @Override
@@ -37,7 +37,7 @@ public interface WebhookActivityEventModelToActivityMapper extends DataMapper<We
     @Mapping(target = "owner.name", source = "current.ownerName")
     @Mapping(target = "updatedActivityDate", source = "meta.timestamp", qualifiedByName = "longToLocalDateTime")
     @Mapping(target = "markedAsDoneTime", source = "current.markedAsDoneTime", qualifiedByName = "stringToLocalDateTime")
-    Activity map(WebhookActivityEventModel target);
+    Activity map(WebhookActivityModel target);
 
     @Named("longToLocalDateTime")
     static LocalDateTime longToLocalDateTime(Long timestamp) {
