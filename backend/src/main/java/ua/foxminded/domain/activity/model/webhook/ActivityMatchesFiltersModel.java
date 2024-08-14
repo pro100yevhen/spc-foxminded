@@ -1,9 +1,9 @@
-package ua.foxminded.domain.activity.model.event;
+package ua.foxminded.domain.activity.model.webhook;
 
 import java.util.List;
 import java.util.Objects;
 
-public class MatchesFiltersEventModel {
+public class ActivityMatchesFiltersModel {
 
     private List<Object> current;
 
@@ -27,7 +27,7 @@ public class MatchesFiltersEventModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final MatchesFiltersEventModel that = (MatchesFiltersEventModel) o;
+        final ActivityMatchesFiltersModel that = (ActivityMatchesFiltersModel) o;
         return Objects.equals(current, that.current);
     }
 

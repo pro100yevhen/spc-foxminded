@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.foxminded.common.filter.Filter;
 import ua.foxminded.common.mapper.TypeMapperFacade;
 import ua.foxminded.domain.activity.model.entity.Activity;
-import ua.foxminded.domain.activity.model.event.WebhookActivityModel;
+import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
 import ua.foxminded.domain.activity.service.ActivityService;
 import ua.foxminded.infrastructure.util.JsonParser;
 
@@ -34,8 +34,6 @@ public class ActivityController {
 
     @PostMapping
     public void test(@RequestBody final String activity) {
-        LOG.info("Received activity data: {}", activity);
-
         final WebhookActivityModel webhookEvent = jsonParser.parseJson(activity, WebhookActivityModel.class);
         LOG.info("Parsed WebhookActivityEventModel: {}", webhookEvent.getEvent());
 

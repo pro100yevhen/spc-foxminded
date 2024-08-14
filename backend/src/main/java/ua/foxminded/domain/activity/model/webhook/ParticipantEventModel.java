@@ -1,4 +1,4 @@
-package ua.foxminded.domain.activity.model.event;
+package ua.foxminded.domain.activity.model.webhook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

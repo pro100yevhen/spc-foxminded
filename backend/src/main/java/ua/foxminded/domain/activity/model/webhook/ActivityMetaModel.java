@@ -1,11 +1,11 @@
-package ua.foxminded.domain.activity.model.event;
+package ua.foxminded.domain.activity.model.webhook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Objects;
 
-public class MetaEventModel {
+public class ActivityMetaModel {
     private String action;
 
     @JsonProperty("change_source")
@@ -22,7 +22,7 @@ public class MetaEventModel {
     private boolean isBulkUpdate;
 
     @JsonProperty("matches_filters")
-    private MatchesFiltersEventModel matchesFilters;
+    private ActivityMatchesFiltersModel matchesFilters;
 
     private String object;
 
@@ -105,11 +105,11 @@ public class MetaEventModel {
         isBulkUpdate = bulkUpdate;
     }
 
-    public MatchesFiltersEventModel getMatchesFilters() {
+    public ActivityMatchesFiltersModel getMatchesFilters() {
         return matchesFilters;
     }
 
-    public void setMatchesFilters(final MatchesFiltersEventModel matchesFilters) {
+    public void setMatchesFilters(final ActivityMatchesFiltersModel matchesFilters) {
         this.matchesFilters = matchesFilters;
     }
 
@@ -239,7 +239,7 @@ public class MetaEventModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final MetaEventModel that = (MetaEventModel) o;
+        final ActivityMetaModel that = (ActivityMetaModel) o;
         return isBulkUpdate == that.isBulkUpdate && transPending == that.transPending && sendActivityNotifications == that.sendActivityNotifications && Objects.equals(
                 action, that.action) && Objects.equals(changeSource,
                 that.changeSource) && Objects.equals(companyId, that.companyId) && Objects.equals(host,

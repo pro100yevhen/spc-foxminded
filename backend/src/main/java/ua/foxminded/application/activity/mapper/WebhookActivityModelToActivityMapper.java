@@ -6,7 +6,7 @@ import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import ua.foxminded.common.mapper.DataMapper;
 import ua.foxminded.domain.activity.model.entity.Activity;
-import ua.foxminded.domain.activity.model.event.WebhookActivityModel;
+import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface WebhookActivityEventModelToActivityMapper extends DataMapper<WebhookActivityModel, Activity> {
+public interface WebhookActivityModelToActivityMapper extends DataMapper<WebhookActivityModel, Activity> {
 
     @Override
     default Class<WebhookActivityModel> getSourceClass() {

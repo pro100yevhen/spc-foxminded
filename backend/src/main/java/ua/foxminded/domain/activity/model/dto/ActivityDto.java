@@ -1,6 +1,5 @@
 package ua.foxminded.domain.activity.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ua.foxminded.common.model.dto.OwnerDto;
 
 import java.time.LocalDateTime;

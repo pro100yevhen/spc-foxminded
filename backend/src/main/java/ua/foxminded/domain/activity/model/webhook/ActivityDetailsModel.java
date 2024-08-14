@@ -1,4 +1,4 @@
-package ua.foxminded.domain.activity.model.event;
+package ua.foxminded.domain.activity.model.webhook;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ActivityEventModel {
+public class ActivityDetailsModel {
 
     @JsonProperty("last_notification_time")
     private Long lastNotificationTime;
@@ -835,7 +835,7 @@ public class ActivityEventModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final ActivityEventModel that = (ActivityEventModel) o;
+        final ActivityDetailsModel that = (ActivityDetailsModel) o;
         return busyFlag == that.busyFlag && done == that.done && isPrivate == that.isPrivate && activeFlag == that.activeFlag && Objects.equals(
                 lastNotificationTime, that.lastNotificationTime) && Objects.equals(locationStreetNumber,
                 that.locationStreetNumber) && Objects.equals(localSortingDueDate,
