@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface ManagerPointsRepository extends JpaRepository<ManagerPoints, Long>{ 
+public interface ManagerPointsRepository extends JpaRepository<ManagerPoints, Long>{
     List<ManagerPoints> findByManagerIdAndDate(Long managerId, LocalDate date);
 
-    List<ManagerPoints> findAllByPeriod(LocalDate startDate, LocalDate endDate);
+    List<ManagerPoints> findAllByDateBetween(LocalDate startDate, LocalDate endDate);
 
-    List<ManagerPoints> findAllByPeriodAndManagerId(LocalDate startDate, LocalDate endDate, Long managerId);
+    List<ManagerPoints> findAllByDateBetweenAndManagerId(LocalDate startDate, LocalDate endDate, Long managerId);
 }

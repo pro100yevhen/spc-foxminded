@@ -9,6 +9,8 @@ import ua.foxminded.domain.deal.model.event.DealSavedEvent;
 import ua.foxminded.domain.deal.repository.DealRepository;
 import ua.foxminded.domain.deal.service.DealService;
 
+import java.util.Optional;
+
 @Service
 public class DealServiceImpl implements DealService {
 
@@ -37,7 +39,19 @@ public class DealServiceImpl implements DealService {
                 ownerRepository.save(owner);
             }
         }
-        eventPublisher.publishEvent(new DealSavedEvent(owner.getId()));
-        return dealRepository.save(deal);
+
+        // Check if the deal with the same ID already exists
+        if (deal.getId() != null) {
+            final Optional<Deal> existingDeal = dealRepository.findById(deal.getId());
+            if (existingDeal.isPresent()) {
+                // If deal exists, return the existing deal
+                return existingDeal.get();
+            }
+        }
+
+        // Save the new deal and publish an event
+        final Deal savedDeal = dealRepository.save(deal);
+        eventPublisher.publishEvent(new DealSavedEvent(savedDeal.getOwner().getId()));
+        return savedDeal;
     }
 }

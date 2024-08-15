@@ -2,6 +2,7 @@ package ua.foxminded.application.activity.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class ActivityController {
     }
 
     @PostMapping
-    public void save(@RequestBody final String activity) {
+    public ResponseEntity<String> save(@RequestBody final String activity) {
         final WebhookActivityModel webhookEvent = jsonParser.parseJson(activity, WebhookActivityModel.class);
         LOG.info("Parsed WebhookActivityModel: {}", webhookEvent.getEvent());
 
@@ -46,7 +47,10 @@ public class ActivityController {
             activityService.save(activityEntity);
             LOG.info("Activity saved successfully");
         } else {
-            LOG.info("Activity did not pass the filter criteria" + webhookEvent.getMeta());
+            LOG.info("Activity did not pass the filter criteria: {}", webhookEvent.getMeta());
         }
+
+        // Return 200 OK regardless of whether the activity was saved or not
+        return ResponseEntity.ok("Processed successfully");
     }
 }

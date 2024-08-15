@@ -38,7 +38,7 @@ public class ManagerPointsController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate) {
         LOG.info("Fetching points from {} to {}", startDate, endDate);
-        return managerPointsService.findAllByPeriod(startDate, endDate);
+        return managerPointsService.findAllByDateBetween(startDate, endDate);
     }
 
     @GetMapping("/{managerId}/range")
@@ -47,6 +47,6 @@ public class ManagerPointsController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate) {
         LOG.info("Fetching points for manager with ID {} from {} to {}", managerId, startDate, endDate);
-        return managerPointsService.findAllByPeriodAndManagerId(startDate, endDate, managerId);
+        return managerPointsService.findAllByDateBetweenAndManagerId(startDate, endDate, managerId);
     }
 }

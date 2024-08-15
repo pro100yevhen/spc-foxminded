@@ -30,7 +30,7 @@ public interface WebhookDealModelToDealMapper extends DataMapper<WebhookDealMode
     @Mapping(target = "id", source = "meta.id")
     @Mapping(target = "personName", source = "current.personName")
     @Mapping(target = "stageId", source = "current.stageId")
-    @Mapping(target = "owner.id", source = "meta.userId")
+    @Mapping(target = "owner.id", source = "current.userId")
     @Mapping(target = "owner.name", source = "current.ownerName")
     @Mapping(target = "updatedDealStageDate", source = "meta.timestamp", qualifiedByName = "longToLocalDateTime")
     Deal map(WebhookDealModel target);

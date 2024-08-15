@@ -10,6 +10,8 @@ import ua.foxminded.domain.activity.repository.ActivityRepository;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.activity.service.ActivityService;
 
+import java.util.Optional;
+
 @Service
 public class ActivityServiceImpl implements ActivityService {
 
@@ -39,7 +41,18 @@ public class ActivityServiceImpl implements ActivityService {
                 ownerRepository.save(owner);
             }
         }
-        eventPublisher.publishEvent(new ActivitySavedEvent(owner.getId()));
-        return activityRepository.save(activity);
+
+        // Check if the same activity already exists in the database
+        final Optional<Activity> existingActivity = activityRepository.findById(activity.getId());
+
+        if (existingActivity.isPresent()) {
+            // If activity exists, skip saving and return the existing one
+            return existingActivity.get();
+        } else {
+            // If not, save the new activity and publish an event
+            final Activity savedActivity = activityRepository.save(activity);
+            eventPublisher.publishEvent(new ActivitySavedEvent(savedActivity.getOwner().getId()));
+            return savedActivity;
+        }
     }
 }
