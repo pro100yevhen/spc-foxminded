@@ -28,13 +28,13 @@ public class ManagerPointsServiceImpl implements ManagerPointsService {
     }
 
     @Override
-    public List<ManagerPoints> findAllByPeriod(final LocalDate startDate, final LocalDate endDate) {
-        return managerPointsRepository.findAllByPeriod(startDate, endDate);
+    public List<ManagerPoints> findAllByDateBetween(final LocalDate startDate, final LocalDate endDate) {
+        return managerPointsRepository.findAllByDateBetween(startDate, endDate);
     }
 
     @Override
-    public List<ManagerPoints> findAllByPeriodAndManagerId(final LocalDate startDate, final LocalDate endDate,
-                                                           final Long managerId) {
-        return managerPointsRepository.findAllByPeriodAndManagerId(startDate, endDate, managerId);
+    public List<ManagerPoints> findAllByDateBetweenAndManagerId(final LocalDate startDate, final LocalDate endDate,
+                                                                final Long managerId) {
+        return managerPointsRepository.findAllByDateBetweenAndManagerId(startDate, endDate, managerId);
     }
 }

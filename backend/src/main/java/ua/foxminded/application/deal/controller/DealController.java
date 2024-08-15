@@ -2,6 +2,7 @@ package ua.foxminded.application.deal.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class DealController {
     }
 
     @PostMapping
-    public void save(@RequestBody final String deal) {
+    public ResponseEntity<String> save(@RequestBody final String deal) {
         final WebhookDealModel webhookEvent = jsonParser.parseJson(deal, WebhookDealModel.class);
         LOG.info("Parsed WebhookDealModel: {}", webhookEvent.getEvent());
 
@@ -46,7 +47,10 @@ public class DealController {
             dealService.save(dealToSave);
             LOG.info("Deal saved successfully");
         } else {
-            LOG.info("Deal did not pass the filter criteria" + webhookEvent.getMeta());
+            LOG.info("Deal did not pass the filter criteria: {}", webhookEvent.getMeta());
         }
+
+        // Return 200 OK regardless of whether the deal was saved or not
+        return ResponseEntity.ok("Processed successfully");
     }
 }
