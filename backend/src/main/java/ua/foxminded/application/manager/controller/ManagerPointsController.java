@@ -1,52 +1,76 @@
 package ua.foxminded.application.manager.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import ua.foxminded.domain.manager.model.ManagerPoints;
-import ua.foxminded.domain.manager.service.ManagerPointsService;
+import ua.foxminded.common.model.dto.OwnerDto;
+import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
+import ua.foxminded.domain.manager.service.ManagerPointsFrontendService;
+import ua.foxminded.infrastructure.config.ManagerPointsConfig;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@RestController
-@RequestMapping("/manager/points")
+@Controller
+@RequestMapping
 public class ManagerPointsController {
 
-    private final ManagerPointsService managerPointsService;
-    private final Logger LOG = LoggerFactory.getLogger(ManagerPointsController.class);
+    private final ManagerPointsFrontendService managerPointsService;
+    private final ManagerPointsConfig managerPointsConfig;
 
-    public ManagerPointsController(final ManagerPointsService managerPointsService) {
+    public ManagerPointsController(final ManagerPointsFrontendService managerPointsService,
+                                   final ManagerPointsConfig managerPointsConfig) {
         this.managerPointsService = managerPointsService;
+        this.managerPointsConfig = managerPointsConfig;
     }
 
-    @GetMapping("/{managerId}")
-    public List<ManagerPoints> getPointsByManagerIdAndDate(
-            @PathVariable final Long managerId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate date) {
-        LOG.info("Fetching points for manager with ID {} on date {}", managerId, date);
-        return managerPointsService.findByManagerIdAndDate(managerId, date);
+    @GetMapping
+    public String displayTodayProgress(final Model model) {
+        // Fetch today's manager points
+        final List<ManagerPointsDto> todayPoints = managerPointsService.findAllForToday();
+        // Fetch normative value
+        final int normative = managerPointsConfig.getNorm();
+
+        model.addAttribute("managerPoints", todayPoints);
+        model.addAttribute("norm", normative);
+
+        return "manager-progress";
     }
 
-    @GetMapping("/range")
-    public List<ManagerPoints> getAllPointsByPeriod(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate) {
-        LOG.info("Fetching points from {} to {}", startDate, endDate);
-        return managerPointsService.findAllByDateBetween(startDate, endDate);
+    @GetMapping("/period")
+    public String displayProgressByPeriod(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate,
+            final Model model) {
+        // Fetch manager points for the specified period
+        final List<ManagerPointsDto> pointsByPeriod = managerPointsService.getPointsByPeriod(startDate, endDate);
+        final int normative = managerPointsConfig.getNorm();
+
+        model.addAttribute("managerPoints", pointsByPeriod);
+        model.addAttribute("norm", normative);
+
+        return "manager-progress";
     }
 
-    @GetMapping("/{managerId}/range")
-    public List<ManagerPoints> getPointsByManagerIdAndPeriod(
-            @PathVariable final Long managerId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate) {
-        LOG.info("Fetching points for manager with ID {} from {} to {}", managerId, startDate, endDate);
-        return managerPointsService.findAllByDateBetweenAndManagerId(startDate, endDate, managerId);
+    @GetMapping("/manager-period")
+    public String displayProgressByManagerAndPeriod(@RequestParam("managerId") final Long managerId,
+                                                    @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate startDate,
+                                                    @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate,
+                                                    final Model model) {
+        // Fetch manager points for the specific manager and period
+        final List<ManagerPointsDto> pointsByManagerAndPeriod = managerPointsService.getPointsByManagerAndPeriod(
+                managerId, startDate, endDate);
+        final int normative = managerPointsConfig.getNorm();
+
+        final List<OwnerDto> managers = managerPointsService.getAllManagers();
+
+        model.addAttribute("managerPoints", pointsByManagerAndPeriod);
+        model.addAttribute("norm", normative);
+        model.addAttribute("managers", managers);
+
+        return "manager-progress";
     }
 }

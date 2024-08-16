@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manager Points</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+
+        .form-inline .form-group {
+            margin-right: 10px;
+        }
+
+        .btn-sm {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Manager Points Dashboard</h2>
+
+    <!-- Normative -->
+    <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title">Normative for Today</h4>
+            <h5><span class="badge badge-primary" th:text="${norm}"></span> Points</h5>
+        </div>
+    </div>
+
+    <!-- Buttons to request points by period -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Query Manager Points</h5>
+
+            <!-- Form to show points by manager and period -->
+            <form action="/manager-period" method="get" class="form-inline mb-3">
+                <div class="form-group">
+                    <label for="managerId" class="mr-2">Manager:</label>
+                    <select id="managerId" name="managerId" required class="form-control">
+                        <option value="" th:text="'Select Manager'"></option>
+                        <option th:each="manager : ${managers}"
+                                th:value="${manager.id}"
+                                th:text="${manager.name}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="startDate" class="mr-2">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="endDate" class="mr-2">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Show Points by Period</button>
+            </form>
+
+            <!-- Form to show points by period without specific manager -->
+            <form action="/period" method="get" class="form-inline mb-3">
+                <div class="form-group">
+                    <label for="startDatePeriod" class="mr-2">Start Date:</label>
+                    <input type="date" id="startDatePeriod" name="startDate" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="endDatePeriod" class="mr-2">End Date:</label>
+                    <input type="date" id="endDatePeriod" name="endDate" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-info btn-sm">Show Points (All Managers)</button>
+            </form>
+
+            <!-- Button to return to today's points -->
+            <a href="/" class="btn btn-secondary btn-sm">Back to Today's Points</a>
+        </div>
+    </div>
+
+    <!-- Manager Points Table -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Manager Points</h5>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Activities</th>
+                        <th>Test Periods</th>
+                        <th>Points</th>
+                        <th>Bonuses</th>
+                        <th>Progress</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="manager : ${managerPoints}">
+                        <td th:text="${manager.managerName}"></td>
+                        <td th:text="${#temporals.format(manager.date, 'dd.MM.yyyy')}"></td>
+                        <td th:text="${manager.activitiesCount}"></td>
+                        <td th:text="${manager.testPeriodCount}"></td>
+                        <td th:text="${manager.points}"></td>
+                        <td th:text="${manager.bonuses}"></td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success"
+                                     role="progressbar"
+                                     th:style="'width: ' + ${manager.points} * 100 / ${norm} + '%;'"
+                                     th:text="${manager.points} * 100 / ${norm} + '%'">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
