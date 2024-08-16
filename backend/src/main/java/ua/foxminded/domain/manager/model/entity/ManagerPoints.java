@@ -1,4 +1,4 @@
-package ua.foxminded.domain.manager.model;
+package ua.foxminded.domain.manager.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +20,7 @@ public class ManagerPoints extends BaseEntity {
     private Long managerId;
     private LocalDate date;
     private int points;
+    private int bonuses;
     private int activitiesCount;
     private int testPeriodCount;
 
@@ -45,6 +46,14 @@ public class ManagerPoints extends BaseEntity {
 
     public void setDate(final LocalDate date) {
         this.date = date;
+    }
+
+    public int getBonuses() {
+        return bonuses;
+    }
+
+    public void setBonuses(final int bonuses) {
+        this.bonuses = bonuses;
     }
 
     public int getPoints() {

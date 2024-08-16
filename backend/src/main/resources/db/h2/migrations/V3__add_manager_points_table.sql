@@ -4,6 +4,7 @@ CREATE TABLE manager_points
     manager_id       BIGINT NOT NULL,
     date             DATE NOT NULL,
     points           INT NOT NULL,
+    bonuses          INT NOT NULL,
     activities_count INT NOT NULL,
     test_period_count INT NOT NULL,
     created_date     TIMESTAMP NOT NULL,
