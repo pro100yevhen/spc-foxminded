@@ -124,4 +124,20 @@ public class Activity extends BaseEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", dealId=" + dealId +
+                ", personName='" + personName + '\'' +
+                ", busyFlag=" + busyFlag +
+                ", typeName='" + typeName + '\'' +
+                ", owner=" + owner +
+                ", updatedActivityDate=" + updatedActivityDate +
+                ", markedAsDoneTime=" + markedAsDoneTime +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                '}';
+    }
 }

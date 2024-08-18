@@ -34,6 +34,9 @@ public class ManagerPointsController {
         // Fetch normative value
         final int normative = managerPointsConfig.getNorm();
 
+        final List<OwnerDto> managers = managerPointsService.getAllManagers();
+
+        model.addAttribute("managers", managers);
         model.addAttribute("managerPoints", todayPoints);
         model.addAttribute("norm", normative);
 
@@ -48,7 +51,9 @@ public class ManagerPointsController {
         // Fetch manager points for the specified period
         final List<ManagerPointsDto> pointsByPeriod = managerPointsService.getPointsByPeriod(startDate, endDate);
         final int normative = managerPointsConfig.getNorm();
+        final List<OwnerDto> managers = managerPointsService.getAllManagers();
 
+        model.addAttribute("managers", managers);
         model.addAttribute("managerPoints", pointsByPeriod);
         model.addAttribute("norm", normative);
 

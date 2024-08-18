@@ -20,6 +20,7 @@ public class ActivityFilter implements Filter<WebhookActivityModel> {
     public boolean apply(final WebhookActivityModel eventModel) {
         final Long userId = eventModel.getCurrent().getUserId();
         final boolean busyFlag = eventModel.getCurrent().isBusyFlag();
-        return allowedUserIds.contains(userId) && busyFlag;
+        final boolean doneFlag = eventModel.getCurrent().isDone();
+        return allowedUserIds.contains(userId) && busyFlag && doneFlag;
     }
 }

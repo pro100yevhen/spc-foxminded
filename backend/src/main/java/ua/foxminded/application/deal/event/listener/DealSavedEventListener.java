@@ -58,7 +58,7 @@ public class DealSavedEventListener extends AbstractEventListener<DealSavedEvent
                 testPeriodCount * config.getTestPeriodCoefficient() +
                 bonus;
 
-        return Math.min(intensity, config.getNorm());
+        return intensity;
     }
 
     private int getBonus(final int testPeriodCount) {

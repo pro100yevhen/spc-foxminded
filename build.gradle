@@ -11,6 +11,7 @@ allprojects {
     ext {
         modelMapperVersion = '3.0.0'
         mapStructMapperVersion = '1.5.5.Final'
+        springCloudVersion = '2022.0.3'
     }
 }
 
@@ -30,6 +31,12 @@ subprojects {
     test {
         useJUnitPlatform {
             includeEngines("junit-jupiter")
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
     }
 }
