@@ -25,7 +25,7 @@ public class ActivityController {
     private final ActivityService activityService;
     private final TypeMapperFacade mapper;
 
-    public ActivityController(final JsonParser jsonParser, final Filter <WebhookActivityModel> activityFilter,
+    public ActivityController(final JsonParser jsonParser, final Filter<WebhookActivityModel> activityFilter,
                               final ActivityService activityService, final TypeMapperFacade typeMapperFacade) {
         this.jsonParser = jsonParser;
         this.activityFilter = activityFilter;
@@ -47,7 +47,11 @@ public class ActivityController {
             activityService.save(activityEntity);
             LOG.info("Activity saved successfully");
         } else {
-            LOG.info("Activity did not pass the filter criteria: {}", webhookEvent.getMeta());
+            LOG.info("Activity did not pass the filter criteria: PersonName={}, Done={}, UserId={}, BusyFlag={}",
+                    webhookEvent.getCurrent().getPersonName(),
+                    webhookEvent.getCurrent().isDone(),
+                    webhookEvent.getCurrent().getUserId(),
+                    webhookEvent.getCurrent().isBusyFlag());
         }
 
         // Return 200 OK regardless of whether the activity was saved or not

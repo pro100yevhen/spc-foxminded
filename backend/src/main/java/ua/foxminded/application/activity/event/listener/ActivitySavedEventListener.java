@@ -58,7 +58,7 @@ public class ActivitySavedEventListener extends AbstractEventListener<ActivitySa
                 testPeriodCount * config.getTestPeriodCoefficient() +
                 bonus;
 
-        return Math.min(intensity, config.getNorm());
+        return intensity;
     }
 
     private int getBonus(final int testPeriodCount) {
