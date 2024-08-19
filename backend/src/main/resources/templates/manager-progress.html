@@ -105,14 +105,13 @@
                         <td th:text="${manager.activitiesCount}"></td>
                         <td th:text="${manager.testPeriodCount}"></td>
                         <td th:text="${manager.bonuses}"></td>
-                        <!-- Display points based on condition -->
-                        <td th:text="${manager.points > norm} ? ${norm} : ${manager.points}"></td>
+                        <td th:text="${manager.points > manager.normative ? manager.normative : manager.points}"></td>
                         <td>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped bg-success"
                                      role="progressbar"
-                                     th:style="'width: ' + ${#numbers.formatInteger((manager.points * 100 / norm))} + '%;'"
-                                     th:text="${#numbers.formatInteger((manager.points * 100 / norm))} + '%'">
+                                     th:style="'width: ' + ${manager.progress}"
+                                     th:text="${manager.progress}">
                                 </div>
                             </div>
                         </td>

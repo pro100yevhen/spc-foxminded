@@ -34,6 +34,7 @@ public interface WebhookActivityModelToActivityMapper extends DataMapper<Webhook
     @Mapping(target = "busyFlag", source = "current.busyFlag")
     @Mapping(target = "typeName", source = "current.typeName")
     @Mapping(target = "owner.id", source = "current.userId")
+    @Mapping(target = "personId", source = "current.personId")
     @Mapping(target = "owner.name", source = "current.ownerName")
     @Mapping(target = "updatedActivityDate", source = "meta.timestamp", qualifiedByName = "longToLocalDateTime")
     @Mapping(target = "markedAsDoneTime", source = "current.markedAsDoneTime", qualifiedByName = "stringToLocalDateTime")

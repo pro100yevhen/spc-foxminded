@@ -23,6 +23,7 @@ public class ManagerPoints extends BaseEntity {
     private int bonuses;
     private int activitiesCount;
     private int testPeriodCount;
+    private int normative;
 
     public Long getId() {
         return id;
@@ -70,6 +71,14 @@ public class ManagerPoints extends BaseEntity {
 
     public void setActivitiesCount(final int activitiesCount) {
         this.activitiesCount = activitiesCount;
+    }
+
+    public int getNormative() {
+        return normative;
+    }
+
+    public void setNormative(final int normative) {
+        this.normative = normative;
     }
 
     public int getTestPeriodCount() {
