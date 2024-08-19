@@ -10,6 +10,7 @@ import ua.foxminded.domain.activity.repository.ActivityRepository;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.activity.service.ActivityService;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -29,30 +30,39 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Activity save(final Activity activity) {
-        // Check if the owner exists
-        final Owner owner = activity.getOwner();
-        if (owner != null && owner.getId() != null) {
-            final Owner existingOwner = ownerRepository.findById(owner.getId()).orElse(null);
-            if (existingOwner != null) {
-                // Use the existing owner
-                activity.setOwner(existingOwner);
-            } else {
-                // Save new owner
-                ownerRepository.save(owner);
-            }
-        }
+        checkOwner(activity.getOwner());
 
-        // Check if the same activity already exists in the database
-        final Optional<Activity> existingActivity = activityRepository.findById(activity.getId());
+        // Get today's date range (midnight to midnight)
+        final LocalDateTime now = LocalDateTime.now();
+        final LocalDateTime todayStart = now.toLocalDate().atStartOfDay();
+        final LocalDateTime todayEnd = todayStart.plusDays(1).minusNanos(1);
 
-        if (existingActivity.isPresent()) {
-            // If activity exists, skip saving and return the existing one
-            return existingActivity.get();
+        // Check if an activity with the same person ID exists today
+        final Activity existingActivity = activityRepository.findByPersonIdAndCreatedDateBetween(activity.getPersonId(),
+                todayStart, todayEnd);
+
+        if (existingActivity != null) {
+            // If an activity exists for today, return the existing one
+            return existingActivity;
         } else {
             // If not, save the new activity and publish an event
             final Activity savedActivity = activityRepository.save(activity);
-            eventPublisher.publishEvent(new ActivitySavedEvent(savedActivity.getOwner().getId()));
+            publishEvent(savedActivity);
             return savedActivity;
         }
+    }
+
+    private void checkOwner(final Owner owner) {
+        if (owner != null && owner.getId() != null) {
+            final Optional<Owner> existingOwner = ownerRepository.findById(owner.getId());
+            if (existingOwner.isPresent()) {
+            } else {
+                ownerRepository.save(owner);
+            }
+        }
+    }
+
+    private void publishEvent(final Activity activity) {
+        eventPublisher.publishEvent(new ActivitySavedEvent(activity.getOwner().getId()));
     }
 }

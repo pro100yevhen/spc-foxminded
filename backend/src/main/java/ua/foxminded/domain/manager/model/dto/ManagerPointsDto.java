@@ -13,15 +13,8 @@ public class ManagerPointsDto {
     private int bonuses;
     private int activitiesCount;
     private int testPeriodCount;
-    private String formattedDate;
-
-    public String getFormattedDate() {
-        return formattedDate;
-    }
-
-    public void setFormattedDate(final String formattedDate) {
-        this.formattedDate = formattedDate;
-    }
+    private int normative;
+    private String progress;
 
     public Long getId() {
         return id;
@@ -29,6 +22,22 @@ public class ManagerPointsDto {
 
     public void setId(final Long id) {
         this.id = id;
+    }
+
+    public int getNormative() {
+        return normative;
+    }
+
+    public void setNormative(final int normative) {
+        this.normative = normative;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(final String progress) {
+        this.progress = progress;
     }
 
     public Long getManagerId() {

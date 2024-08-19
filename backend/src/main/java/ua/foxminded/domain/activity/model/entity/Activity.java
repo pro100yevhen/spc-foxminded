@@ -24,6 +24,9 @@ public class Activity extends BaseEntity {
     @Column(name = "deal_id")
     private Long dealId;
 
+    @Column(name = "person_id")
+    private Long personId;
+
     @Column(name = "person_name")
     private String personName;
 
@@ -65,6 +68,14 @@ public class Activity extends BaseEntity {
 
     public void setPersonName(final String personName) {
         this.personName = personName;
+    }
+
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(final Long personId) {
+        this.personId = personId;
     }
 
     public boolean isBusyFlag() {

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ManagerPointsConfig {
 
-    @Value("${manager.points.norm}")
+    @Value("${manager.points.normative}")
     private int norm;
 
     @Value("${manager.points.call-coefficient}")

@@ -44,6 +44,7 @@ public class ActivitySavedEventListener extends AbstractEventListener<ActivitySa
 
         final int points = calculatePoints(managerPoints);
         managerPoints.setPoints(points);
+        managerPoints.setNormative(config.getNorm());
 
         // Save updated manager points
         managerPointsService.save(managerPoints);

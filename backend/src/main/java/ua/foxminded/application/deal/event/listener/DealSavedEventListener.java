@@ -44,6 +44,7 @@ public class DealSavedEventListener extends AbstractEventListener<DealSavedEvent
 
         final int points = calculatePoints(managerPoints);
         managerPoints.setPoints(points);
+        managerPoints.setNormative(config.getNorm());
 
         // Save updated manager points
         managerPointsService.save(managerPoints);
