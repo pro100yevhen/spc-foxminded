@@ -12,6 +12,7 @@ allprojects {
         modelMapperVersion = '3.0.0'
         mapStructMapperVersion = '1.5.5.Final'
         springCloudVersion = '2022.0.3'
+        postgresqlVersion = '42.6.0'
     }
 }
 

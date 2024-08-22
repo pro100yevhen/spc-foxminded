@@ -1,7 +1,7 @@
 -- Table for Manager Points entity
 CREATE TABLE manager_points
 (
-    id                BIGINT PRIMARY KEY IDENTITY(1,1),
+    id                BIGSERIAL PRIMARY KEY,
     manager_id        BIGINT NOT NULL,
     date              DATE   NOT NULL,
     points            INT    NOT NULL,
@@ -9,6 +9,6 @@ CREATE TABLE manager_points
     activities_count  INT    NOT NULL,
     test_period_count INT    NOT NULL,
     normative         INT    NOT NULL,
-    created_date      DATETIME2(0) NOT NULL,
-    updated_date      DATETIME2(0) NOT NULL
+    created_date      TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated_date      TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );

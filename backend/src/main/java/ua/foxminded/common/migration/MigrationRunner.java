@@ -20,18 +20,20 @@ public class MigrationRunner implements CommandLineRunner {
     private final String dataSourceUrl;
     private final String dataSourceUsername;
     private final String dataSourcePassword;
-
+    private final String configurationLocation;
     private final boolean migrationEnabled;
 
     public MigrationRunner(
             @Value("${spring.datasource.url}") final String dataSourceUrl,
             @Value("${spring.datasource.username}") final String dataSourceUsername,
             @Value("${spring.datasource.password}") final String dataSourcePassword,
+            @Value("${manager.configuration.seed}") final String configurationLocation,
             @Value("${migration.enabled}") final boolean migrationEnabled
     ) {
         this.dataSourceUrl = dataSourceUrl;
         this.dataSourceUsername = dataSourceUsername;
         this.dataSourcePassword = dataSourcePassword;
+        this.configurationLocation = configurationLocation;
         this.migrationEnabled = migrationEnabled;
     }
 
@@ -53,7 +55,7 @@ public class MigrationRunner implements CommandLineRunner {
         final ClassicConfiguration config = new ClassicConfiguration();
 
         config.setDataSource(dataSourceUrl, dataSourceUsername, dataSourcePassword);
-//        config.setLocations(new Location("classpath:db/h2/migrations"));
+        config.setLocations(new Location(configurationLocation));
         config.setValidateOnMigrate(false);
         return config;
     }

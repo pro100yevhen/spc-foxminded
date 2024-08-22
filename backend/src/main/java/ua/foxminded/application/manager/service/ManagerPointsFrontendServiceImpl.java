@@ -7,7 +7,6 @@ import ua.foxminded.common.model.dto.OwnerDto;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.service.ManagerPointsFrontendService;
-import ua.foxminded.infrastructure.config.ManagerPointsConfig;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,15 +17,12 @@ public class ManagerPointsFrontendServiceImpl implements ManagerPointsFrontendSe
     private final ManagerPointsRecourse recourse;
     private final OwnerRepository ownerRepository;
     private final TypeMapperFacade typeMapperFacade;
-    private final int normative;
 
     public ManagerPointsFrontendServiceImpl(final ManagerPointsRecourse recourse, final OwnerRepository ownerRepository,
-                                            final TypeMapperFacade typeMapperFacade,
-                                            final ManagerPointsConfig managerPointsConfig) {
+                                            final TypeMapperFacade typeMapperFacade) {
         this.recourse = recourse;
         this.ownerRepository = ownerRepository;
         this.typeMapperFacade = typeMapperFacade;
-        this.normative = managerPointsConfig.getNorm();
     }
 
     @Override
