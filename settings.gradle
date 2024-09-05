@@ -1,4 +1,3 @@
 rootProject.name = 'pipedrive-foxminded'
 include 'backend'
-include 'frontend'
 

@@ -1,11 +1,9 @@
 package ua.foxminded.common.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class OwnerDto {
 
     private Long id;
