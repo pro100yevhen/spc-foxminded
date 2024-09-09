@@ -14,7 +14,7 @@ public class ManagerPointsDto {
     private int activitiesCount;
     private int testPeriodCount;
     private int normative;
-    private String progress;
+    private int progress;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class ManagerPointsDto {
         this.normative = normative;
     }
 
-    public String getProgress() {
+    public int getProgress() {
         return progress;
     }
 
-    public void setProgress(final String progress) {
+    public void setProgress(final int progress) {
         this.progress = progress;
     }
 

@@ -56,7 +56,7 @@ public class ManagerPointsFrontendServiceImpl implements ManagerPointsFrontendSe
             if (percentage > oneHundredPercent) {
                 percentage = oneHundredPercent;
             }
-            dto.setProgress(percentage + "%");
+            dto.setProgress(percentage);
         }
         return points;
     }

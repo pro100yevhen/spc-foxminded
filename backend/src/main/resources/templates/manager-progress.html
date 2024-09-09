@@ -7,35 +7,54 @@
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         .card {
-            margin-bottom: 20px;
-            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .progress-bar {
-            transition: width 1s ease-in-out;
-        }
-
-        .form-inline .form-group {
-            margin-right: 10px;
-        }
-
-        .btn-sm {
-            margin-top: 5px;
+            transition: width 0.5s ease;
         }
 
         .settings-icon {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
             color: #6c757d;
         }
 
         .settings-icon:hover {
             color: #007bff;
+        }
+
+        .form-group {
+            margin-right: 1rem;
+        }
+
+        .btn-sm {
+            margin-top: 0.5rem;
+        }
+
+        /* Apple-like minimalism */
+        h2, h4, h5 {
+            font-weight: 500;
+        }
+
+        /* Hide the Query Manager Points card initially */
+        #queryPointsForm {
+            display: none;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #007bff;
+            font-size: 1rem;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -56,10 +75,15 @@
         </div>
     </div>
 
-    <!-- Buttons to request points by period -->
-    <div class="card">
+    <!-- Toggle Button for Query Manager Points -->
+    <div class="text-center mb-4">
+        <a class="toggle-button" onclick="toggleForm()">Show Query Manager Points</a>
+    </div>
+
+    <!-- Buttons to request points by period (Initially hidden) -->
+    <div class="card" id="queryPointsForm">
         <div class="card-body">
-            <h5 class="card-title">Query Manager Points</h5>
+            <h5 class="card-title">Select Points by Period</h5>
 
             <!-- Form to show points by manager and period -->
             <form action="/manager-period" method="get" class="form-inline mb-3">
@@ -124,14 +148,14 @@
                         <td th:text="${manager.bonuses}"></td>
                         <td th:text="${manager.points > manager.normative ? manager.normative : manager.points}"></td>
                         <td>
-                            <div class="progress" style="position: relative; height: 20px;">
+                            <div class="progress" style="position: relative; height: 1.25rem;">
                                 <div class="progress-bar progress-bar-striped bg-success"
                                      role="progressbar"
-                                     th:style="'width: ' + ${manager.progress}"
+                                     th:style="'width: ' + ${manager.progress} + '%' "
                                      style="height: 100%;">
                                 </div>
-                                <span style="position: absolute; width: 100%; text-align: center; color: #6c757d; line-height: 20px; font-weight: bold;"
-                                      th:text="${manager.progress}"></span>
+                                <span th:style="'position: absolute; width: 100%; text-align: center; line-height: 1.25rem; font-weight: bold; color: ' + (${manager.progress >= 50} ? 'white' : '#6c757d')"
+                                      th:text="${manager.progress + '%'}"></span>
                             </div>
                         </td>
                     </tr>
@@ -142,6 +166,21 @@
     </div>
 
 </div>
+
+<script>
+    function toggleForm() {
+        var form = document.getElementById("queryPointsForm");
+        var toggleButton = document.querySelector(".toggle-button");
+
+        if (form.style.display === "none" || form.style.display === "") {
+            form.style.display = "block";
+            toggleButton.textContent = "Hide Query Manager Points";
+        } else {
+            form.style.display = "none";
+            toggleButton.textContent = "Show Query Manager Points";
+        }
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
