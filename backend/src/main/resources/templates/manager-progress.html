@@ -11,6 +11,7 @@
 
         .card {
             margin-bottom: 20px;
+            position: relative;
         }
 
         .progress-bar {
@@ -24,6 +25,18 @@
         .btn-sm {
             margin-top: 5px;
         }
+
+        .settings-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #6c757d;
+        }
+
+        .settings-icon:hover {
+            color: #007bff;
+        }
     </style>
 </head>
 <body>
@@ -31,10 +44,14 @@
     <h2 class="text-center mb-4">
         <a href="/" class="text-decoration-none">Manager Points Dashboard</a>
     </h2>
+
     <!-- Normative -->
     <div class="card text-center">
         <div class="card-body">
             <h4 class="card-title">Normative for Today</h4>
+            <a href="/config" class="settings-icon" title="Settings">
+                <i class="fas fa-cog"></i>
+            </a>
             <h5><span class="badge badge-primary" th:text="${norm}"></span> Points</h5>
         </div>
     </div>
@@ -107,12 +124,14 @@
                         <td th:text="${manager.bonuses}"></td>
                         <td th:text="${manager.points > manager.normative ? manager.normative : manager.points}"></td>
                         <td>
-                            <div class="progress">
+                            <div class="progress" style="position: relative; height: 20px;">
                                 <div class="progress-bar progress-bar-striped bg-success"
                                      role="progressbar"
                                      th:style="'width: ' + ${manager.progress}"
-                                     th:text="${manager.progress}">
+                                     style="height: 100%;">
                                 </div>
+                                <span style="position: absolute; width: 100%; text-align: center; color: #6c757d; line-height: 20px; font-weight: bold;"
+                                      th:text="${manager.progress}"></span>
                             </div>
                         </td>
                     </tr>

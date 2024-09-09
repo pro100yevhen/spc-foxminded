@@ -15,7 +15,7 @@ public class CacheConfig {
 
     @Bean
     @Scope("prototype")
-    public Cache<Integer, Boolean> eventCache() {
+    public Cache<String, Boolean> eventCache() {
         return Caffeine.newBuilder()
                 .expireAfterWrite(10, TimeUnit.MINUTES)
                 .build();

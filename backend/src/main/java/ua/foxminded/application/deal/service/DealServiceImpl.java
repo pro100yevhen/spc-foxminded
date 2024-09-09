@@ -1,7 +1,7 @@
 package ua.foxminded.application.deal.service;
 
 import org.springframework.stereotype.Service;
-import ua.foxminded.common.event.GenericEventPublisher;
+import ua.foxminded.common.event.EventPublisher;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.deal.model.entity.Deal;
@@ -16,10 +16,10 @@ public class DealServiceImpl implements DealService {
 
     private final DealRepository dealRepository;
     private final OwnerRepository ownerRepository;
-    private final GenericEventPublisher eventPublisher;
+    private final EventPublisher eventPublisher;
 
     public DealServiceImpl(final DealRepository dealRepository, final OwnerRepository ownerRepository,
-                           final GenericEventPublisher eventPublisher) {
+                           final EventPublisher eventPublisher) {
         this.dealRepository = dealRepository;
         this.ownerRepository = ownerRepository;
         this.eventPublisher = eventPublisher;
