@@ -17,7 +17,7 @@ public class ActivitySavedEventListener extends AbstractEventListener<ActivitySa
     private final ManagerPointsService managerPointsService;
     private final ManagerPointsConfigurationService managerPointsConfigurationService;
 
-    protected ActivitySavedEventListener(final Cache<Integer, Boolean> eventCache,
+    protected ActivitySavedEventListener(final Cache<String, Boolean> eventCache,
                                          final ManagerPointsService managerPointsService,
                                          final ManagerPointsConfigurationService managerPointsConfigurationService) {
         super(eventCache);

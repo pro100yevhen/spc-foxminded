@@ -17,7 +17,7 @@ public class DealSavedEventListener extends AbstractEventListener<DealSavedEvent
     private final ManagerPointsService managerPointsService;
     private final ManagerPointsConfigurationService managerPointsConfigurationService;
 
-    protected DealSavedEventListener(final Cache<Integer, Boolean> eventCache,
+    protected DealSavedEventListener(final Cache<String, Boolean> eventCache,
                                      final ManagerPointsService managerPointsService,
                                      final ManagerPointsConfigurationService managerPointsConfigurationService) {
         super(eventCache);
