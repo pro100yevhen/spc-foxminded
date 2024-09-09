@@ -2,7 +2,7 @@ package ua.foxminded.application.activity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.foxminded.common.event.GenericEventPublisher;
+import ua.foxminded.common.event.EventPublisher;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.domain.activity.model.entity.Activity;
 import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
@@ -18,11 +18,11 @@ public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityRepository activityRepository;
     private final OwnerRepository ownerRepository;
-    private final GenericEventPublisher eventPublisher;
+    private final EventPublisher eventPublisher;
 
     @Autowired
     public ActivityServiceImpl(final ActivityRepository activityRepository, final OwnerRepository ownerRepository,
-                               final GenericEventPublisher eventPublisher) {
+                               final EventPublisher eventPublisher) {
         this.activityRepository = activityRepository;
         this.ownerRepository = ownerRepository;
         this.eventPublisher = eventPublisher;
