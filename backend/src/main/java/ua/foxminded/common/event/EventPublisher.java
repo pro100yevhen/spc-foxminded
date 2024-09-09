@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import ua.foxminded.common.event.model.BaseEvent;
 
 @Component
-public abstract class EventPublisher<T extends BaseEvent> {
+public class EventPublisher<T extends BaseEvent> {
     private static final Logger LOG = LoggerFactory.getLogger(EventPublisher.class);
     private final ApplicationEventPublisher applicationEventPublisher;
 
