@@ -1,7 +1,6 @@
 package ua.foxminded.application.deal.service;
 
 import org.springframework.stereotype.Service;
-import ua.foxminded.common.event.GenericEventPublisher;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.deal.model.entity.Deal;
