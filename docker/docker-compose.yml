@@ -1,21 +1,14 @@
 services:
-  ngodb:
-    container_name: activity
-    image: mcr.microsoft.com/mssql/server:2019-CU27-ubuntu-20.04
+  db:
+    container_name: foxminded-activity-database
+    image: postgres:16.4
     restart: always
     ports:
-      - "1433:1433"
+      - "5432:5432"
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=P@ssw0rd1234!
-      - MSSQL_COLLATION=Cyrillic_General_CI_AS
-    volumes:
-      - /Users/yevheniipiddubnyi/Downloads/shvirid:/db
-    healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "P@ssw0rd1234!" -Q "CREATE DATABASE activity"
-      interval: 10s
-      timeout: 3s
-      retries: 10
+      - POSTGRES_PASSWORD=P@ssw0rd1234!
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=activity
     networks:
       - shvirid
 
@@ -32,11 +25,11 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config:80
       - SPRING_PROFILES_ACTIVE=local
     volumes:
-      - /Users/yevheniipiddubnyi/Downloads/shvirid/app:/app
+      - /D:/Downloads/activity/back:/app
     command: ['java', '-jar', '/app/app.jar']
     depends_on:
-      ngodb:
-        condition: service_healthy
+      db:
+        condition: service_started
       config:
         condition: service_started
     networks:
@@ -54,8 +47,8 @@ services:
       - SPRING_CLOUD_CONFIG_DISCOVERY_ENABLED=false
       - SPRING_CLOUD_DISCOVERY_ENABLED=false
     volumes:
-      - /Users/yevheniipiddubnyi/Downloads/docker/ngo-cloud-config-server:/app
-      - /Users/yevheniipiddubnyi/Downloads/shvirid/configs:/config
+      - /D:/Downloads/activity/config:/app
+      - /D:/Downloads/activity/config/configs:/config
     command: [ 'java', '-jar', '/app/app.jar' ]
     networks:
       - shvirid
