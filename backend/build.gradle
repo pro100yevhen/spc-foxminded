@@ -23,10 +23,7 @@ dependencies {
     //Cache
     implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
 
-    //Database
-    implementation 'com.h2database:h2'
-
 }
 
 group = 'ua.foxminded'
-version = '1.0.0'
+version = '1.0.1'
