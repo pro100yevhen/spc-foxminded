@@ -13,6 +13,7 @@ import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.service.ManagerPointsFrontendService;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 @Controller
@@ -77,5 +78,22 @@ public class ManagerPointsController {
         model.addAttribute("managers", managers);
 
         return "manager-progress";
+    }
+
+    @GetMapping("/average-progress")
+    public String displayAverageProgress(
+            @RequestParam("month") @DateTimeFormat(pattern = "yyyy-MM") final YearMonth month,
+            final Model model) {
+        final LocalDate startDate = month.atDay(1);
+        final LocalDate endDate = month.atEndOfMonth();
+
+        final List<ManagerPointsDto> averageProgress = managerPointsService.getAverageProgressPerMonth(startDate, endDate);
+        final List<OwnerDto> managers = managerPointsService.getAllManagers();
+
+        model.addAttribute("averageProgress", averageProgress);
+        model.addAttribute("managers", managers);
+        model.addAttribute("month", month);
+
+        return "average-progress";
     }
 }
