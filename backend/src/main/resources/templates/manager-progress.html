@@ -119,6 +119,15 @@
                 </div>
                 <button type="submit" class="btn btn-info btn-sm">Show Points (All Managers)</button>
             </form>
+
+            <!-- Add form for month selection within the queryPointsForm -->
+            <form action="/average-progress" method="get" class="form-inline mb-3">
+                <div class="form-group">
+                    <label for="month" class="mr-2">Select Month:</label>
+                    <input type="month" id="month" name="month" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-info btn-sm">Show Points for Month</button>
+            </form>
         </div>
     </div>
 
@@ -155,7 +164,7 @@
                                      style="height: 100%;">
                                 </div>
                                 <span th:style="'position: absolute; width: 100%; text-align: center; line-height: 1.25rem; font-weight: bold; color: ' + (${manager.progress >= 50} ? 'white' : '#6c757d')"
-                                      th:text="${manager.progress + '%'}"></span>
+                                      th:text="${#numbers.formatDecimal(manager.progress, 1, 1) + '%'}"></span>
                             </div>
                         </td>
                     </tr>

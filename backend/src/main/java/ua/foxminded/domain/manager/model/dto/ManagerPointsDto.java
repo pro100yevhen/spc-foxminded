@@ -14,7 +14,8 @@ public class ManagerPointsDto {
     private int activitiesCount;
     private int testPeriodCount;
     private int normative;
-    private int progress;
+    private Double progress;
+    private int activeDays;
 
     public Long getId() {
         return id;
@@ -32,11 +33,19 @@ public class ManagerPointsDto {
         this.normative = normative;
     }
 
-    public int getProgress() {
+    public Double getProgress() {
         return progress;
     }
 
-    public void setProgress(final int progress) {
+    public int getActiveDays() {
+        return activeDays;
+    }
+
+    public void setActiveDays(final int activeDays) {
+        this.activeDays = activeDays;
+    }
+
+    public void setProgress(final Double progress) {
         this.progress = progress;
     }
 
