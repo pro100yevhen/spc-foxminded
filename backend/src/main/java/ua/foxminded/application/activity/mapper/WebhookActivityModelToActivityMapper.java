@@ -42,7 +42,7 @@ public interface WebhookActivityModelToActivityMapper extends DataMapper<Webhook
 
     @Named("longToLocalDateTime")
     static LocalDateTime longToLocalDateTime(Long timestamp) {
-        return timestamp != null ? LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneOffset.UTC) : null;
+        return timestamp != null ? LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneOffset.UTC) : null;
     }
 
     @Named("stringToLocalDateTime")
