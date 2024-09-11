@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Page Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .card {
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+
+        .settings-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+
+        .settings-icon:hover {
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-right: 1rem;
+        }
+
+        .btn-sm {
+            margin-top: 0.5rem;
+        }
+
+        h2, h5 {
+            font-weight: 500;
+        }
+
+        .navbar {
+            margin-bottom: 2rem;
+        }
+
+        a.nav-link.active {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Manager Points</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/config" th:classappend="${activePage == 'config' ? 'active' : ''}">Configuration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="toggleForm()">Query Manager Points</a>
+            </li>
+        </ul>
+    </div>
+</nav>

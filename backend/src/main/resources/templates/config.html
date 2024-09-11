@@ -1,33 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Configuration</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
+<th:block th:replace="fragments/header :: header(title='Configuration', activePage='config')"></th:block>
 
-    .card {
-      margin-bottom: 20px;
-    }
-
-    .form-inline .form-group {
-      margin-right: 10px;
-    }
-
-    .btn-sm {
-      margin-top: 5px;
-    }
-  </style>
-</head>
 <body>
 <div class="container mt-5">
-  <h2 class="text-center mb-4">
-    <a href="/" class="text-decoration-none">Back to Manager Points Dashboard</a>
-  </h2>
-
   <div class="card">
     <div class="card-body">
       <h2>Update Configuration</h2>
@@ -81,8 +57,5 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+<th:block th:replace="fragments/footer :: footer"></th:block>
 </html>

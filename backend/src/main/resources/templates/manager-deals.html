@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Manager Deals</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-    </style>
-</head>
+<th:block th:replace="fragments/header :: header(title='Manager Deals', activePage='deals')"></th:block>
+
 <body>
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Deals for Manager</h2>
+    <h2 class="text-center mb-4">Manager Deals</h2>
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -42,6 +33,9 @@
         </table>
     </div>
 </div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
 
 <script>
     function deleteDeal(button) {
