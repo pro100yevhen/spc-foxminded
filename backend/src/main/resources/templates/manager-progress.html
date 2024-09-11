@@ -59,6 +59,26 @@
     </style>
 </head>
 <body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Manager Points</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/config">Configuration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="toggleForm()">Query Manager Points</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container mt-5">
     <h2 class="text-center mb-4">
         <a href="/" class="text-decoration-none">Manager Points Dashboard</a>
@@ -73,11 +93,6 @@
             </a>
             <h5><span class="badge badge-primary" th:text="${norm}"></span> Points</h5>
         </div>
-    </div>
-
-    <!-- Toggle Button for Query Manager Points -->
-    <div class="text-center mb-4">
-        <a class="toggle-button" onclick="toggleForm()">Show Query Manager Points</a>
     </div>
 
     <!-- Buttons to request points by period (Initially hidden) -->
@@ -134,10 +149,10 @@
     <!-- Manager Points Table -->
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Manager Points</h5>
+            <h5 class="card-title text-center">Manager Points</h5>
             <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
+                <table class="table table-striped mx-auto" style="width: 100%;">
+                    <thead class="text-center">
                     <tr>
                         <th>Name</th>
                         <th>Date</th>
@@ -149,11 +164,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="manager : ${managerPoints}">
+                    <tr th:each="manager : ${managerPoints}" class="text-center">
                         <td th:text="${manager.managerName}"></td>
-                        <td th:text="${#temporals.format(manager.date, 'dd.MM.yyyy')}"></td>
+                        <td th:text="${#temporals.format(manager.date, 'dd.MM.yyyy')}" id="dealDate"></td>
                         <td th:text="${manager.activitiesCount}"></td>
-                        <td th:text="${manager.testPeriodCount}"></td>
+                        <td>
+                            <!-- Make the test periods clickable to fetch deals by owner and date -->
+                            <a th:href="@{/manager-deals(ownerId=${manager.managerId}, date=${#temporals.format(manager.date, 'yyyy-MM-dd')})}"
+                               th:text="${manager.testPeriodCount}"></a>
+                        </td>
                         <td th:text="${manager.bonuses}"></td>
                         <td th:text="${manager.points > manager.normative ? manager.normative : manager.points}"></td>
                         <td>
@@ -161,8 +180,7 @@
                                 <div class="progress-bar progress-bar-striped bg-success"
                                      role="progressbar"
                                      th:style="'width: ' + ${manager.progress} + '%' "
-                                     style="height: 100%;">
-                                </div>
+                                     style="height: 100%;"></div>
                                 <span th:style="'position: absolute; width: 100%; text-align: center; line-height: 1.25rem; font-weight: bold; color: ' + (${manager.progress >= 50} ? 'white' : '#6c757d')"
                                       th:text="${#numbers.formatDecimal(manager.progress, 1, 1) + '%'}"></span>
                             </div>
@@ -173,7 +191,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <script>
