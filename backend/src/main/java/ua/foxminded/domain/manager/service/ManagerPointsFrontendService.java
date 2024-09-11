@@ -15,4 +15,6 @@ public interface ManagerPointsFrontendService {
     List<ManagerPointsDto> getPointsByManagerAndPeriod(Long managerId, LocalDate startDate, LocalDate endDate);
 
     List<OwnerDto> getAllManagers();
+
+    List<ManagerPointsDto> getAverageProgressPerMonth(LocalDate startDate, LocalDate endDate);
 }
