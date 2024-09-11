@@ -2,114 +2,108 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="fragments/header :: header(title='Manager Points Dashboard', activePage='dashboard')"></th:block>
 
+<body>
 <div class="container mt-5">
-
-    <!-- Normative -->
-    <div class="card text-center">
-        <div class="card-body">
-            <h4 class="card-title">Normative for Today</h4>
-            <a href="/config" class="settings-icon" title="Settings">
-                <i class="fas fa-cog"></i>
-            </a>
-            <h5><span class="badge badge-primary" th:text="${norm}"></span> Points</h5>
-        </div>
+    <!-- Normative Points -->
+    <div class="text-center mb-4">
+        <h4>Normative for Today: <span class="badge bg-secondary text-white" th:text="${norm}"></span> Points</h4>
+        <a href="/config" class="settings-icon" title="Settings">
+            <i class="fas fa-cog"></i>
+        </a>
     </div>
 
-    <!-- Buttons to request points by period (Initially hidden) -->
-    <div class="card" id="queryPointsForm" style="display: none;">
-        <div class="card-body">
-            <h5 class="card-title">Select Points by Period</h5>
+    <!-- Query Manager Points -->
+    <div class="text-center mb-4">
+        <a class="nav-link" href="#" onclick="toggleForm()" style="color: #6c757d; text-decoration: none;">Manager
+            Points Service</a>
+    </div>
 
-            <!-- Form to show points by manager and period -->
-            <form action="/manager-period" method="get" class="form-inline mb-3">
-                <div class="form-group">
-                    <label for="managerId" class="mr-2">Manager:</label>
-                    <select id="managerId" name="managerId" required class="form-control">
-                        <option value="" th:text="'Select Manager'"></option>
-                        <option th:each="manager : ${managers}"
-                                th:value="${manager.id}"
-                                th:text="${manager.name}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="startDate" class="mr-2">Start Date:</label>
-                    <input type="date" id="startDate" name="startDate" required class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="endDate" class="mr-2">End Date:</label>
-                    <input type="date" id="endDate" name="endDate" required class="form-control">
-                </div>
-                <button type="submit" class="btn btn-info btn-sm">Show Points by Period</button>
-            </form>
+    <!-- Points Query Form (Initially Hidden) -->
+    <div id="queryPointsForm" style="display: none;">
+        <!-- Form: Show points by manager and period -->
+        <form action="/manager-period" method="get" class="form-inline mb-3">
+            <div class="form-group mr-2">
+                <label for="managerId">Manager:</label>
+                <select id="managerId" name="managerId" required class="form-control ml-2">
+                    <option value="" th:text="'Select Manager'"></option>
+                    <option th:each="manager : ${managers}"
+                            th:value="${manager.id}"
+                            th:text="${manager.name}"></option>
+                </select>
+            </div>
+            <div class="form-group mr-2">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required class="form-control ml-2">
+            </div>
+            <div class="form-group mr-2">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required class="form-control ml-2">
+            </div>
+            <button type="submit" class="btn btn-secondary">Show Points</button>
+        </form>
 
-            <!-- Form to show points by period without specific manager -->
-            <form action="/period" method="get" class="form-inline mb-3">
-                <div class="form-group">
-                    <label for="startDatePeriod" class="mr-2">Start Date:</label>
-                    <input type="date" id="startDatePeriod" name="startDate" required class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="endDatePeriod" class="mr-2">End Date:</label>
-                    <input type="date" id="endDatePeriod" name="endDate" required class="form-control">
-                </div>
-                <button type="submit" class="btn btn-info btn-sm">Show Points (All Managers)</button>
-            </form>
+        <!-- Form: Show points for all managers by period -->
+        <form action="/period" method="get" class="form-inline mb-3">
+            <div class="form-group mr-2">
+                <label for="startDatePeriod">Start Date:</label>
+                <input type="date" id="startDatePeriod" name="startDate" required class="form-control ml-2">
+            </div>
+            <div class="form-group mr-2">
+                <label for="endDatePeriod">End Date:</label>
+                <input type="date" id="endDatePeriod" name="endDate" required class="form-control ml-2">
+            </div>
+            <button type="submit" class="btn btn-secondary">Show Points (All Managers)</button>
+        </form>
 
-            <!-- Add form for month selection within the queryPointsForm -->
-            <form action="/average-progress" method="get" class="form-inline mb-3">
-                <div class="form-group">
-                    <label for="month" class="mr-2">Select Month:</label>
-                    <input type="month" id="month" name="month" required class="form-control">
-                </div>
-                <button type="submit" class="btn btn-info btn-sm">Show Points for Month</button>
-            </form>
-        </div>
+        <!-- Form: Show points by month -->
+        <form action="/average-progress" method="get" class="form-inline mb-3">
+            <div class="form-group mr-2">
+                <label for="month">Select Month:</label>
+                <input type="month" id="month" name="month" required class="form-control ml-2">
+            </div>
+            <button type="submit" class="btn btn-secondary">Show Monthly Points</button>
+        </form>
     </div>
 
     <!-- Manager Points Table -->
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title text-center">Manager Points</h5>
-            <div class="table-responsive">
-                <table class="table table-striped mx-auto" style="width: 100%;">
-                    <thead class="text-center">
-                    <tr>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Activities</th>
-                        <th>Test Periods</th>
-                        <th>Bonuses</th>
-                        <th>Points</th>
-                        <th>Progress</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="manager : ${managerPoints}" class="text-center">
-                        <td th:text="${manager.managerName}"></td>
-                        <td th:text="${#temporals.format(manager.date, 'dd.MM.yyyy')}" id="dealDate"></td>
-                        <td th:text="${manager.activitiesCount}"></td>
-                        <td>
-                            <!-- Make the test periods clickable to fetch deals by owner and date -->
-                            <a th:href="@{/manager-deals(ownerId=${manager.managerId}, date=${#temporals.format(manager.date, 'yyyy-MM-dd')})}"
-                               th:text="${manager.testPeriodCount}"></a>
-                        </td>
-                        <td th:text="${manager.bonuses}"></td>
-                        <td th:text="${manager.points > manager.normative ? manager.normative : manager.points}"></td>
-                        <td>
-                            <div class="progress" style="position: relative; height: 1.25rem;">
-                                <div class="progress-bar progress-bar-striped bg-success"
-                                     role="progressbar"
-                                     th:style="'width: ' + ${manager.progress} + '%' "
-                                     style="height: 100%;"></div>
-                                <span th:style="'position: absolute; width: 100%; text-align: center; line-height: 1.25rem; font-weight: bold; color: ' + (${manager.progress >= 50} ? 'white' : '#6c757d')"
-                                      th:text="${#numbers.formatDecimal(manager.progress, 1, 1) + '%'}"></span>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="text-center">
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Activities</th>
+                <th>Test Periods</th>
+                <th>Bonuses</th>
+                <th>Points</th>
+                <th>Progress</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="manager : ${managerPoints}" class="text-center">
+                <td th:text="${manager.managerName}"></td>
+                <td th:text="${#temporals.format(manager.date, 'dd.MM.yyyy')}" id="dealDate"></td>
+                <td th:text="${manager.activitiesCount}"></td>
+                <td>
+                    <a th:href="@{/manager-deals(ownerId=${manager.managerId}, date=${#temporals.format(manager.date, 'yyyy-MM-dd')})}"
+                       th:text="${manager.testPeriodCount}"
+                       style="color: black; text-decoration: none; cursor: pointer;">
+                    </a>
+                </td>
+                <td th:text="${manager.bonuses}"></td>
+                <td th:text="${manager.points > manager.normative ? manager.normative : manager.points}"></td>
+                <td>
+                    <div class="progress" style="position: relative; height: 1.25rem;">
+                        <div class="progress-bar progress-bar-striped" style="height: 100%;"
+                             role="progressbar"
+                             th:style="'width: ' + ${manager.progress} + '%' "></div>
+                        <span th:style="'position: absolute; width: 100%; text-align: center; line-height: 1.25rem; font-weight: bold; color: ' + (${manager.progress >= 50} ? 'white' : '#6c757d')"
+                              th:text="${#numbers.formatDecimal(manager.progress, 1, 1) + '%'}"></span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -118,13 +112,8 @@
 <script>
     function toggleForm() {
         var form = document.getElementById("queryPointsForm");
-        var toggleButton = document.querySelector(".toggle-button");
-
-        if (form.style.display === "none" || form.style.display === "") {
-            form.style.display = "block";
-        } else {
-            form.style.display = "none";
-        }
+        form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
     }
 </script>
+</body>
 </html>

@@ -36,40 +36,26 @@
 
 <th:block th:replace="fragments/footer :: footer"></th:block>
 
-
 <script>
     function deleteDeal(button) {
-        var dealId = $(button).data('id');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/deal?id=' + dealId,
-                    type: 'DELETE',
-                    success: function(result) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your deal has been deleted.',
-                            'success'
-                        ).then(() => {
-                            location.reload();
-                        });
-                    },
-                    error: function() {
-                        Swal.fire('Error', 'There was a problem deleting the deal.', 'error');
+        var dealId = button.getAttribute('data-id');
+        if (confirm('Are you sure you want to delete this deal? This action cannot be undone.')) {
+            fetch('/deal?id=' + dealId, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Deal deleted successfully.');
+                        location.reload();
+                    } else {
+                        alert('Error deleting deal.');
                     }
+                })
+                .catch(error => {
+                    alert('Error: ' + error.message);
                 });
-            }
-        });
+        }
     }
 </script>
-
 </body>
 </html>
