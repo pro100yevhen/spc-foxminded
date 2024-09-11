@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.CascadeType;
 import ua.foxminded.common.model.entity.BaseEntity;
 import ua.foxminded.common.model.entity.Owner;
 
@@ -36,7 +35,7 @@ public class Activity extends BaseEntity {
     @Column(name = "type")
     private String typeName;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
