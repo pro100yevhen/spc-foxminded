@@ -83,7 +83,12 @@
             <tr th:each="manager : ${managerPoints}" class="text-center">
                 <td th:text="${manager.managerName}"></td>
                 <td th:text="${#temporals.format(manager.date, 'dd.MM.yyyy')}" id="dealDate"></td>
-                <td th:text="${manager.activitiesCount}"></td>
+                <td>
+                    <a th:href="@{/manager-activities(ownerId=${manager.managerId}, date=${#temporals.format(manager.date, 'yyyy-MM-dd')})}"
+                       th:text="${manager.activitiesCount}"
+                       style="color: black; text-decoration: none; cursor: pointer;">
+                    </a>
+                </td>
                 <td>
                     <a th:href="@{/manager-deals(ownerId=${manager.managerId}, date=${#temporals.format(manager.date, 'yyyy-MM-dd')})}"
                        th:text="${manager.testPeriodCount}"

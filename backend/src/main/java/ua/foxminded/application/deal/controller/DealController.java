@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.foxminded.domain.deal.model.dto.DealDto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller

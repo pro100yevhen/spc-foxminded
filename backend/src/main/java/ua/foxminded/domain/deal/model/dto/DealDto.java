@@ -1,7 +1,6 @@
 package ua.foxminded.domain.deal.model.dto;
 
 import ua.foxminded.common.model.dto.OwnerDto;
-import ua.foxminded.common.model.entity.Owner;
 
 import java.time.LocalDateTime;
 

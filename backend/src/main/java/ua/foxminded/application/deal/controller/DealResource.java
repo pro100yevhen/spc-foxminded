@@ -19,7 +19,6 @@ import ua.foxminded.domain.deal.service.DealService;
 import ua.foxminded.infrastructure.util.JsonParser;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
