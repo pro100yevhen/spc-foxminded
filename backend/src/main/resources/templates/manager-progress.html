@@ -1,88 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Manager Points</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        .card {
-            margin-bottom: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            transition: width 0.5s ease;
-        }
-
-        .settings-icon {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            color: #6c757d;
-        }
-
-        .settings-icon:hover {
-            color: #007bff;
-        }
-
-        .form-group {
-            margin-right: 1rem;
-        }
-
-        .btn-sm {
-            margin-top: 0.5rem;
-        }
-
-        /* Apple-like minimalism */
-        h2, h4, h5 {
-            font-weight: 500;
-        }
-
-        /* Hide the Query Manager Points card initially */
-        #queryPointsForm {
-            display: none;
-        }
-
-        .toggle-button {
-            cursor: pointer;
-            color: #007bff;
-            font-size: 1rem;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Manager Points</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/config">Configuration</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="toggleForm()">Query Manager Points</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<th:block th:replace="fragments/header :: header(title='Manager Points Dashboard', activePage='dashboard')"></th:block>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">
-        <a href="/" class="text-decoration-none">Manager Points Dashboard</a>
-    </h2>
 
     <!-- Normative -->
     <div class="card text-center">
@@ -96,7 +16,7 @@
     </div>
 
     <!-- Buttons to request points by period (Initially hidden) -->
-    <div class="card" id="queryPointsForm">
+    <div class="card" id="queryPointsForm" style="display: none;">
         <div class="card-body">
             <h5 class="card-title">Select Points by Period</h5>
 
@@ -193,6 +113,8 @@
     </div>
 </div>
 
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
 <script>
     function toggleForm() {
         var form = document.getElementById("queryPointsForm");
@@ -200,16 +122,9 @@
 
         if (form.style.display === "none" || form.style.display === "") {
             form.style.display = "block";
-            toggleButton.textContent = "Hide Query Manager Points";
         } else {
             form.style.display = "none";
-            toggleButton.textContent = "Show Query Manager Points";
         }
     }
 </script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
 </html>
