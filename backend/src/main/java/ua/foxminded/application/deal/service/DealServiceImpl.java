@@ -9,6 +9,10 @@ import ua.foxminded.domain.deal.model.event.DealSavedEvent;
 import ua.foxminded.domain.deal.repository.DealRepository;
 import ua.foxminded.domain.deal.service.DealService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,4 +58,18 @@ public class DealServiceImpl implements DealService {
         eventPublisher.publishEvent(new DealSavedEvent(savedDeal.getOwner().getId()));
         return savedDeal;
     }
+
+    @Override
+    public List<Deal> findByOwnerAndDate(final Long ownerId, final LocalDate date) {
+        final LocalDateTime startDateTime = date.atStartOfDay();
+        final LocalDateTime endDateTime = date.atTime(LocalTime.MAX);
+        return dealRepository.findAllByOwnerIdAndCreatedDateBetween(ownerId, startDateTime, endDateTime);
+    }
+
+    @Override
+    public void delete(final Long id) {
+        dealRepository.deleteById(id);
+    }
+
+
 }
