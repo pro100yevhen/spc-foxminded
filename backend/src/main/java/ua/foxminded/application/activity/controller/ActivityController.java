@@ -42,7 +42,7 @@ public class ActivityController {
             LOG.info("Activity passed the filter criteria");
 
             final Activity activityEntity = mapper.map(webhookEvent, Activity.class);
-            LOG.info("Mapped Activity entity: {}", activityEntity);
+                LOG.info("Mapped Activity entity: {}", activityEntity);
 
             activityService.save(activityEntity);
             LOG.info("Activity saved successfully");
