@@ -14,6 +14,8 @@ import ua.foxminded.domain.manager.service.ManagerPointsFrontendService;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -32,10 +34,12 @@ public class ManagerPointsController {
     @GetMapping
     public String displayTodayProgress(final Model model) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration();
-        final List<ManagerPointsDto> todayPoints = managerPointsService.findAllForToday();
+        final List<ManagerPointsDto> todayPoints = new ArrayList<>(managerPointsService.findAllForToday());
         final int normative = config.getManagerPointsNormative();
 
         final List<OwnerDto> managers = managerPointsService.getAllManagers();
+
+        todayPoints.sort(Comparator.comparing(ManagerPointsDto::getDate));
 
         model.addAttribute("managers", managers);
         model.addAttribute("managerPoints", todayPoints);
@@ -50,9 +54,11 @@ public class ManagerPointsController {
             @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate,
             final Model model) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration();
-        final List<ManagerPointsDto> pointsByPeriod = managerPointsService.getPointsByPeriod(startDate, endDate);
+        final List<ManagerPointsDto> pointsByPeriod = new ArrayList<>(managerPointsService.getPointsByPeriod(startDate, endDate));
         final int normative = config.getManagerPointsNormative();
         final List<OwnerDto> managers = managerPointsService.getAllManagers();
+
+        pointsByPeriod.sort(Comparator.comparing(ManagerPointsDto::getDate));
 
         model.addAttribute("managers", managers);
         model.addAttribute("managerPoints", pointsByPeriod);
@@ -67,9 +73,11 @@ public class ManagerPointsController {
                                                     @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate endDate,
                                                     final Model model) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration();
-        final List<ManagerPointsDto> pointsByManagerAndPeriod = managerPointsService.getPointsByManagerAndPeriod(
-                managerId, startDate, endDate);
+        final List<ManagerPointsDto> pointsByManagerAndPeriod = new ArrayList<>(managerPointsService.getPointsByManagerAndPeriod(
+                managerId, startDate, endDate));
         final int normative = config.getManagerPointsNormative();
+
+        pointsByManagerAndPeriod.sort(Comparator.comparing(ManagerPointsDto::getDate));
 
         final List<OwnerDto> managers = managerPointsService.getAllManagers();
 
