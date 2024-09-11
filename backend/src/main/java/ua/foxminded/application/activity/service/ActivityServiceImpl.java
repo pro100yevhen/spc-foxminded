@@ -10,7 +10,10 @@ import ua.foxminded.domain.activity.repository.ActivityRepository;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.activity.service.ActivityService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,6 +53,18 @@ public class ActivityServiceImpl implements ActivityService {
             publishEvent(savedActivity);
             return savedActivity;
         }
+    }
+
+    @Override
+    public List<Activity> findByOwnerAndDate(final Long ownerId, final LocalDate date) {
+        final LocalDateTime startDateTime = date.atStartOfDay();
+        final LocalDateTime endDateTime = date.atTime(LocalTime.MAX);
+        return activityRepository.findAllByOwnerIdAndMarkedAsDoneTimeBetween(ownerId, startDateTime, endDateTime);
+    }
+
+    @Override
+    public void delete(final Long id) {
+        activityRepository.deleteById(id);
     }
 
     private void checkOwner(final Owner owner) {

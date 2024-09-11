@@ -70,6 +70,4 @@ public class DealServiceImpl implements DealService {
     public void delete(final Long id) {
         dealRepository.deleteById(id);
     }
-
-
 }

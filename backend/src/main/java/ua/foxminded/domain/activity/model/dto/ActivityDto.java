@@ -13,9 +13,9 @@ public class ActivityDto {
 
     private String personName;
 
-    private boolean busy;
+    private boolean busyFlag;
 
-    private String type;
+    private String typeName;
 
     private OwnerDto owner;
 
@@ -47,20 +47,20 @@ public class ActivityDto {
         this.personName = personName;
     }
 
-    public boolean isBusy() {
-        return busy;
+    public boolean isBusyFlag() {
+        return busyFlag;
     }
 
-    public void setBusy(final boolean busy) {
-        this.busy = busy;
+    public void setBusyFlag(final boolean busyFlag) {
+        this.busyFlag = busyFlag;
     }
 
-    public String getType() {
-        return type;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setType(final String type) {
-        this.type = type;
+    public void setTypeName(final String typeName) {
+        this.typeName = typeName;
     }
 
     public OwnerDto getOwner() {
@@ -93,9 +93,9 @@ public class ActivityDto {
         if (o == null || getClass() != o.getClass()) return false;
 
         final ActivityDto activity = (ActivityDto) o;
-        return busy == activity.busy && Objects.equals(id, activity.id) && Objects.equals(dealId,
+        return busyFlag == activity.busyFlag && Objects.equals(id, activity.id) && Objects.equals(dealId,
                 activity.dealId) && Objects.equals(personName, activity.personName) && Objects.equals(
-                type, activity.type) && Objects.equals(owner, activity.owner) && Objects.equals(
+                typeName, activity.typeName) && Objects.equals(owner, activity.owner) && Objects.equals(
                 updatedActivityDate, activity.updatedActivityDate) && Objects.equals(createdActivityDate,
                 activity.createdActivityDate);
     }
