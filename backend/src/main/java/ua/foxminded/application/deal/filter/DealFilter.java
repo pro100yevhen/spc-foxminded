@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 public class DealFilter implements Filter<WebhookDealModel> {
 
     private final ManagerPointsConfigurationService managerPointsConfigurationService;
+    private final String status = "open";
 
     public DealFilter(final ManagerPointsConfigurationService managerPointsConfigurationService) {
         this.managerPointsConfigurationService = managerPointsConfigurationService;
@@ -24,7 +25,8 @@ public class DealFilter implements Filter<WebhookDealModel> {
         final Set<Long> allowedDealStages = parseIds(managerPointsConfigurationService.getConfiguration().getDealStagesIds());
 
         return allowedDealStages.contains(eventModel.getCurrent().getStageId()) &&
-                allowedUserIds.contains(eventModel.getCurrent().getUserId());
+                allowedUserIds.contains(eventModel.getCurrent().getUserId()) &&
+                eventModel.getCurrent().getStatus().equals(status);
     }
 
     private Set<Long> parseIds(final String ids) {
