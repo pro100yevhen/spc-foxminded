@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.common.event.EventPublisher;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.domain.activity.model.entity.Activity;
+import ua.foxminded.domain.activity.model.event.ActivityDeletedEvent;
 import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
 import ua.foxminded.domain.activity.repository.ActivityRepository;
 import ua.foxminded.common.repository.OwnerRepository;
@@ -64,7 +65,9 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public void delete(final Long id) {
+        final Activity activity = activityRepository.findById(id).get();
         activityRepository.deleteById(id);
+        eventPublisher.publishEvent(new ActivityDeletedEvent(activity.getOwner().getId(), activity.getCreatedDate()));
     }
 
     private void checkOwner(final Owner owner) {

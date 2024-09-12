@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ManagerPointsRepository extends JpaRepository<ManagerPoints, Long> {
@@ -15,4 +16,6 @@ public interface ManagerPointsRepository extends JpaRepository<ManagerPoints, Lo
     List<ManagerPoints> findAllByDateBetweenAndManagerId(LocalDate startDate, LocalDate endDate, Long managerId);
 
     List<ManagerPoints> findByDate(LocalDate date);
+
+    ManagerPoints findByManagerIdAndCreatedDateBetween(Long managerId, LocalDateTime startDate, LocalDateTime endDate);
 }

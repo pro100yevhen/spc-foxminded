@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="fragments/header :: header(title='Manager Activities', activePage='activities')"></th:block>
+<th:block th:replace="~{fragments/header :: header(title='Manager Activities', activePage='activities')}"></th:block>
 
 <body>
 <div class="container mt-5">
@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<th:block th:replace="fragments/footer :: footer"></th:block>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 
 <script>
     function deleteActivity(button) {
