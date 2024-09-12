@@ -2,16 +2,20 @@ package ua.foxminded.domain.admin.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import ua.foxminded.common.model.entity.BaseEntity;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "manager_points_configuration")
-public class ManagerPointsConfiguration {
+public class ManagerPointsConfiguration extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "allowed_user_ids")
     private String allowedUserIds;

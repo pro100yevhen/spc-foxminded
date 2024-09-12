@@ -5,12 +5,16 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.common.event.EventPublisher;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.domain.activity.model.entity.Activity;
+import ua.foxminded.domain.activity.model.event.ActivityDeletedEvent;
 import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
 import ua.foxminded.domain.activity.repository.ActivityRepository;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.activity.service.ActivityService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,6 +54,20 @@ public class ActivityServiceImpl implements ActivityService {
             publishEvent(savedActivity);
             return savedActivity;
         }
+    }
+
+    @Override
+    public List<Activity> findByOwnerAndDate(final Long ownerId, final LocalDate date) {
+        final LocalDateTime startDateTime = date.atStartOfDay();
+        final LocalDateTime endDateTime = date.atTime(LocalTime.MAX);
+        return activityRepository.findAllByOwnerIdAndMarkedAsDoneTimeBetween(ownerId, startDateTime, endDateTime);
+    }
+
+    @Override
+    public void delete(final Long id) {
+        final Activity activity = activityRepository.findById(id).get();
+        activityRepository.deleteById(id);
+        eventPublisher.publishEvent(new ActivityDeletedEvent(activity.getOwner().getId(), activity.getCreatedDate()));
     }
 
     private void checkOwner(final Owner owner) {

@@ -5,6 +5,7 @@ import ua.foxminded.common.event.EventPublisher;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.deal.model.entity.Deal;
+import ua.foxminded.domain.deal.model.event.DealDeletedEvent;
 import ua.foxminded.domain.deal.model.event.DealSavedEvent;
 import ua.foxminded.domain.deal.repository.DealRepository;
 import ua.foxminded.domain.deal.service.DealService;
@@ -68,8 +69,8 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public void delete(final Long id) {
+        final Deal deal = dealRepository.findById(id).get();
         dealRepository.deleteById(id);
+        eventPublisher.publishEvent(new DealDeletedEvent(deal.getOwner().getId(), deal.getCreatedDate()));
     }
-
-
 }

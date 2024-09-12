@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="fragments/header :: header(title='Configuration', activePage='config')"></th:block>
+<th:block th:replace="~{fragments/header :: header(title='Configuration', activePage='config')}"></th:block>
 
 <body>
 <div class="container mt-5">
@@ -54,6 +54,6 @@
   </form>
 </div>
 
-<th:block th:replace="fragments/footer :: footer"></th:block>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>
