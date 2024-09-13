@@ -4,9 +4,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.foxminded.common.mapper.DataMapper;
 import ua.foxminded.domain.deal.model.entity.Deal;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
+import ua.foxminded.infrastructure.config.TimezoneProvider;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -14,15 +16,18 @@ import java.time.ZoneOffset;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface WebhookDealModelToDealMapper extends DataMapper<WebhookDealModel, Deal> {
+public abstract class WebhookDealModelToDealMapper implements DataMapper<WebhookDealModel, Deal> {
+
+    @Autowired
+    private TimezoneProvider timezoneProvider;
 
     @Override
-    default Class<WebhookDealModel> getSourceClass() {
+    public Class<WebhookDealModel> getSourceClass() {
         return WebhookDealModel.class;
     }
 
     @Override
-    default Class<Deal> getTargetClass() {
+    public Class<Deal> getTargetClass() {
         return Deal.class;
     }
 
@@ -33,10 +38,10 @@ public interface WebhookDealModelToDealMapper extends DataMapper<WebhookDealMode
     @Mapping(target = "owner.id", source = "current.userId")
     @Mapping(target = "owner.name", source = "current.ownerName")
     @Mapping(target = "updatedDealStageDate", source = "meta.timestamp", qualifiedByName = "longToLocalDateTime")
-    Deal map(WebhookDealModel target);
+    public abstract Deal map(WebhookDealModel target);
 
     @Named("longToLocalDateTime")
-    static LocalDateTime longToLocalDateTime(Long timestamp) {
-        return timestamp != null ? LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneOffset.UTC) : null;
+    LocalDateTime longToLocalDateTime(final Long timestamp) {
+        return timestamp != null ? LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), timezoneProvider.getZoneId()) : null;
     }
 }
