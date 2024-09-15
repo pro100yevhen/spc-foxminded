@@ -74,6 +74,30 @@ The application uses **Docker** to handle both the database and backend service.
         - `SPRING_MAIN_BANNER-MODE=off`
         - `SPRING_PROFILES_ACTIVE=local`
     - Command: `java -jar /app/app.jar`
+    - Volumes:
+        - `/Users/yevheniipiddubnyi/Downloads/shvirid/app:/app`  _(See more below on how to change this)_
+
+---
+
+## Changing Volume for the Application
+
+In the `docker-compose.yml` file, the volume for the application is currently mapped as follows:
+
+```yaml
+volumes:
+  - /Users/yevheniipiddubnyi/Downloads/shvirid/app:/app
+```
+
+This configuration maps your local application directory to the container. If you need to change the volume, update the path on your system (before the `:`). For example:
+
+```yaml
+volumes:
+  - /your/new/path/to/app:/app
+```
+
+This allows Docker to use the application files from the specified local path and map them to the `/app` directory inside the container.
+
+Make sure the path exists on your system and contains the necessary application files, such as the JAR file.
 
 ---
 
@@ -140,7 +164,7 @@ To test the application locally:
 
 ---
 
-### Example points calculate
+### Example points calculation
 
 Let's walk through an example based on your configuration:
 
@@ -188,5 +212,3 @@ Assume the following values for a sales manager:
 For any questions or further assistance:
 - **Ivan Shvirid** (FoxmindEd Sales department)
 - **Mykola Shornik** (FoxmindEd IT department)
-
----
