@@ -1,11 +1,11 @@
-package ua.foxminded.common.mapper.impl;
+package ua.foxminded.infrastructure.mapper.impl;
 
 import jakarta.annotation.PostConstruct;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ua.foxminded.common.mapper.DataMapper;
-import ua.foxminded.common.mapper.TypeMapperFacade;
-import ua.foxminded.common.mapper.exception.TypeMappingException;
+import ua.foxminded.infrastructure.mapper.DataMapper;
+import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
+import ua.foxminded.infrastructure.mapper.exception.TypeMappingException;
 
 import java.util.HashMap;
 import java.util.List;

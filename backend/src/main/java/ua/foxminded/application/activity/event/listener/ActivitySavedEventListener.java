@@ -4,8 +4,8 @@ import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.event.AbstractEventListener;
 import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
-import ua.foxminded.domain.admin.model.ManagerPointsConfiguration;
-import ua.foxminded.domain.admin.service.ManagerPointsConfigurationService;
+import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
 

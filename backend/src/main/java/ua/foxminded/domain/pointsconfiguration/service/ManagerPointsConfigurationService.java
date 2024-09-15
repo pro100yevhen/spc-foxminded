@@ -1,6 +1,6 @@
-package ua.foxminded.domain.admin.service;
+package ua.foxminded.domain.pointsconfiguration.service;
 
-import ua.foxminded.domain.admin.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
 
 import java.time.LocalDateTime;
 

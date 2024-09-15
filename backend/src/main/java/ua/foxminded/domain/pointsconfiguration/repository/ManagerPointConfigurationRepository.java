@@ -1,8 +1,8 @@
-package ua.foxminded.domain.admin.repository;
+package ua.foxminded.domain.pointsconfiguration.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ua.foxminded.domain.admin.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
 
 import java.time.LocalDateTime;
 
