@@ -5,14 +5,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.foxminded.common.mapper.DataMapper;
+import ua.foxminded.infrastructure.mapper.DataMapper;
 import ua.foxminded.domain.deal.model.entity.Deal;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
 import ua.foxminded.infrastructure.config.TimezoneProvider;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)

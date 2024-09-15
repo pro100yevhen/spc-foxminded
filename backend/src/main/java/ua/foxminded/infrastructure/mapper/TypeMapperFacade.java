@@ -1,6 +1,6 @@
-package ua.foxminded.common.mapper;
+package ua.foxminded.infrastructure.mapper;
 
-import ua.foxminded.common.mapper.exception.TypeMappingException;
+import ua.foxminded.infrastructure.mapper.exception.TypeMappingException;
 
 import java.util.List;
 

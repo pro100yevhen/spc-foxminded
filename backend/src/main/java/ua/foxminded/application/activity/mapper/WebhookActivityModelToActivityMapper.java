@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.foxminded.common.mapper.DataMapper;
+import ua.foxminded.infrastructure.mapper.DataMapper;
 import ua.foxminded.domain.activity.model.entity.Activity;
 import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
 import ua.foxminded.infrastructure.config.TimezoneProvider;

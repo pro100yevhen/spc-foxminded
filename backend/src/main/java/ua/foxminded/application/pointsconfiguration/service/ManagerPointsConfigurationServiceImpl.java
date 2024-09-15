@@ -1,9 +1,9 @@
-package ua.foxminded.application.admin.service;
+package ua.foxminded.application.pointsconfiguration.service;
 
 import org.springframework.stereotype.Service;
-import ua.foxminded.domain.admin.model.ManagerPointsConfiguration;
-import ua.foxminded.domain.admin.repository.ManagerPointConfigurationRepository;
-import ua.foxminded.domain.admin.service.ManagerPointsConfigurationService;
+import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.repository.ManagerPointConfigurationRepository;
+import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

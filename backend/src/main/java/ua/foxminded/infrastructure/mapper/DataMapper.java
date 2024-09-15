@@ -1,4 +1,4 @@
-package ua.foxminded.common.mapper;
+package ua.foxminded.infrastructure.mapper;
 
 public interface DataMapper<E, D> {
 
