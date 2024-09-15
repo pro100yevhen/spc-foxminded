@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ua.foxminded.common.filter.Filter;
-import ua.foxminded.common.mapper.TypeMapperFacade;
+import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.domain.deal.model.dto.DealDto;
 import ua.foxminded.domain.deal.model.entity.Deal;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;

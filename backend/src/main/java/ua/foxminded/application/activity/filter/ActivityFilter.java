@@ -3,7 +3,7 @@ package ua.foxminded.application.activity.filter;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.filter.Filter;
 import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
-import ua.foxminded.domain.admin.service.ManagerPointsConfigurationService;
+import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

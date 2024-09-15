@@ -1,4 +1,4 @@
-package ua.foxminded.common.mapper.exception;
+package ua.foxminded.infrastructure.mapper.exception;
 
 import ua.foxminded.common.exception.PipedriveApplicationException;
 
