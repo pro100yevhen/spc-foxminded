@@ -31,7 +31,7 @@ For the correct functioning of webhooks, you need to add **username and password
 ---
 
 ## Application Purpose
-This application was created for **FoxmindEd IT school** to calculate **daily activity points** for sales managers. The activity points configuration system is derived from the **FoxmindEd skarb-ngo** project led by **Serhii Suchok**.
+This application was created for **FoxmindEd IT school** to calculate **daily activity points** for sales managers. It processes activity and deal updates to compute performance metrics.
 
 ---
 
@@ -108,7 +108,6 @@ The configuration for manager points is dynamic and can be updated using a simpl
     - `manager_points_bonus_equal_3`: Bonus for exactly 3 test periods.
     - `manager_points_bonus_over_4`: Bonus for more than 4 test periods.
 
-
 ---
 
 ## Manager Points Calculation
@@ -182,10 +181,12 @@ Assume the following values for a sales manager:
 ### Final Points for the Manager:
 - The calculated points for the manager would be **62** based on this configuration and activity level.
 
-This system allows the manager to accumulate points depending on their activity level, test period involvement, and additional bonuses.
+---
 
 ## Support Contacts
 
 For any questions or further assistance:
 - **Ivan Shvirid** (FoxmindEd Sales department)
 - **Mykola Shornik** (FoxmindEd IT department)
+
+---
