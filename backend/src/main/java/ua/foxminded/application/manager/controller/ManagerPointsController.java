@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.foxminded.common.model.dto.OwnerDto;
-import ua.foxminded.domain.admin.model.ManagerPointsConfiguration;
-import ua.foxminded.domain.admin.service.ManagerPointsConfigurationService;
+import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.service.ManagerPointsFrontendService;
 
