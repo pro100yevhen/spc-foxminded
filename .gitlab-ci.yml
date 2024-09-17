@@ -9,7 +9,8 @@ build:
   stage: build
   script:
     - echo "Compiling the code..."
-    - ./gradlew clean build
+    - ./gradlew build --stacktrace --info
+
     - echo "Build directory contents:"
     - ls -R build || echo "No build directory found"
   artifacts:
