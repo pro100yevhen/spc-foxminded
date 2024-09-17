@@ -32,7 +32,7 @@ deploy:
   
     - ssh $SSH_USER@$SSH_SERVER "cd /home/docker/spc && docker-compose down && docker-compose up -d --build"
   only:
-    - dev
+    - main
   environment:
     name: production
     url: http://135.181.128.39
