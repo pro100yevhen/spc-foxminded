@@ -8,8 +8,10 @@ default:
 build:
   stage: build
   script:
+    - echo "Installing Maven..."
+    - apt-get update && apt-get install -y maven
     - echo "Compiling the code..."
-
+    - mvn clean package
   artifacts:
     paths:
       - target/*.jar
@@ -24,7 +26,6 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan -p 222 $SSH_SERVER >> ~/.ssh/known_hosts  
   script:
-    - scp -P 222 target/*.jar $SSH_USER@$SSH_SERVER:/home/docker/spc/app/app.jar  
     - scp -P 222 docker-compose.yml $SSH_USER@$SSH_SERVER:/home/docker/spc/docker-compose.yml  
     - ssh -p 222 $SSH_USER@$SSH_SERVER "cd /home/docker/spc && docker-compose down && docker-compose up -d --build"  
   only:
@@ -32,3 +33,4 @@ deploy:
   environment:
     name: production
     url: http://135.181.128.39
+
