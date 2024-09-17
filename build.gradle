@@ -39,7 +39,10 @@ subprojects {
         }
     }
 
-    // Ensure that a JAR file is created
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
     tasks.withType(Jar) {
         manifest {
             attributes(
@@ -49,19 +52,8 @@ subprojects {
         }
     }
 
-    // Ensure that the JAR files are built correctly
-    bootJar {
-        baseName = 'app'
-        version = version
-    }
-
-    // Add this to make sure JAR files are created and placed in the build/libs directory
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-    }
-
-    // Add this block to ensure proper handling of deprecated features
-    tasks.withType(JavaCompile) {
-        options.compilerArgs += ['--release', '21']
+    tasks.withType(org.springframework.boot.gradle.tasks.bundling.BootJar) {
+        archiveBaseName.set('app')
+        archiveVersion.set(version)
     }
 }
