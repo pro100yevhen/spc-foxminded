@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{fragments/header :: header(title='Manager Activities', activePage='activities')}"></th:block>
+
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Manager Activities</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Owner</th>
+                <th>Activity ID</th>
+                <th>Deal ID</th>
+                <th>Person</th>
+                <th>Type</th>
+                <th>Updated Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="activity : ${activities}">
+                <td th:text="${activity.owner.name}"></td>
+                <td th:text="${activity.id}"></td>
+                <td th:text="${activity.dealId}"></td>
+                <td th:text="${activity.personName}"></td>
+                <td th:text="${activity.typeName}"></td>
+                <td th:text="${#temporals.format(activity.updatedActivityDate, 'dd.MM.yyyy HH:mm')}"></td>
+                <td>
+                    <button class="btn btn-danger" th:attr="data-id=${activity.id}" onclick="deleteActivity(this)">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+<script>
+    function deleteActivity(button) {
+        var activityId = button.getAttribute('data-id');
+        if (confirm('Are you sure you want to delete this activity? This action cannot be undone.')) {
+            fetch('/activity?id=' + activityId, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Activity deleted successfully.');
+                        location.reload();
+                    } else {
+                        alert('Error deleting activity.');
+                    }
+                })
+                .catch(error => {
+                    alert('Error: ' + error.message);
+                });
+        }
+    }
+</script>
+</body>
+</html>

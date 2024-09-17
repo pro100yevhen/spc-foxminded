@@ -1,0 +1,31 @@
+services:
+  db:
+    container_name: foxminded-activity-database
+    image: postgres:16.4
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=P@ssw0rd1234!
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=activity
+
+  back:
+    container_name: backend
+    image: 'openjdk:21-slim'
+    restart: always
+    ports:
+      - "9080:80"
+    environment:
+      - SERVER_PORT=80
+      - SERVER_ADDRESS=0.0.0.0
+      - SPRING_MAIN_BANNER-MODE=off
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://foxminded-activity-database:5432/activity
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=P@ssw0rd1234!
+    volumes:
+      - /Users/yevheniipiddubnyi/Downloads/shvirid/app:/app
+    command: [ 'java', '-jar', '/app/app.jar' ]
+    depends_on:
+      db:
+        condition: service_started

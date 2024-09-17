@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{fragments/header :: header(title='Average Progress', activePage='average-progress')}"></th:block>
+<body>
+<div class="container mt-5">
+  <!-- Table for Average Progress -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title text-center">Average Progress for <span th:text="${month}"></span></h5>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr class="text-center">
+            <th>Manager Name</th>
+            <th>Days Active</th>
+            <th>Average Progress</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="manager : ${averageProgress}" class="text-center">
+            <td th:text="${manager.managerName}"></td>
+            <td th:text="${manager.activeDays}"></td>
+            <td th:text="${#numbers.formatDecimal(manager.progress, 1, 1)} + '%'"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons for Selecting Managers for Detailed View -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">View Detailed Data by Manager</h5>
+      <div class="d-flex flex-wrap">
+        <div th:each="manager : ${managers}">
+          <a th:href="'/manager-period?managerId=' + ${manager.id} + '&startDate=' + ${month.atDay(1)} + '&endDate=' + ${month.atEndOfMonth()}"
+             class="btn btn-secondary mb-2 mr-2" th:text="${manager.name}"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</body>
+</html>

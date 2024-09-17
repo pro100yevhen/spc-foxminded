@@ -25,15 +25,14 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan $SSH_SERVER >> ~/.ssh/known_hosts
   script:
-    # Обновляем docker-compose.yml в проекте
+   
     - scp docker-compose.yml $SSH_USER@$SSH_SERVER:/home/docker/spc/docker-compose.yml
-    # Копируем jar файл
+   
     - scp target/*.jar $SSH_USER@$SSH_SERVER:/home/docker/spc/app
-    # Перезапускаем контейнер с новым образом
+  
     - ssh $SSH_USER@$SSH_SERVER "cd /home/docker/spc && docker-compose down && docker-compose up -d --build"
   only:
     - main
   environment:
     name: production
     url: http://135.181.128.39
-
