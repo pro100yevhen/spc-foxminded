@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.2' apply false
+}
+
+group = 'ua.foxminded'
+version = 'v.1.0.1'
+
+allprojects {
+
+    ext {
+        modelMapperVersion = '3.0.0'
+        mapStructMapperVersion = '1.5.5.Final'
+        springCloudVersion = '2022.0.3'
+        postgresqlVersion = '42.6.0'
+    }
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+
+
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform {
+            includeEngines("junit-jupiter")
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}
+
+
+
+
