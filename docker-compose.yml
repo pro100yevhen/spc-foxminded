@@ -39,8 +39,7 @@ services:
       - /home/docker/spc/app:/app
     command: ['java', '-jar', '/app/app.jar']
     depends_on:
-      db:
-        condition: service_started
+      - db
 
     networks:
       - shvirid
