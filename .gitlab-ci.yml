@@ -8,13 +8,12 @@ default:
 build:
   stage: build
   script:
-    - echo "Installing Maven..."
-    - apt-get update && apt-get install -y maven
     - echo "Compiling the code..."
-    - mvn clean package
+    - ./gradlew clean build
   artifacts:
     paths:
-      - target/*.jar
+      - build/libs/*.jar
+    expire_in: 1 hour
 
 deploy:
   stage: deploy
@@ -26,11 +25,11 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan -p 222 $SSH_SERVER >> ~/.ssh/known_hosts  
   script:
-    - scp -P 222 docker-compose.yml $SSH_USER@$SSH_SERVER:/home/docker/spc/docker-compose.yml  
+    - scp -P 222 build/libs/*.jar $SSH_USER@$SSH_SERVER:/home/docker/spc/app/
+    - scp -P 222 docker-compose.yml $SSH_USER@$SSH_SERVER:/home/docker/spc/docker-compose.yml
     - ssh -p 222 $SSH_USER@$SSH_SERVER "cd /home/docker/spc && docker-compose down && docker-compose up -d --build"  
   only:
     - main
   environment:
     name: production
     url: http://135.181.128.39
-
