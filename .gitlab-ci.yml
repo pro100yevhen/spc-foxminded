@@ -3,7 +3,7 @@ stages:
   - deploy
 
 default:
-  image: maven:3.8.5-openjdk-17
+  image: openjdk:21-slim
 
 build:
   stage: build
