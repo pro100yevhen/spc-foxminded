@@ -9,7 +9,7 @@ build:
   stage: build
   script:
     - echo "Compiling the code..."
-    - mvn clean package
+
   artifacts:
     paths:
       - target/*.jar
