@@ -1,12 +1,12 @@
 plugins {
-    id 'org.springframework.boot' version '3.1.2'
-    id 'java'
+    id 'org.springframework.boot' version '3.1.2' apply false
 }
 
 group = 'ua.foxminded'
 version = 'v.1.0.1'
 
 allprojects {
+
     ext {
         modelMapperVersion = '3.0.0'
         mapStructMapperVersion = '1.5.5.Final'
@@ -15,13 +15,14 @@ allprojects {
     }
 }
 
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.springframework.boot'
 
     sourceCompatibility = '21'
     targetCompatibility = '21'
+
 
     repositories {
         mavenCentral()
@@ -38,22 +39,5 @@ subprojects {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
     }
-
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-    }
-
-    tasks.withType(Jar) {
-        manifest {
-            attributes(
-                'Implementation-Title': 'Your Project',
-                'Implementation-Version': version
-            )
-        }
-    }
-
-    tasks.withType(org.springframework.boot.gradle.tasks.bundling.BootJar) {
-        archiveBaseName.set('app')
-        archiveVersion.set(version)
-    }
 }
+
