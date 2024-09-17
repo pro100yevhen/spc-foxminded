@@ -10,7 +10,8 @@ build:
   script:
     - echo "Compiling the code..."
     - ./gradlew clean build
-    - ls -R build 
+    - echo "Build directory contents:"
+    - ls -R build || echo "No build directory found"
   artifacts:
     paths:
       - backend/build/libs/*.jar
