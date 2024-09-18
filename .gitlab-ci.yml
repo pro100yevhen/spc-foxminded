@@ -11,8 +11,6 @@ build:
     - echo "Compiling the code..."
     - ./gradlew build --stacktrace --info
 
-    - echo "Build directory contents:"
-    - ls -R build || echo "No build directory found"
   artifacts:
     paths:
       - backend/build/libs/*.jar
