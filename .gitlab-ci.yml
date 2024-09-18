@@ -10,7 +10,8 @@ build:
   script:
     - echo "Compiling the code..."
     - ./gradlew build --stacktrace --info
-
+    - cd backend
+    - du -h build/libs/*.jar
   artifacts:
     paths:
       - backend/build/libs/*.jar
