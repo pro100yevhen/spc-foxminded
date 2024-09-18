@@ -30,10 +30,9 @@ deploy:
   script:
     - scp -P 222 backend/build/libs/*.jar $SSH_USER@$SSH_SERVER:/home/docker/spc/app/
     - scp -P 222 docker-compose.yml $SSH_USER@$SSH_SERVER:/home/docker/spc/docker-compose.yml
-    - ssh -p 222 $SSH_USER@$SSH_SERVER "cd /home/docker/spc && docker-compose down && docker-compose up -d --build"  
+    - ssh -p 222 $SSH_USER@$SSH_SERVER "cd /home/docker/spc && docker-compose down && docker-compose up -d --build"
   only:
     - main
   environment:
     name: production
     url: http://135.181.128.39
-
