@@ -10,6 +10,7 @@ build:
   script:
     - echo "Compiling the code..."
     - ./gradlew build --stacktrace --info
+    - split -b 30M backend/build/libs/backend.jar "backend_part_"
     - cd backend
     - du -h build/libs/*.jar
   artifacts:
