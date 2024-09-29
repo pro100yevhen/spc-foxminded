@@ -1,3 +1,4 @@
+version: "3.8"
 services:
   db:
     container_name: foxminded-activity-database
@@ -36,16 +37,17 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
     volumes:
       - /home/docker/spc/app:/app
-    command: ['java', '-jar', '/app/app.jar']
+    command: ['java', '-jar', '/app/backend.jar']
     depends_on:
-      db:
-        condition: service_started
+      - db
+
     networks:
       - shvirid
       - compose-demo_default
 
 
+
 networks:
-  compose-demo_default:
-    external: true
-  shvirid:
+   compose-demo_default:
+     external: true
+   shvirid:
