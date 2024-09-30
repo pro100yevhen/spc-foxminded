@@ -39,9 +39,7 @@ public class ManagerPointsController {
 
         final List<OwnerDto> managers = managerPointsService.getAllManagers();
 
-        todayPoints.sort(Comparator
-                .comparing(ManagerPointsDto::getDate)
-                .thenComparing(manager -> manager.getManagerName()));
+        todayPoints.sort(Comparator.comparing(ManagerPointsDto::getDate));
 
         model.addAttribute("managers", managers);
         model.addAttribute("managerPoints", todayPoints);
@@ -60,9 +58,7 @@ public class ManagerPointsController {
         final int normative = config.getManagerPointsNormative();
         final List<OwnerDto> managers = managerPointsService.getAllManagers();
 
-        pointsByPeriod.sort(Comparator
-                .comparing(ManagerPointsDto::getDate)
-                .thenComparing(manager -> manager.getManagerName()));
+        pointsByPeriod.sort(Comparator.comparing(ManagerPointsDto::getDate));
 
         model.addAttribute("managers", managers);
         model.addAttribute("managerPoints", pointsByPeriod);
@@ -81,8 +77,7 @@ public class ManagerPointsController {
                 managerId, startDate, endDate));
         final int normative = config.getManagerPointsNormative();
 
-        pointsByManagerAndPeriod.sort(Comparator.comparing(ManagerPointsDto::getDate)
-                .thenComparing(manager -> manager.getManagerName()));
+        pointsByManagerAndPeriod.sort(Comparator.comparing(ManagerPointsDto::getDate));
 
         final List<OwnerDto> managers = managerPointsService.getAllManagers();
 
