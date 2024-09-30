@@ -12,6 +12,7 @@ import ua.foxminded.domain.pointsconfiguration.repository.ManagerPointConfigurat
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,7 +28,6 @@ class ManagerPointsConfigurationServiceImplTest {
 
     @InjectMocks
     private ManagerPointsConfigurationServiceImpl managerPointsConfigurationService;
-
 
     private static final LocalDateTime START_OF_DAY = LocalDate.now().atStartOfDay();
     private static final LocalDateTime END_OF_DAY = LocalDate.now().atTime(LocalTime.MAX);
@@ -50,8 +50,8 @@ class ManagerPointsConfigurationServiceImplTest {
     public void shouldReturnTodayConfiguration_whenExistsInRepository() {
         // Arrange
         ManagerPointsConfiguration todayConfig = new ManagerPointsConfiguration();
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY)).thenReturn(
-                todayConfig);
+        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY))
+                .thenReturn(List.of(todayConfig));
 
         // Act
         ManagerPointsConfiguration result = managerPointsConfigurationService.getConfiguration();
@@ -66,11 +66,12 @@ class ManagerPointsConfigurationServiceImplTest {
     public void shouldReturnPreviousConfigurationAndSaveNew_whenNoTodayConfigExists() {
         // Arrange
         ManagerPointsConfiguration previousConfig = new ManagerPointsConfiguration();
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY)).thenReturn(
-                null);
-        when(managerPointConfigurationRepositoryMock.findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(
-                START_OF_DAY)).thenReturn(previousConfig);
-        when(managerPointConfigurationRepositoryMock.save(previousConfig)).thenReturn(previousConfig);
+        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY))
+                .thenReturn(List.of());  // Return empty list instead of null
+        when(managerPointConfigurationRepositoryMock.findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(START_OF_DAY))
+                .thenReturn(previousConfig);
+        when(managerPointConfigurationRepositoryMock.save(any(ManagerPointsConfiguration.class)))
+                .thenReturn(previousConfig);
 
         // Act
         ManagerPointsConfiguration result = managerPointsConfigurationService.getConfiguration();
@@ -78,8 +79,7 @@ class ManagerPointsConfigurationServiceImplTest {
         // Assert
         assertNotNull(result);
         verify(managerPointConfigurationRepositoryMock).findByCreatedDateBetween(START_OF_DAY, END_OF_DAY);
-        verify(managerPointConfigurationRepositoryMock).findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(
-                START_OF_DAY);
+        verify(managerPointConfigurationRepositoryMock).findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(START_OF_DAY);
         verify(managerPointConfigurationRepositoryMock).save(any(ManagerPointsConfiguration.class));
     }
 
@@ -96,13 +96,12 @@ class ManagerPointsConfigurationServiceImplTest {
         previousConfig.setManagerPointsBonusEqual3(20);
         previousConfig.setManagerPointsBonusOver4(30);
 
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY)).thenReturn(
-                null);
-        when(managerPointConfigurationRepositoryMock.findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(
-                START_OF_DAY)).thenReturn(previousConfig);
+        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY))
+                .thenReturn(List.of());  // Empty list instead of null
+        when(managerPointConfigurationRepositoryMock.findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(START_OF_DAY))
+                .thenReturn(previousConfig);
 
-        ArgumentCaptor<ManagerPointsConfiguration> configCaptor = ArgumentCaptor.forClass(
-                ManagerPointsConfiguration.class);
+        ArgumentCaptor<ManagerPointsConfiguration> configCaptor = ArgumentCaptor.forClass(ManagerPointsConfiguration.class);
 
         // Act
         managerPointsConfigurationService.getConfiguration();
@@ -115,8 +114,7 @@ class ManagerPointsConfigurationServiceImplTest {
         assertEquals(previousConfig.getDealStagesIds(), savedConfig.getDealStagesIds());
         assertEquals(previousConfig.getManagerPointsNormative(), savedConfig.getManagerPointsNormative());
         assertEquals(previousConfig.getManagerPointsCallCoefficient(), savedConfig.getManagerPointsCallCoefficient());
-        assertEquals(previousConfig.getManagerPointsTestPeriodCoefficient(),
-                savedConfig.getManagerPointsTestPeriodCoefficient());
+        assertEquals(previousConfig.getManagerPointsTestPeriodCoefficient(), savedConfig.getManagerPointsTestPeriodCoefficient());
         assertEquals(previousConfig.getManagerPointsBonusUnder3(), savedConfig.getManagerPointsBonusUnder3());
         assertEquals(previousConfig.getManagerPointsBonusEqual3(), savedConfig.getManagerPointsBonusEqual3());
         assertEquals(previousConfig.getManagerPointsBonusOver4(), savedConfig.getManagerPointsBonusOver4());
@@ -131,8 +129,8 @@ class ManagerPointsConfigurationServiceImplTest {
         LocalDateTime endOfTargetDay = targetDate.atTime(LocalTime.MAX);
 
         ManagerPointsConfiguration config = new ManagerPointsConfiguration();
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(startOfTargetDay,
-                endOfTargetDay)).thenReturn(config);
+        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(startOfTargetDay, endOfTargetDay))
+                .thenReturn(List.of(config));
 
         // Act
         ManagerPointsConfiguration result = managerPointsConfigurationService.findByDate(targetDateTime);
