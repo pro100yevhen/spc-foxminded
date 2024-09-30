@@ -33,16 +33,13 @@ public abstract class WebhookActivityModelToActivityMapper implements DataMapper
     }
 
     @Override
-    @Mapping(target = "id", source = "meta.id")
-    @Mapping(target = "dealId", source = "current.dealId")
-    @Mapping(target = "personName", source = "current.personName")
-    @Mapping(target = "busyFlag", source = "current.busyFlag")
-    @Mapping(target = "typeName", source = "current.typeName")
-    @Mapping(target = "owner.id", source = "current.userId")
-    @Mapping(target = "personId", source = "current.personId")
-    @Mapping(target = "owner.name", source = "current.ownerName")
-    @Mapping(target = "updatedActivityDate", source = "meta.timestamp", qualifiedByName = "longToLocalDateTime")
-    @Mapping(target = "markedAsDoneTime", source = "current.markedAsDoneTime", qualifiedByName = "stringToLocalDateTime")
+    @Mapping(target = "id", source = "data.id")
+    @Mapping(target = "dealId", source = "data.dealId")
+    @Mapping(target = "busyFlag", source = "data.busyFlag")
+    @Mapping(target = "typeName", source = "data.type")
+    @Mapping(target = "owner.id", source = "data.ownerId")
+    @Mapping(target = "personId", source = "data.personId")
+    @Mapping(target = "updatedActivityDate", source = "meta.timestamp", qualifiedByName = "stringToLocalDateTime")
     public abstract Activity map(WebhookActivityModel target);
 
     @Named("longToLocalDateTime")
@@ -54,11 +51,9 @@ public abstract class WebhookActivityModelToActivityMapper implements DataMapper
 
     @Named("stringToLocalDateTime")
     LocalDateTime stringToLocalDateTime(final String dateTime) {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (dateTime == null || dateTime.trim().isEmpty()) {
-            return null;
-        } else {
-            return LocalDateTime.parse(dateTime, formatter);
+        if (dateTime != null && !dateTime.trim().isEmpty()) {
+            return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
         }
+        return null;
     }
 }

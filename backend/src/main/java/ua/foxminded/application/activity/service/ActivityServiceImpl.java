@@ -2,6 +2,7 @@ package ua.foxminded.application.activity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.foxminded.application.pipedriveapi.service.PipedriveApiClient;
 import ua.foxminded.common.event.EventPublisher;
 import ua.foxminded.common.model.entity.Owner;
 import ua.foxminded.domain.activity.model.entity.Activity;
@@ -10,6 +11,7 @@ import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
 import ua.foxminded.domain.activity.repository.ActivityRepository;
 import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.activity.service.ActivityService;
+import ua.foxminded.domain.pipedriveapi.model.ActivityPipedriveApi;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,17 +25,20 @@ public class ActivityServiceImpl implements ActivityService {
     private final ActivityRepository activityRepository;
     private final OwnerRepository ownerRepository;
     private final EventPublisher eventPublisher;
+    private final PipedriveApiClient apiClient;
 
     @Autowired
     public ActivityServiceImpl(final ActivityRepository activityRepository, final OwnerRepository ownerRepository,
-                               final EventPublisher eventPublisher) {
+                               final EventPublisher eventPublisher, final PipedriveApiClient apiClient) {
         this.activityRepository = activityRepository;
         this.ownerRepository = ownerRepository;
         this.eventPublisher = eventPublisher;
+        this.apiClient = apiClient;
     }
 
     @Override
     public Activity save(final Activity activity) {
+        final ActivityPipedriveApi pipedriveActivity = apiClient.getActivityById(activity.getId()).block();
         checkOwner(activity.getOwner());
 
         // Get today's date range (midnight to midnight)
