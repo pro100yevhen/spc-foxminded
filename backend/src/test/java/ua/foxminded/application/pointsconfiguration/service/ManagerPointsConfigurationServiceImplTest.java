@@ -12,6 +12,7 @@ import ua.foxminded.domain.pointsconfiguration.repository.ManagerPointConfigurat
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -50,8 +51,8 @@ class ManagerPointsConfigurationServiceImplTest {
     public void shouldReturnTodayConfiguration_whenExistsInRepository() {
         // Arrange
         ManagerPointsConfiguration todayConfig = new ManagerPointsConfiguration();
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY)).thenReturn(
-                todayConfig);
+        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY)).thenReturn(List.of(
+                todayConfig));
 
         // Act
         ManagerPointsConfiguration result = managerPointsConfigurationService.getConfiguration();
@@ -132,7 +133,7 @@ class ManagerPointsConfigurationServiceImplTest {
 
         ManagerPointsConfiguration config = new ManagerPointsConfiguration();
         when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(startOfTargetDay,
-                endOfTargetDay)).thenReturn(config);
+                endOfTargetDay)).thenReturn(List.of(config));
 
         // Act
         ManagerPointsConfiguration result = managerPointsConfigurationService.findByDate(targetDateTime);
