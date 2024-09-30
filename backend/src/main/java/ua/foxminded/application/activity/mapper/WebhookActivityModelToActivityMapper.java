@@ -5,14 +5,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.foxminded.infrastructure.mapper.DataMapper;
 import ua.foxminded.domain.activity.model.entity.Activity;
 import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
 import ua.foxminded.infrastructure.config.TimezoneProvider;
+import ua.foxminded.infrastructure.mapper.DataMapper;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring",
@@ -42,17 +41,13 @@ public abstract class WebhookActivityModelToActivityMapper implements DataMapper
     @Mapping(target = "updatedActivityDate", source = "meta.timestamp", qualifiedByName = "stringToLocalDateTime")
     public abstract Activity map(WebhookActivityModel target);
 
-    @Named("longToLocalDateTime")
-    LocalDateTime longToLocalDateTime(final Long timestamp) {
-        final ZoneId zoneId = timezoneProvider.getZoneId();
-        return timestamp != null ?
-                LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), zoneId) : null;
-    }
-
     @Named("stringToLocalDateTime")
     LocalDateTime stringToLocalDateTime(final String dateTime) {
         if (dateTime != null && !dateTime.trim().isEmpty()) {
-            return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
+            // Parse the string to ZonedDateTime first
+            final ZonedDateTime zonedDateTime = ZonedDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
+            // Convert it to LocalDateTime in the desired timezone
+            return zonedDateTime.withZoneSameInstant(timezoneProvider.getZoneId()).toLocalDateTime();
         }
         return null;
     }
