@@ -2,8 +2,6 @@ package ua.foxminded.domain.deal.model.webhook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
-
 public class DealMetaModel {
 
     private String action;
@@ -18,7 +16,7 @@ public class DealMetaModel {
     @JsonProperty("is_bulk_edit")
     private boolean isBulkEdit;
 
-    private LocalDateTime timestamp;
+    private String timestamp;
     private String type;
 
     @JsonProperty("user_id")
@@ -75,11 +73,11 @@ public class DealMetaModel {
         isBulkEdit = bulkEdit;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(final LocalDateTime timestamp) {
+    public void setTimestamp(final String timestamp) {
         this.timestamp = timestamp;
     }
 

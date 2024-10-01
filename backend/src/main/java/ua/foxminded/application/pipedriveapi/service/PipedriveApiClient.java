@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ua.foxminded.domain.pipedriveapi.model.ActivityPipedriveApi;
+import ua.foxminded.domain.pipedriveapi.model.activity.ActivityPipedriveApi;
+import ua.foxminded.domain.pipedriveapi.model.deal.DealPipedriveApi;
 
 @Service
 public class PipedriveApiClient {
@@ -32,5 +33,15 @@ public class PipedriveApiClient {
                         .build(id))
                 .retrieve()
                 .bodyToMono(ActivityPipedriveApi.class);
+    }
+
+    public Mono<DealPipedriveApi> getDealById(final Long id) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(DEAL_URL + "/{id}")
+                        .queryParam(AUTH_KEY, PIPEDRIVE_TOKEN)
+                        .build(id))
+                .retrieve()
+                .bodyToMono(DealPipedriveApi.class);
     }
 }

@@ -1,4 +1,4 @@
-package ua.foxminded.domain.pipedriveapi.model;
+package ua.foxminded.domain.pipedriveapi.model.common;
 
 public class Phone {
 

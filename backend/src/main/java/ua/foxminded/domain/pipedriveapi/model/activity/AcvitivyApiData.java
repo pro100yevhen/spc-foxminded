@@ -1,10 +1,10 @@
-package ua.foxminded.domain.pipedriveapi.model;
+package ua.foxminded.domain.pipedriveapi.model.activity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class Data {
+public class AcvitivyApiData {
 
     private Long id;
 

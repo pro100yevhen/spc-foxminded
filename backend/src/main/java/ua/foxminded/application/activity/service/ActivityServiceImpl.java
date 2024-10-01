@@ -11,8 +11,7 @@ import ua.foxminded.domain.activity.model.event.ActivityDeletedEvent;
 import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
 import ua.foxminded.domain.activity.repository.ActivityRepository;
 import ua.foxminded.domain.activity.service.ActivityService;
-import ua.foxminded.domain.pipedriveapi.model.ActivityPipedriveApi;
-import ua.foxminded.infrastructure.config.TimezoneProvider;
+import ua.foxminded.domain.pipedriveapi.model.activity.ActivityPipedriveApi;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,17 +27,14 @@ public class ActivityServiceImpl implements ActivityService {
     private final OwnerRepository ownerRepository;
     private final EventPublisher eventPublisher;
     private final PipedriveApiClient apiClient;
-    private TimezoneProvider timezoneProvider;
 
     @Autowired
     public ActivityServiceImpl(final ActivityRepository activityRepository, final OwnerRepository ownerRepository,
-                               final EventPublisher eventPublisher, final PipedriveApiClient apiClient,
-                               final TimezoneProvider timezoneProvider) {
+                               final EventPublisher eventPublisher, final PipedriveApiClient apiClient) {
         this.activityRepository = activityRepository;
         this.ownerRepository = ownerRepository;
         this.eventPublisher = eventPublisher;
         this.apiClient = apiClient;
-        this.timezoneProvider = timezoneProvider;
     }
 
     @Override
@@ -60,9 +56,9 @@ public class ActivityServiceImpl implements ActivityService {
         final Activity existingActivity = activityRepository.findByPersonIdAndCreatedDateBetween(activity.getPersonId(),
                 todayStart, todayEnd);
 
-        if(existingActivity != null){
+        if (existingActivity != null) {
             return existingActivity;
-        }else{
+        } else {
             return saveNewActivity(activity);
         }
     }
