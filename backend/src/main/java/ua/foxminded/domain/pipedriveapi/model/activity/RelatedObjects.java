@@ -1,4 +1,7 @@
-package ua.foxminded.domain.pipedriveapi.model;
+package ua.foxminded.domain.pipedriveapi.model.activity;
+
+import ua.foxminded.domain.pipedriveapi.model.common.Person;
+import ua.foxminded.domain.pipedriveapi.model.common.User;
 
 import java.util.Map;
 

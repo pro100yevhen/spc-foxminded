@@ -1,4 +1,4 @@
-package ua.foxminded.domain.pipedriveapi.model;
+package ua.foxminded.domain.pipedriveapi.model.common;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ public class Person {
     private String name;
     private List<Email> email;
     private List<Phone> phone;
+    private int owner_id;
+    private int value;
 
     public Long getId() {
         return id;
@@ -39,5 +41,21 @@ public class Person {
 
     public void setPhone(final List<Phone> phone) {
         this.phone = phone;
+    }
+
+    public int getOwner_id() {
+        return owner_id;
+    }
+
+    public void setOwner_id(final int owner_id) {
+        this.owner_id = owner_id;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(final int value) {
+        this.value = value;
     }
 }

@@ -1,11 +1,11 @@
-package ua.foxminded.domain.pipedriveapi.model;
+package ua.foxminded.domain.pipedriveapi.model.activity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ActivityPipedriveApi {
 
     private boolean success;
-    private Data data;
+    private AcvitivyApiData acvitivyApiData;
     @JsonProperty("related_objects")
     private RelatedObjects relatedObjects;
 
@@ -17,12 +17,12 @@ public class ActivityPipedriveApi {
         this.success = success;
     }
 
-    public Data getData() {
-        return data;
+    public AcvitivyApiData getData() {
+        return acvitivyApiData;
     }
 
-    public void setData(final Data data) {
-        this.data = data;
+    public void setData(final AcvitivyApiData acvitivyApiData) {
+        this.acvitivyApiData = acvitivyApiData;
     }
 
     public RelatedObjects getRelatedObjects() {
