@@ -2,61 +2,30 @@ package ua.foxminded.domain.deal.model.webhook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 public class DealMetaModel {
 
     private String action;
+    private String companyId;
+    private String correlationId;
 
-    @JsonProperty("change_source")
-    private String changeSource;
+    @JsonProperty("entity_id")
+    private String entityId;
 
-    @JsonProperty("company_id")
-    private Long companyId;
+    private String entity;
 
-    private String host;
+    @JsonProperty("is_bulk_edit")
+    private boolean isBulkEdit;
 
-    private Long id;
-
-    @JsonProperty("is_bulk_update")
-    private boolean isBulkUpdate;
-
-    @JsonProperty("matches_filters")
-    private DealMatchesFiltersModel matchesFilters;
-
-    private String object;
-
-    @JsonProperty("permitted_user_ids")
-    private List<Long> permittedUserIds;
-
-    @JsonProperty("pipedrive_service_name")
-    private String pipedriveServiceName;
-
-    private Long timestamp;
-
-    @JsonProperty("timestamp_micro")
-    private Long timestampMicro;
-
-    @JsonProperty("prepublish_timestamp")
-    private Long prepublishTimestamp;
-
-    @JsonProperty("trans_pending")
-    private boolean transPending;
+    private LocalDateTime timestamp;
+    private String type;
 
     @JsonProperty("user_id")
-    private Long userId;
+    private String userId;
 
-    private Long v;
-
-    @JsonProperty("activity_notifications_language")
-    private String activityNotificationsLanguage;
-
-    @JsonProperty("send_activity_notifications")
-    private boolean sendActivityNotifications;
-
-    @JsonProperty("webhook_id")
-    private String webhookId;
+    private String version;
+    private String host;
 
     public String getAction() {
         return action;
@@ -66,20 +35,76 @@ public class DealMetaModel {
         this.action = action;
     }
 
-    public String getChangeSource() {
-        return changeSource;
-    }
-
-    public void setChangeSource(final String changeSource) {
-        this.changeSource = changeSource;
-    }
-
-    public Long getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(final Long companyId) {
+    public void setCompanyId(final String companyId) {
         this.companyId = companyId;
+    }
+
+    public String getCorrelationId() {
+        return correlationId;
+    }
+
+    public void setCorrelationId(final String correlationId) {
+        this.correlationId = correlationId;
+    }
+
+    public String getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(final String entityId) {
+        this.entityId = entityId;
+    }
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(final String entity) {
+        this.entity = entity;
+    }
+
+    public boolean isBulkEdit() {
+        return isBulkEdit;
+    }
+
+    public void setBulkEdit(final boolean bulkEdit) {
+        isBulkEdit = bulkEdit;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(final LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(final String type) {
+        this.type = type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(final String userId) {
+        this.userId = userId;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(final String version) {
+        this.version = version;
     }
 
     public String getHost() {
@@ -88,175 +113,5 @@ public class DealMetaModel {
 
     public void setHost(final String host) {
         this.host = host;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public boolean isBulkUpdate() {
-        return isBulkUpdate;
-    }
-
-    public void setBulkUpdate(final boolean bulkUpdate) {
-        isBulkUpdate = bulkUpdate;
-    }
-
-    public DealMatchesFiltersModel getMatchesFilters() {
-        return matchesFilters;
-    }
-
-    public void setMatchesFilters(final DealMatchesFiltersModel matchesFilters) {
-        this.matchesFilters = matchesFilters;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(final String object) {
-        this.object = object;
-    }
-
-    public List<Long> getPermittedUserIds() {
-        return permittedUserIds;
-    }
-
-    public void setPermittedUserIds(final List<Long> permittedUserIds) {
-        this.permittedUserIds = permittedUserIds;
-    }
-
-    public String getPipedriveServiceName() {
-        return pipedriveServiceName;
-    }
-
-    public void setPipedriveServiceName(final String pipedriveServiceName) {
-        this.pipedriveServiceName = pipedriveServiceName;
-    }
-
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(final Long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public Long getTimestampMicro() {
-        return timestampMicro;
-    }
-
-    public void setTimestampMicro(final Long timestampMicro) {
-        this.timestampMicro = timestampMicro;
-    }
-
-    public Long getPrepublishTimestamp() {
-        return prepublishTimestamp;
-    }
-
-    public void setPrepublishTimestamp(final Long prepublishTimestamp) {
-        this.prepublishTimestamp = prepublishTimestamp;
-    }
-
-    public boolean isTransPending() {
-        return transPending;
-    }
-
-    public void setTransPending(final boolean transPending) {
-        this.transPending = transPending;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(final Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getV() {
-        return v;
-    }
-
-    public void setV(final Long v) {
-        this.v = v;
-    }
-
-    public String getActivityNotificationsLanguage() {
-        return activityNotificationsLanguage;
-    }
-
-    public void setActivityNotificationsLanguage(final String activityNotificationsLanguage) {
-        this.activityNotificationsLanguage = activityNotificationsLanguage;
-    }
-
-    public boolean isSendActivityNotifications() {
-        return sendActivityNotifications;
-    }
-
-    public void setSendActivityNotifications(final boolean sendActivityNotifications) {
-        this.sendActivityNotifications = sendActivityNotifications;
-    }
-
-    public String getWebhookId() {
-        return webhookId;
-    }
-
-    public void setWebhookId(final String webhookId) {
-        this.webhookId = webhookId;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final DealMetaModel that = (DealMetaModel) o;
-        return isBulkUpdate == that.isBulkUpdate && transPending == that.transPending && sendActivityNotifications == that.sendActivityNotifications && Objects.equals(
-                action, that.action) && Objects.equals(changeSource,
-                that.changeSource) && Objects.equals(companyId, that.companyId) && Objects.equals(host,
-                that.host) && Objects.equals(id, that.id) && Objects.equals(matchesFilters,
-                that.matchesFilters) && Objects.equals(object, that.object) && Objects.equals(
-                permittedUserIds, that.permittedUserIds) && Objects.equals(pipedriveServiceName,
-                that.pipedriveServiceName) && Objects.equals(timestamp,
-                that.timestamp) && Objects.equals(timestampMicro,
-                that.timestampMicro) && Objects.equals(prepublishTimestamp,
-                that.prepublishTimestamp) && Objects.equals(userId, that.userId) && Objects.equals(v,
-                that.v) && Objects.equals(activityNotificationsLanguage,
-                that.activityNotificationsLanguage) && Objects.equals(webhookId, that.webhookId);
-    }
-
-    @Override
-    public int hashCode() {
-       return Objects.hashCode(getClass());
-    }
-
-    @Override
-    public String toString() {
-        return "DealMetaModel{" +
-                "action='" + action + '\'' +
-                ", changeSource='" + changeSource + '\'' +
-                ", companyId=" + companyId +
-                ", host='" + host + '\'' +
-                ", id=" + id +
-                ", isBulkUpdate=" + isBulkUpdate +
-                ", matchesFilters=" + matchesFilters +
-                ", object='" + object + '\'' +
-                ", permittedUserIds=" + permittedUserIds +
-                ", pipedriveServiceName='" + pipedriveServiceName + '\'' +
-                ", timestamp=" + timestamp +
-                ", timestampMicro=" + timestampMicro +
-                ", prepublishTimestamp=" + prepublishTimestamp +
-                ", transPending=" + transPending +
-                ", userId=" + userId +
-                ", v=" + v +
-                ", activityNotificationsLanguage='" + activityNotificationsLanguage + '\'' +
-                ", sendActivityNotifications=" + sendActivityNotifications +
-                ", webhookId='" + webhookId + '\'' +
-                '}';
     }
 }

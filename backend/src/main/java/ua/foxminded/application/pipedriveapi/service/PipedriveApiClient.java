@@ -13,7 +13,6 @@ public class PipedriveApiClient {
 
     private String PIPEDRIVE_TOKEN;
     private final String ACTIVITY_URL = "/activities";
-    private final String OWNER_URL = "/owners";
     private final String DEAL_URL = "/deals";
     private final String AUTH_KEY = "api_token";
 
