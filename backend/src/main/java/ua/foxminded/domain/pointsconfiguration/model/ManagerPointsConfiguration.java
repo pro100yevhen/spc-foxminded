@@ -111,10 +111,8 @@ public class ManagerPointsConfiguration extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final ManagerPointsConfiguration managerPointsConfiguration = (ManagerPointsConfiguration) o;
-        return managerPointsNormative == managerPointsConfiguration.managerPointsNormative && managerPointsCallCoefficient == managerPointsConfiguration.managerPointsCallCoefficient && managerPointsTestPeriodCoefficient == managerPointsConfiguration.managerPointsTestPeriodCoefficient && managerPointsBonusUnder3 == managerPointsConfiguration.managerPointsBonusUnder3 && managerPointsBonusEqual3 == managerPointsConfiguration.managerPointsBonusEqual3 && managerPointsBonusOver4 == managerPointsConfiguration.managerPointsBonusOver4 && Objects.equals(
-                id, managerPointsConfiguration.id) && Objects.equals(allowedUserIds,
-                managerPointsConfiguration.allowedUserIds) && Objects.equals(dealStagesIds, managerPointsConfiguration.dealStagesIds);
+        final ManagerPointsConfiguration that = (ManagerPointsConfiguration) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override
