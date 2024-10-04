@@ -24,7 +24,7 @@ public class DealDeletedEventListener extends AbstractEventListener<DealDeletedE
     }
 
     @Override
-    protected void handleEvent(final DealDeletedEvent event) {
+    protected void handleConcreteEvent(final DealDeletedEvent event) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getCreatedDate());
         final Long managerId = event.getUserId();
 
