@@ -1,17 +1,19 @@
 # FoxmindEd Activity Points Application
 
 ## Introduction
-This application is designed for **FoxmindEd IT school** and is used to **calculate sales managers' daily activity points** based on data received from **Pipedrive CRM webhooks**. It handles activities and deals updates to track the daily performance of the sales team.
+This application is designed for **FoxmindEd IT school** to **calculate sales managers' daily activity points** based on data received from **Pipedrive CRM webhooks**. It handles activities and deals updates to track the daily performance of the sales team.
 
 ---
 
 ## Pipedrive CRM Setup
 
 ### Webhooks Setup
-To get started, you need to create **three webhooks** in the **Pipedrive CRM** system (URL: [Foxminded Pipedrive](https://foxminded.pipedrive.com/)):
+The application now uses **Pipedrive webhook v2** for activity tracking. You can read more about webhook v2 here: [Pipedrive Webhook v2 Guide](https://pipedrive.readme.io/docs/guide-for-webhooks-v2).
+
+To get started, you need to create the following webhooks in the **Pipedrive CRM** system (URL: [Foxminded Pipedrive](https://foxminded.pipedrive.com/)):
 
 1. **For updated activities:**
-    - **Event action:** `updated`
+    - **Event action:** `changed`
     - **Event object:** `activity`
     - **Endpoint URL:** `your-url/activity`
 
@@ -21,7 +23,7 @@ To get started, you need to create **three webhooks** in the **Pipedrive CRM** s
     - **Endpoint URL:** `your-url/activity`
 
 3. **For deals update:**
-    - **Event action:** `update`
+    - **Event action:** `changed`
     - **Event object:** `deal`
     - **Endpoint URL:** `your-url/deal`
 
@@ -35,69 +37,70 @@ This application was created for **FoxmindEd IT school** to calculate **daily ac
 
 ---
 
+## Pipedrive API Token Setup
+
+The application now requires the **PIPEDRIVE_TOKEN** for accessing Pipedrive data. You can retrieve this token from your **Personal Preferences** page on the Pipedrive settings: [Pipedrive API Settings](https://foxminded.pipedrive.com/settings/api).
+
+In case you need the token updated on the server, please reach out to **Mykola Shornik**.
+
+---
+
 ## Configuration Setup
 
-### Configuration File
+### Environment Variables
 
-The application uses a configuration file named `backend-local.properties` to manage server settings and database connections. You need to update the `application.properties` file according to your environment.
+To run the application, ensure the following environment variables are correctly set in your environment:
 
-#### Key Settings:
+- **PIPEDRIVE_TOKEN**: The token to access Pipedrive.
+- **Other environment variables** related to the database and server setup (these can be set through Docker Compose or directly in the environment).
 
-- **Server Properties**:
-    - `server.address=0.0.0.0` (or `localhost` for local use)
-    - `server.port=8080`
+#### Example Docker Compose Environment Setup:
 
-- **Database Connection**:
-    - `spring.datasource.url=jdbc:postgresql://localhost:5555/activity` (Update if using Docker or other environments)
+```yaml
+version: "3.8"
+services:
+  db:
+    container_name: foxminded-activity-database
+    image: postgres:16.4
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
 
-Ensure these settings match your environment.
+  back:
+    container_name: backend
+    image: 'openjdk:21-slim'
+    restart: always
+    ports:
+      - "9080:80"
+    environment:
+      - SPRING_MAIN_BANNER-MODE=off
+      - PIPEDRIVE_TOKEN=${PIPEDRIVE_TOKEN}
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+```
 
 ---
 
 ## Docker Setup
 
-The application uses **Docker** to handle both the database and backend service. Below is an example configuration from the `docker-compose.yml`:
+The application uses **Docker** to handle both the database and backend service. Below is an example configuration from the `docker-compose.yml` file (only relevant sections included):
 
 ### Services:
+
 - **PostgreSQL Database**:
     - Image: `postgres:16.4`
     - Port: `5432:5432`
-    - Environment:
-        - `POSTGRES_PASSWORD=P@ssw0rd1234!`
-        - `POSTGRES_USER=admin`
-        - `POSTGRES_DB=activity`
+    - Environment variables: `POSTGRES_PASSWORD`, `POSTGRES_USER`, `POSTGRES_DB`
 
 - **Backend**:
     - Image: `openjdk:21-slim`
     - Port: `9080:80`
-    - Environment:
-        - `SPRING_MAIN_BANNER-MODE=off`
-        - `SPRING_PROFILES_ACTIVE=local`
-    - Command: `java -jar /app/app.jar`
-    - Volumes:
-        - `/Users/yevheniipiddubnyi/Downloads/shvirid/app:/app`  _(See more below on how to change this)_
-
----
-
-## Changing Volume for the Application
-
-In the `docker-compose.yml` file, the volume for the application is currently mapped as follows:
-
-```yaml
-volumes:
-  - /Users/yevheniipiddubnyi/Downloads/shvirid/app:/app
-```
-
-This configuration maps your local application directory to the container. If you need to change the volume, update the path on your system (before the `:`). For example:
-
-```yaml
-volumes:
-  - /your/new/path/to/app:/app
-```
-
-This allows Docker to use the application files from the specified local path and map them to the `/app` directory inside the container.
-
-Make sure the path exists on your system and contains the necessary application files, such as the JAR file.
+    - Environment variables: `SPRING_MAIN_BANNER-MODE`, `PIPEDRIVE_TOKEN`, `SPRING_DATASOURCE_URL`, etc.
 
 ---
 
@@ -154,61 +157,12 @@ Here, the intensity of activity is calculated based on calls, test period activi
 
 ---
 
-## Testing and Development
-
-To test the application locally:
-1. Set up your Docker environment as specified.
-2. Ensure that the `application.properties` file is properly configured for local development.
-3. Access the system via the specified port (`localhost:8080` or similar).
-4. Update manager points configuration through the web interface, ensuring you have appropriate login credentials.
-
----
-
-### Example points calculation
-
-Let's walk through an example based on your configuration:
-
-```plaintext
-manager_points_normative: 50
-manager_points_call_coefficient: 2
-manager_points_test_period_coefficient: 8
-manager_points_bonus_under_3: 0
-manager_points_bonus_equal_3: 5
-manager_points_bonus_over_4: 20
-```
-
-Assume the following values for a sales manager:
-
-- **Activities count**: 5
-- **Test period count**: 4
-- **Bonus**: Based on `testPeriodCount`, this manager will receive the `manager_points_bonus_over_4` bonus of 20.
-
-### Steps for calculation:
-
-1. **Activities Points**:
-    - `activitiesCount = 5`
-    - `managerPointsCallCoefficient = 2`
-    - Activities points = `5 * 2 = 10`
-
-2. **Test Period Points**:
-    - `testPeriodCount = 4`
-    - `managerPointsTestPeriodCoefficient = 8`
-    - Test period points = `4 * 8 = 32`
-
-3. **Bonus**:
-    - Since `testPeriodCount = 4`, the bonus is `20` (as per `manager_points_bonus_over_4`).
-
-4. **Total Points**:
-    - Total points = Activities points + Test period points + Bonus
-    - Total points = `10 + 32 + 20 = 62`
-
-### Final Points for the Manager:
-- The calculated points for the manager would be **62** based on this configuration and activity level.
-
----
-
 ## Support Contacts
 
 For any questions or further assistance:
 - **Ivan Shvirid** (FoxmindEd Sales department)
 - **Mykola Shornik** (FoxmindEd IT department)
+
+---
+
+This update includes the changes for webhook v2, the Pipedrive token requirements, and the removal of full `docker-compose.yml` details from the readme. Let me know if you need further adjustments.
