@@ -24,9 +24,9 @@ public class DealFilter implements Filter<WebhookDealModel> {
         final Set<Long> allowedUserIds = parseIds(managerPointsConfigurationService.getConfiguration().getAllowedUserIds());
         final Set<Long> allowedDealStages = parseIds(managerPointsConfigurationService.getConfiguration().getDealStagesIds());
 
-        return allowedDealStages.contains(eventModel.getCurrent().getStageId()) &&
-                allowedUserIds.contains(eventModel.getCurrent().getUserId()) &&
-                eventModel.getCurrent().getStatus().equals(status);
+        return allowedDealStages.contains(eventModel.getData().getStageId()) &&
+                allowedUserIds.contains(eventModel.getData().getOwnerId()) &&
+                eventModel.getData().getStatus().equals(status);
     }
 
     private Set<Long> parseIds(final String ids) {

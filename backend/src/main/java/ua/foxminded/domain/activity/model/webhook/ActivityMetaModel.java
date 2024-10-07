@@ -2,60 +2,44 @@ package ua.foxminded.domain.activity.model.webhook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-import java.util.Objects;
-
 public class ActivityMetaModel {
+
     private String action;
 
-    @JsonProperty("change_source")
-    private String changeSource;
-
     @JsonProperty("company_id")
-    private Long companyId;
+    private String companyId;
 
-    private String host;
+    @JsonProperty("correlation_id")
+    private String correlationId;
 
-    private Long id;
+    @JsonProperty("entity_id")
+    private String entityId;
 
-    @JsonProperty("is_bulk_update")
-    private boolean isBulkUpdate;
+    private String entity;
 
-    @JsonProperty("matches_filters")
-    private ActivityMatchesFiltersModel matchesFilters;
+    private String id;
 
-    private String object;
+    @JsonProperty("is_bulk_edit")
+    private boolean isBulkEdit;
 
-    @JsonProperty("permitted_user_ids")
-    private List<Long> permittedUserIds;
+    private String timestamp;
 
-    @JsonProperty("pipedrive_service_name")
-    private String pipedriveServiceName;
-
-    private Long timestamp;
-
-    @JsonProperty("timestamp_micro")
-    private Long timestampMicro;
-
-    @JsonProperty("prepublish_timestamp")
-    private Long prepublishTimestamp;
-
-    @JsonProperty("trans_pending")
-    private boolean transPending;
+    private String type;
 
     @JsonProperty("user_id")
-    private Long userId;
+    private String userId;
 
-    private Long v;
-
-    @JsonProperty("activity_notifications_language")
-    private String activityNotificationsLanguage;
-
-    @JsonProperty("send_activity_notifications")
-    private boolean sendActivityNotifications;
+    private String version;
 
     @JsonProperty("webhook_id")
     private String webhookId;
+
+    @JsonProperty("webhook_owner_id")
+    private String webhookOwnerId;
+
+    private int attempt;
+
+    private String host;
 
     public String getAction() {
         return action;
@@ -65,140 +49,84 @@ public class ActivityMetaModel {
         this.action = action;
     }
 
-    public String getChangeSource() {
-        return changeSource;
-    }
-
-    public void setChangeSource(final String changeSource) {
-        this.changeSource = changeSource;
-    }
-
-    public Long getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(final Long companyId) {
+    public void setCompanyId(final String companyId) {
         this.companyId = companyId;
     }
 
-    public String getHost() {
-        return host;
+    public String getCorrelationId() {
+        return correlationId;
     }
 
-    public void setHost(final String host) {
-        this.host = host;
+    public void setCorrelationId(final String correlationId) {
+        this.correlationId = correlationId;
     }
 
-    public Long getId() {
+    public String getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(final String entityId) {
+        this.entityId = entityId;
+    }
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(final String entity) {
+        this.entity = entity;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(final Long id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
-    public boolean isBulkUpdate() {
-        return isBulkUpdate;
+    public boolean isBulkEdit() {
+        return isBulkEdit;
     }
 
-    public void setBulkUpdate(final boolean bulkUpdate) {
-        isBulkUpdate = bulkUpdate;
+    public void setBulkEdit(final boolean bulkEdit) {
+        isBulkEdit = bulkEdit;
     }
 
-    public ActivityMatchesFiltersModel getMatchesFilters() {
-        return matchesFilters;
-    }
-
-    public void setMatchesFilters(final ActivityMatchesFiltersModel matchesFilters) {
-        this.matchesFilters = matchesFilters;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(final String object) {
-        this.object = object;
-    }
-
-    public List<Long> getPermittedUserIds() {
-        return permittedUserIds;
-    }
-
-    public void setPermittedUserIds(final List<Long> permittedUserIds) {
-        this.permittedUserIds = permittedUserIds;
-    }
-
-    public String getPipedriveServiceName() {
-        return pipedriveServiceName;
-    }
-
-    public void setPipedriveServiceName(final String pipedriveServiceName) {
-        this.pipedriveServiceName = pipedriveServiceName;
-    }
-
-    public Long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(final Long timestamp) {
+    public void setTimestamp(final String timestamp) {
         this.timestamp = timestamp;
     }
 
-    public Long getTimestampMicro() {
-        return timestampMicro;
+    public String getType() {
+        return type;
     }
 
-    public void setTimestampMicro(final Long timestampMicro) {
-        this.timestampMicro = timestampMicro;
+    public void setType(final String type) {
+        this.type = type;
     }
 
-    public Long getPrepublishTimestamp() {
-        return prepublishTimestamp;
-    }
-
-    public void setPrepublishTimestamp(final Long prepublishTimestamp) {
-        this.prepublishTimestamp = prepublishTimestamp;
-    }
-
-    public boolean isTransPending() {
-        return transPending;
-    }
-
-    public void setTransPending(final boolean transPending) {
-        this.transPending = transPending;
-    }
-
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(final Long userId) {
+    public void setUserId(final String userId) {
         this.userId = userId;
     }
 
-    public Long getV() {
-        return v;
+    public String getVersion() {
+        return version;
     }
 
-    public void setV(final Long v) {
-        this.v = v;
-    }
-
-    public String getActivityNotificationsLanguage() {
-        return activityNotificationsLanguage;
-    }
-
-    public void setActivityNotificationsLanguage(final String activityNotificationsLanguage) {
-        this.activityNotificationsLanguage = activityNotificationsLanguage;
-    }
-
-    public boolean isSendActivityNotifications() {
-        return sendActivityNotifications;
-    }
-
-    public void setSendActivityNotifications(final boolean sendActivityNotifications) {
-        this.sendActivityNotifications = sendActivityNotifications;
+    public void setVersion(final String version) {
+        this.version = version;
     }
 
     public String getWebhookId() {
@@ -209,53 +137,27 @@ public class ActivityMetaModel {
         this.webhookId = webhookId;
     }
 
-    @Override
-    public String toString() {
-        return "MetaEventModel{" +
-                "action='" + action + '\'' +
-                ", changeSource='" + changeSource + '\'' +
-                ", companyId=" + companyId +
-                ", host='" + host + '\'' +
-                ", id=" + id +
-                ", isBulkUpdate=" + isBulkUpdate +
-                ", matchesFilters=" + matchesFilters +
-                ", object='" + object + '\'' +
-                ", permittedUserIds=" + permittedUserIds +
-                ", pipedriveServiceName='" + pipedriveServiceName + '\'' +
-                ", timestamp=" + timestamp +
-                ", timestampMicro=" + timestampMicro +
-                ", prepublishTimestamp=" + prepublishTimestamp +
-                ", transPending=" + transPending +
-                ", userId=" + userId +
-                ", v=" + v +
-                ", activityNotificationsLanguage='" + activityNotificationsLanguage + '\'' +
-                ", sendActivityNotifications=" + sendActivityNotifications +
-                ", webhookId='" + webhookId + '\'' +
-                '}';
+    public String getWebhookOwnerId() {
+        return webhookOwnerId;
     }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final ActivityMetaModel that = (ActivityMetaModel) o;
-        return isBulkUpdate == that.isBulkUpdate && transPending == that.transPending && sendActivityNotifications == that.sendActivityNotifications && Objects.equals(
-                action, that.action) && Objects.equals(changeSource,
-                that.changeSource) && Objects.equals(companyId, that.companyId) && Objects.equals(host,
-                that.host) && Objects.equals(id, that.id) && Objects.equals(matchesFilters,
-                that.matchesFilters) && Objects.equals(object, that.object) && Objects.equals(
-                permittedUserIds, that.permittedUserIds) && Objects.equals(pipedriveServiceName,
-                that.pipedriveServiceName) && Objects.equals(timestamp,
-                that.timestamp) && Objects.equals(timestampMicro,
-                that.timestampMicro) && Objects.equals(prepublishTimestamp,
-                that.prepublishTimestamp) && Objects.equals(userId, that.userId) && Objects.equals(v,
-                that.v) && Objects.equals(activityNotificationsLanguage,
-                that.activityNotificationsLanguage) && Objects.equals(webhookId, that.webhookId);
+    public void setWebhookOwnerId(final String webhookOwnerId) {
+        this.webhookOwnerId = webhookOwnerId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getClass());
+    public int getAttempt() {
+        return attempt;
+    }
+
+    public void setAttempt(final int attempt) {
+        this.attempt = attempt;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(final String host) {
+        this.host = host;
     }
 }
