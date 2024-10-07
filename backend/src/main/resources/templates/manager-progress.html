@@ -99,10 +99,10 @@
                 <td th:text="${manager.points > manager.normative ? manager.normative : manager.points}"></td>
                 <td>
                     <div class="progress" style="position: relative; height: 1.25rem;">
-                        <div class="progress-bar progress-bar-striped" style="height: 100%;"
+                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" style="height: 100%;"
                              role="progressbar"
                              th:style="'width: ' + ${manager.progress} + '%' "></div>
-                        <span th:style="'position: absolute; width: 100%; text-align: center; line-height: 1.25rem; font-weight: bold; color: ' + (${manager.progress >= 50} ? 'white' : '#6c757d')"
+                        <span th:style="'position: absolute; width: 100%; text-align: center; line-height: 1.25rem; font-weight: bold; color: ' + (${manager.progress >= 50} ? 'white' : 'black')"
                               th:text="${#numbers.formatDecimal(manager.progress, 1, 1) + '%'}"></span>
                     </div>
                 </td>
