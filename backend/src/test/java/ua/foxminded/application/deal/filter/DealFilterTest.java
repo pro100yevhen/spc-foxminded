@@ -5,9 +5,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ua.foxminded.domain.deal.model.webhook.DealDataModel;
+import ua.foxminded.domain.deal.model.webhook.DealDetailsModel;
 import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
-import ua.foxminded.domain.deal.model.webhook.DealDetailsModel;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -118,13 +119,13 @@ public class DealFilterTest {
     }
 
     private WebhookDealModel buildWebhookDealModel(Long userId, Long stageId, String status) {
-        DealDetailsModel current = new DealDetailsModel();
-        current.setUserId(userId);
+        DealDataModel current = new DealDataModel();
+        current.setOwnerId(userId);
         current.setStageId(stageId);
         current.setStatus(status);
 
         WebhookDealModel eventModel = new WebhookDealModel();
-        eventModel.setCurrent(current);
+        eventModel.setData(current);
 
         return eventModel;
     }

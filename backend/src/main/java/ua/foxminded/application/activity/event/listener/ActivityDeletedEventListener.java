@@ -24,7 +24,7 @@ public class ActivityDeletedEventListener extends AbstractEventListener<Activity
     }
 
     @Override
-    protected void handleEvent(final ActivityDeletedEvent event) {
+    protected void handleConcreteEvent(final ActivityDeletedEvent event) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getCreatedDate());
         final Long managerId = event.getUserId();
 
