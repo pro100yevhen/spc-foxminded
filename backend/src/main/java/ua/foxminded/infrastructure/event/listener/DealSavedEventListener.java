@@ -1,52 +1,55 @@
-package ua.foxminded.application.activity.event.listener;
+package ua.foxminded.infrastructure.event.listener;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.event.AbstractEventListener;
-import ua.foxminded.domain.activity.model.event.ActivityDeletedEvent;
 import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
+import ua.foxminded.domain.deal.model.event.DealSavedEvent;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
 
+import java.time.LocalDate;
+
 @Component
-public class ActivityDeletedEventListener extends AbstractEventListener<ActivityDeletedEvent> {
+public class DealSavedEventListener extends AbstractEventListener<DealSavedEvent> {
 
     private final ManagerPointsService managerPointsService;
     private final ManagerPointsConfigurationService managerPointsConfigurationService;
 
-    protected ActivityDeletedEventListener(final Cache<String, Boolean> eventCache,
-                                           final ManagerPointsService managerPointsService,
-                                           final ManagerPointsConfigurationService managerPointsConfigurationService) {
+    protected DealSavedEventListener(final Cache<String, Boolean> eventCache,
+                                     final ManagerPointsService managerPointsService,
+                                     final ManagerPointsConfigurationService managerPointsConfigurationService) {
         super(eventCache);
         this.managerPointsService = managerPointsService;
         this.managerPointsConfigurationService = managerPointsConfigurationService;
     }
 
     @Override
-    protected void handleConcreteEvent(final ActivityDeletedEvent event) {
-        final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getCreatedDate());
+    protected void handleConcreteEvent(final DealSavedEvent event) {
+        final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration();
         final Long managerId = event.getUserId();
 
         // Fetch existing points or create a new entry
-        final ManagerPoints managerPoints = managerPointsService.findByManagerIdAndDate(managerId, event.getCreatedDate());
+        final ManagerPoints managerPoints = managerPointsService.findByManagerId(managerId)
+                .stream()
+                .findFirst()
+                .orElseGet(() -> new ManagerPoints());
 
-        // Decrease the activities count
-        managerPoints.setActivitiesCount(managerPoints.getActivitiesCount() - 1);
+        managerPoints.setManagerId(managerId);
+        managerPoints.setDate(LocalDate.now());
+        managerPoints.setTestPeriodCount(managerPoints.getTestPeriodCount() + 1);
 
         // Calculate bonuses and points
         final int bonus = getBonus(managerPoints.getTestPeriodCount(), config);
         managerPoints.setBonuses(bonus);
 
         final int points = calculatePoints(managerPoints, config);
-        if (points <= 0) {
-            managerPointsService.delete(managerPoints.getId());
-        } else {
-            managerPoints.setPoints(points);
+        managerPoints.setPoints(points);
+        managerPoints.setNormative(config.getManagerPointsNormative());
 
-            // Save updated manager points
-            managerPointsService.save(managerPoints);
-        }
+        // Save updated manager points
+        managerPointsService.save(managerPoints);
     }
 
     private int calculatePoints(final ManagerPoints managerPoints, final ManagerPointsConfiguration config) {

@@ -1,14 +1,14 @@
-package ua.foxminded.application.manager.mapper;
+package ua.foxminded.infrastructure.mapper.manager;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.foxminded.infrastructure.mapper.DataMapper;
-import ua.foxminded.common.repository.OwnerRepository;
+import ua.foxminded.domain.owner.repository.OwnerRepository;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
+import ua.foxminded.infrastructure.mapper.DataMapper;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)

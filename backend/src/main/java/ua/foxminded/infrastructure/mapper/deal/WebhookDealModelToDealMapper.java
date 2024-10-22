@@ -1,12 +1,12 @@
-package ua.foxminded.application.activity.mapper;
+package ua.foxminded.infrastructure.mapper.deal;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.foxminded.domain.activity.model.entity.Activity;
-import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
+import ua.foxminded.domain.deal.model.entity.Deal;
+import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
 import ua.foxminded.infrastructure.config.TimezoneProvider;
 import ua.foxminded.infrastructure.mapper.DataMapper;
 
@@ -16,30 +16,27 @@ import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public abstract class WebhookActivityModelToActivityMapper implements DataMapper<WebhookActivityModel, Activity> {
+public abstract class WebhookDealModelToDealMapper implements DataMapper<WebhookDealModel, Deal> {
 
     @Autowired
     private TimezoneProvider timezoneProvider;
 
     @Override
-    public Class<WebhookActivityModel> getSourceClass() {
-        return WebhookActivityModel.class;
+    public Class<WebhookDealModel> getSourceClass() {
+        return WebhookDealModel.class;
     }
 
     @Override
-    public Class<Activity> getTargetClass() {
-        return Activity.class;
+    public Class<Deal> getTargetClass() {
+        return Deal.class;
     }
 
     @Override
     @Mapping(target = "id", source = "data.id")
-    @Mapping(target = "dealId", source = "data.dealId")
-    @Mapping(target = "busyFlag", source = "data.busyFlag")
-    @Mapping(target = "typeName", source = "data.type")
+    @Mapping(target = "stageId", source = "data.stageId")
     @Mapping(target = "owner.id", source = "data.ownerId")
-    @Mapping(target = "personId", source = "data.personId")
-    @Mapping(target = "updatedActivityDate", source = "meta.timestamp", qualifiedByName = "stringToLocalDateTime")
-    public abstract Activity map(WebhookActivityModel target);
+    @Mapping(target = "updatedDealStageDate", source = "meta.timestamp", qualifiedByName = "stringToLocalDateTime")
+    public abstract Deal map(WebhookDealModel target);
 
     @Named("stringToLocalDateTime")
     LocalDateTime stringToLocalDateTime(final String dateTime) {

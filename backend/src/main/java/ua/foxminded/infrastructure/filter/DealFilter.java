@@ -1,7 +1,6 @@
-package ua.foxminded.application.deal.filter;
+package ua.foxminded.infrastructure.filter;
 
 import org.springframework.stereotype.Component;
-import ua.foxminded.common.filter.Filter;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
 

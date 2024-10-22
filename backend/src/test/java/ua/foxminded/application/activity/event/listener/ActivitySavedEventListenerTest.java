@@ -12,6 +12,7 @@ import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
+import ua.foxminded.infrastructure.event.listener.ActivitySavedEventListener;
 
 import java.time.LocalDate;
 import java.util.Collections;

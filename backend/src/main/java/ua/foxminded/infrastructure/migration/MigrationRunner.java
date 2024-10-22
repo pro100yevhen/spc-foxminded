@@ -1,4 +1,4 @@
-package ua.foxminded.common.migration;
+package ua.foxminded.infrastructure.migration;
 
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.Location;

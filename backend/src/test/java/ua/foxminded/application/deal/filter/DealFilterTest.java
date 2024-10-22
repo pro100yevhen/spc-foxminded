@@ -6,10 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ua.foxminded.domain.deal.model.webhook.DealDataModel;
-import ua.foxminded.domain.deal.model.webhook.DealDetailsModel;
 import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
+import ua.foxminded.infrastructure.filter.DealFilter;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

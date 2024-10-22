@@ -1,32 +1,32 @@
-package ua.foxminded.application.deal.event.listener;
+package ua.foxminded.infrastructure.event.listener;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.event.AbstractEventListener;
+import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
 import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
-import ua.foxminded.domain.deal.model.event.DealSavedEvent;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
 
 import java.time.LocalDate;
 
 @Component
-public class DealSavedEventListener extends AbstractEventListener<DealSavedEvent> {
+public class ActivitySavedEventListener extends AbstractEventListener<ActivitySavedEvent> {
 
     private final ManagerPointsService managerPointsService;
     private final ManagerPointsConfigurationService managerPointsConfigurationService;
 
-    protected DealSavedEventListener(final Cache<String, Boolean> eventCache,
-                                     final ManagerPointsService managerPointsService,
-                                     final ManagerPointsConfigurationService managerPointsConfigurationService) {
+    protected ActivitySavedEventListener(final Cache<String, Boolean> eventCache,
+                                         final ManagerPointsService managerPointsService,
+                                         final ManagerPointsConfigurationService managerPointsConfigurationService) {
         super(eventCache);
         this.managerPointsService = managerPointsService;
         this.managerPointsConfigurationService = managerPointsConfigurationService;
     }
 
     @Override
-    protected void handleConcreteEvent(final DealSavedEvent event) {
+    protected void handleConcreteEvent(final ActivitySavedEvent event) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration();
         final Long managerId = event.getUserId();
 
@@ -38,7 +38,7 @@ public class DealSavedEventListener extends AbstractEventListener<DealSavedEvent
 
         managerPoints.setManagerId(managerId);
         managerPoints.setDate(LocalDate.now());
-        managerPoints.setTestPeriodCount(managerPoints.getTestPeriodCount() + 1);
+        managerPoints.setActivitiesCount(managerPoints.getActivitiesCount() + 1);
 
         // Calculate bonuses and points
         final int bonus = getBonus(managerPoints.getTestPeriodCount(), config);

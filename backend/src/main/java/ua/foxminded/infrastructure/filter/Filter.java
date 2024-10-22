@@ -1,4 +1,4 @@
-package ua.foxminded.common.filter;
+package ua.foxminded.infrastructure.filter;
 
 import org.springframework.stereotype.Component;
 
