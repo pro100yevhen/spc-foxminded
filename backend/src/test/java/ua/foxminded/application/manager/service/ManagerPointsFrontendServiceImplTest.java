@@ -10,7 +10,7 @@ import ua.foxminded.application.manager.controller.ManagerPointsRecourse;
 import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.common.model.dto.OwnerDto;
 import ua.foxminded.common.model.entity.Owner;
-import ua.foxminded.common.repository.OwnerRepository;
+import ua.foxminded.domain.owner.repository.OwnerRepository;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 
 import java.time.LocalDate;
