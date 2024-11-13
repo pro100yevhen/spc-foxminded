@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public class ActivityFilter implements Filter<WebhookActivityModel> {
 
     private final ManagerPointsConfigurationService managerPointsConfigurationService;
-    private final String ignoredReferenceType = "salesphone";
+    private final String ignoredPhrasePattern = "no answer from incoming call:";
 
     public ActivityFilter(final ManagerPointsConfigurationService managerPointsConfigurationService) {
         this.managerPointsConfigurationService = managerPointsConfigurationService;
@@ -27,7 +27,11 @@ public class ActivityFilter implements Filter<WebhookActivityModel> {
         return allowedUserIds.contains(eventModel.getData().getOwnerId()) &&
                 eventModel.getData().isBusyFlag() &&
                 eventModel.getData().isDone() &&
-                !ignoredReferenceType.equalsIgnoreCase(eventModel.getData().getType());
+                !containsIgnoredPhrase(eventModel.getData().getSubject());
+    }
+
+    private boolean containsIgnoredPhrase(final String subject) {
+        return subject != null && subject.toLowerCase().contains(ignoredPhrasePattern);
     }
 
     private Set<Long> parseIds(final String ids) {
