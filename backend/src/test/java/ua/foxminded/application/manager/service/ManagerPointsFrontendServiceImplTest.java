@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
-import ua.foxminded.application.manager.controller.ManagerPointsRecourse;
+import ua.foxminded.application.manager.controller.ManagerPointsResource;
 import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.common.model.dto.OwnerDto;
 import ua.foxminded.common.model.entity.Owner;
@@ -35,7 +35,7 @@ public class ManagerPointsFrontendServiceImplTest {
     private static final List<OwnerDto> EXPECTED_MANAGERS_DTO = Collections.singletonList(new OwnerDto());
 
     @Mock
-    private ManagerPointsRecourse recourse;
+    private ManagerPointsResource recourse;
 
     @Mock
     private OwnerRepository ownerRepository;
