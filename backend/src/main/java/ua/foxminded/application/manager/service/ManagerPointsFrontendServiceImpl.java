@@ -1,7 +1,7 @@
 package ua.foxminded.application.manager.service;
 
 import org.springframework.stereotype.Service;
-import ua.foxminded.application.manager.controller.ManagerPointsRecourse;
+import ua.foxminded.application.manager.controller.ManagerPointsResource;
 import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.common.model.dto.OwnerDto;
 import ua.foxminded.common.repository.OwnerRepository;
@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @Service
 public class ManagerPointsFrontendServiceImpl implements ManagerPointsFrontendService {
 
-    private final ManagerPointsRecourse recourse;
+    private final ManagerPointsResource recourse;
     private final OwnerRepository ownerRepository;
     private final TypeMapperFacade typeMapperFacade;
 
-    public ManagerPointsFrontendServiceImpl(final ManagerPointsRecourse recourse, final OwnerRepository ownerRepository,
+    public ManagerPointsFrontendServiceImpl(final ManagerPointsResource recourse, final OwnerRepository ownerRepository,
                                             final TypeMapperFacade typeMapperFacade) {
         this.recourse = recourse;
         this.ownerRepository = ownerRepository;

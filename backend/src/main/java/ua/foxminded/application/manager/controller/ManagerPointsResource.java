@@ -19,13 +19,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/manager-points")
-public class ManagerPointsRecourse {
+public class ManagerPointsResource {
 
     private final ManagerPointsService managerPointsService;
     private final TypeMapperFacade mapper;
-    private final Logger LOG = LoggerFactory.getLogger(ManagerPointsRecourse.class);
+    private final Logger LOG = LoggerFactory.getLogger(ManagerPointsResource.class);
 
-    public ManagerPointsRecourse(final ManagerPointsService managerPointsService, final TypeMapperFacade mapper) {
+    public ManagerPointsResource(final ManagerPointsService managerPointsService, final TypeMapperFacade mapper) {
         this.managerPointsService = managerPointsService;
         this.mapper = mapper;
     }
