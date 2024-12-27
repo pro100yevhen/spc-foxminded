@@ -3,11 +3,11 @@ package ua.foxminded.application.deal.event.listener;
 import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.event.AbstractEventListener;
-import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
-import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.deal.model.event.DealDeletedEvent;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
+import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 
 @Component
 public class DealDeletedEventListener extends AbstractEventListener<DealDeletedEvent> {
@@ -24,7 +24,7 @@ public class DealDeletedEventListener extends AbstractEventListener<DealDeletedE
     }
 
     @Override
-    protected void handleEvent(final DealDeletedEvent event) {
+    protected void handleConcreteEvent(final DealDeletedEvent event) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getCreatedDate());
         final Long managerId = event.getUserId();
 
