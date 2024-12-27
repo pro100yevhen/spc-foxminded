@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ua.foxminded.infrastructure.filter.Filter;
-import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
+import ua.foxminded.common.filter.Filter;
 import ua.foxminded.domain.deal.model.dto.DealDto;
 import ua.foxminded.domain.deal.model.entity.Deal;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
 import ua.foxminded.domain.deal.service.DealService;
+import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.infrastructure.util.JsonParser;
 
 import java.time.LocalDate;

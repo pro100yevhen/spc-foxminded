@@ -1,8 +1,9 @@
-package ua.foxminded.infrastructure.filter;
+package ua.foxminded.application.deal.filter;
 
 import org.springframework.stereotype.Component;
-import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
+import ua.foxminded.common.filter.Filter;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
+import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
+import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/manager-points")
-public class ManagerPointsRecourse {
+public class ManagerPointsResource {
 
     private final ManagerPointsService managerPointsService;
     private final TypeMapperFacade mapper;
-    private final Logger LOG = LoggerFactory.getLogger(ManagerPointsRecourse.class);
+    private final Logger LOG = LoggerFactory.getLogger(ManagerPointsResource.class);
 
-    public ManagerPointsRecourse(final ManagerPointsService managerPointsService, final TypeMapperFacade mapper) {
+    public ManagerPointsResource(final ManagerPointsService managerPointsService, final TypeMapperFacade mapper) {
         this.managerPointsService = managerPointsService;
         this.mapper = mapper;
     }

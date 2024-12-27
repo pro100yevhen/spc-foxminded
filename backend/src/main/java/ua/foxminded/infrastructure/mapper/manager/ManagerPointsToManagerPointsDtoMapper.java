@@ -1,11 +1,11 @@
-package ua.foxminded.infrastructure.mapper.manager;
+package ua.foxminded.application.manager.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.foxminded.domain.owner.repository.OwnerRepository;
+import ua.foxminded.common.repository.OwnerRepository;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.infrastructure.mapper.DataMapper;
