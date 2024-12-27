@@ -3,7 +3,7 @@ package ua.foxminded.application.manager.service;
 import org.springframework.stereotype.Service;
 import ua.foxminded.application.manager.controller.ManagerPointsResource;
 import ua.foxminded.common.model.dto.OwnerDto;
-import ua.foxminded.common.repository.OwnerRepository;
+import ua.foxminded.domain.owner.repository.OwnerRepository;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.service.ManagerPointsFrontendService;
 import ua.foxminded.infrastructure.mapper.TypeMapperFacade;

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.application.pipedriveapi.service.PipedriveApiClient;
 import ua.foxminded.common.event.EventPublisher;
 import ua.foxminded.common.model.entity.Owner;
-import ua.foxminded.common.repository.OwnerRepository;
+import ua.foxminded.domain.owner.repository.OwnerRepository;
 import ua.foxminded.domain.deal.model.entity.Deal;
 import ua.foxminded.domain.deal.model.event.DealDeletedEvent;
 import ua.foxminded.domain.deal.model.event.DealSavedEvent;

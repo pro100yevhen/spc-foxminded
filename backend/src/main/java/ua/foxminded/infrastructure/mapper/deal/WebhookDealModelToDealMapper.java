@@ -1,4 +1,4 @@
-package ua.foxminded.application.deal.mapper;
+package ua.foxminded.infrastructure.mapper.deal;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
