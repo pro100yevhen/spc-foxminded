@@ -4,10 +4,10 @@ import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.event.AbstractEventListener;
 import ua.foxminded.domain.activity.model.event.ActivityDeletedEvent;
-import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
-import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
+import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 
 @Component
 public class ActivityDeletedEventListener extends AbstractEventListener<ActivityDeletedEvent> {
@@ -24,7 +24,7 @@ public class ActivityDeletedEventListener extends AbstractEventListener<Activity
     }
 
     @Override
-    protected void handleEvent(final ActivityDeletedEvent event) {
+    protected void handleConcreteEvent(final ActivityDeletedEvent event) {
         final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getCreatedDate());
         final Long managerId = event.getUserId();
 

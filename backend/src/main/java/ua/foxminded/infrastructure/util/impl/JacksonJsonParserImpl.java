@@ -3,6 +3,7 @@ package ua.foxminded.infrastructure.util.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,9 @@ public class JacksonJsonParserImpl implements JsonParser {
     public JacksonJsonParserImpl(final ObjectMapper mapper) {
         this.mapper = mapper;
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // Ignore unknown properties
+
+        this.mapper.registerModule(new JavaTimeModule());
+        this.mapper.disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
     }
 

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ua.foxminded.common.filter.Filter;
-import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.domain.activity.model.dto.ActivityDto;
 import ua.foxminded.domain.activity.model.entity.Activity;
 import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
 import ua.foxminded.domain.activity.service.ActivityService;
+import ua.foxminded.infrastructure.mapper.TypeMapperFacade;
 import ua.foxminded.infrastructure.util.JsonParser;
 
 import java.time.LocalDate;
@@ -43,7 +43,7 @@ public class ActivityResource {
     @PostMapping
     public ResponseEntity<String> save(@RequestBody final String activity) {
         final WebhookActivityModel webhookEvent = jsonParser.parseJson(activity, WebhookActivityModel.class);
-        LOG.info("Parsed WebhookActivityModel: {}", webhookEvent.getEvent());
+        LOG.info("Parsed WebhookActivityModel: {}", webhookEvent.getData());
 
         if (activityFilter.apply(webhookEvent)) {
             LOG.info("Activity passed the filter criteria");
@@ -55,10 +55,10 @@ public class ActivityResource {
             LOG.info("Activity saved successfully");
         } else {
             LOG.info("Activity did not pass the filter criteria: PersonName={}, Done={}, UserId={}, BusyFlag={}",
-                    webhookEvent.getCurrent().getPersonName(),
-                    webhookEvent.getCurrent().isDone(),
-                    webhookEvent.getCurrent().getUserId(),
-                    webhookEvent.getCurrent().isBusyFlag());
+                    webhookEvent.getData().getPersonId(),
+                    webhookEvent.getData().isDone(),
+                    webhookEvent.getData().getOwnerId(),
+                    webhookEvent.getData().isBusyFlag());
         }
 
         // Return 200 OK regardless of whether the activity was saved or not

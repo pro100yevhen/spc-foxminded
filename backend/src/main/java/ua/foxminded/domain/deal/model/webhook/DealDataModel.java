@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class DealDetailsModel {
+public class DealDataModel {
 
     private Long id;
     private String title;
