@@ -42,7 +42,7 @@ class ActivitySavedEventListenerTest {
         ActivitySavedEvent event = new ActivitySavedEvent(1L); // Assuming event contains a manager ID of 1
         ManagerPointsConfiguration config = buildMockConfiguration();
 
-        when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);
+        when(managerPointsConfigurationServiceMock.getConfiguration(1L)).thenReturn(config);
         when(managerPointsServiceMock.findByManagerId(1L)).thenReturn(Collections.emptyList()); // No existing points
 
         // Act
@@ -70,7 +70,7 @@ class ActivitySavedEventListenerTest {
         existingManagerPoints.setManagerId(1L);
         existingManagerPoints.setActivitiesCount(5); // Manager has already completed 5 activities
 
-        when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);
+        when(managerPointsConfigurationServiceMock.getConfiguration(1L)).thenReturn(config);
         when(managerPointsServiceMock.findByManagerId(1L)).thenReturn(Collections.singletonList(existingManagerPoints));
 
         // Act
@@ -95,7 +95,7 @@ class ActivitySavedEventListenerTest {
         existingManagerPoints.setTestPeriodCount(1);
         existingManagerPoints.setBonuses(0);
 
-        when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);
+        when(managerPointsConfigurationServiceMock.getConfiguration(1L)).thenReturn(config);
         when(managerPointsServiceMock.findByManagerId(1L)).thenReturn(Collections.singletonList(existingManagerPoints));
 
         // Act

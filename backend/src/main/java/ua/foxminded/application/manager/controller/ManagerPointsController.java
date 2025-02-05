@@ -11,7 +11,6 @@ import ua.foxminded.domain.pointsconfiguration.model.entity.GlobalConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.GlobalConfigurationService;
 import ua.foxminded.domain.manager.model.dto.ManagerPointsDto;
 import ua.foxminded.domain.manager.service.ManagerPointsFrontendService;
-import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -25,14 +24,11 @@ public class ManagerPointsController {
 
     private final ManagerPointsFrontendService managerPointsService;
     private final GlobalConfigurationService configurationService;
-    private final ManagerPointsConfigurationService managerPointsConfigurationService;
 
     public ManagerPointsController(final ManagerPointsFrontendService managerPointsService,
-                                   final GlobalConfigurationService configurationService,
-                                   final ManagerPointsConfigurationService managerPointsConfigurationService) {
+                                   final GlobalConfigurationService configurationService) {
         this.managerPointsService = managerPointsService;
         this.configurationService = configurationService;
-        this.managerPointsConfigurationService = managerPointsConfigurationService;
     }
 
     @GetMapping

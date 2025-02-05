@@ -10,7 +10,10 @@ import java.util.List;
 @Repository
 public interface ManagerPointConfigurationRepository extends JpaRepository<ManagerPointsConfiguration, Long> {
 
-    List<ManagerPointsConfiguration> findByOwnerIdAndCreatedDateBetween(Long ownerId, LocalDateTime start, LocalDateTime end);
+    List<ManagerPointsConfiguration> findByOwnerIdAndCreatedDateBetween(Long ownerId, LocalDateTime start,
+                                                                        LocalDateTime end);
 
     ManagerPointsConfiguration findTopByOrderByCreatedDateDesc();
+
+    List<ManagerPointsConfiguration> findByOwnerId(Long ownerId);
 }

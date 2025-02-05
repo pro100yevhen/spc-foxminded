@@ -1,5 +1,9 @@
 package ua.foxminded.domain.pointsconfiguration.model.dto;
 
+import ua.foxminded.domain.pointsconfiguration.model.entity.GlobalConfiguration;
+
+import java.util.Objects;
+
 public class GlobalConfigurationDto {
 
     private Long id;
@@ -39,5 +43,17 @@ public class GlobalConfigurationDto {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        final GlobalConfiguration that = (GlobalConfiguration) o;
+        return Objects.equals(id, that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getClass());
+    }
 }

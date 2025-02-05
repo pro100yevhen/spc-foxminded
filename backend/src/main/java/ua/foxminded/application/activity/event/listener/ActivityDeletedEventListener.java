@@ -25,8 +25,7 @@ public class ActivityDeletedEventListener extends AbstractEventListener<Activity
 
     @Override
     protected void handleConcreteEvent(final ActivityDeletedEvent event) {
-        final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getUserId(),
-                event.getCreatedDate());
+        final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration(event.getUserId());
         final Long managerId = event.getUserId();
 
         // Fetch existing points or create a new entry

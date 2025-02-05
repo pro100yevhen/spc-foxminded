@@ -27,7 +27,7 @@ public class DealSavedEventListener extends AbstractEventListener<DealSavedEvent
 
     @Override
     protected void handleConcreteEvent(final DealSavedEvent event) {
-        final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration();
+        final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration(event.getUserId());
         final Long managerId = event.getUserId();
 
         // Fetch existing points or create a new entry
