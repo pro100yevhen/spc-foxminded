@@ -1,0 +1,1 @@
+ALTER TABLE manager_points_configuration DROP COLUMN allowed_user_ids, DROP COLUMN deal_stages_ids;
