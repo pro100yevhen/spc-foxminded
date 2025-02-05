@@ -27,7 +27,7 @@ public class ActivitySavedEventListener extends AbstractEventListener<ActivitySa
 
     @Override
     protected void handleConcreteEvent(final ActivitySavedEvent event) {
-        final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration();
+        final ManagerPointsConfiguration config = managerPointsConfigurationService.getConfiguration(event.getUserId());
         final Long managerId = event.getUserId();
 
         // Fetch existing points or create a new entry

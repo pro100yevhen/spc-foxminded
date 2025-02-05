@@ -31,6 +31,7 @@ class ManagerPointsConfigurationServiceImplTest {
 
     private static final LocalDateTime START_OF_DAY = LocalDate.now().atStartOfDay();
     private static final LocalDateTime END_OF_DAY = LocalDate.now().atTime(LocalTime.MAX);
+    private static final Long OWNER_ID = 1L;
 
     @Test
     public void shouldSaveManagerPointsConfiguration_whenSaveMethodCalled() {
@@ -50,74 +51,18 @@ class ManagerPointsConfigurationServiceImplTest {
     public void shouldReturnTodayConfiguration_whenExistsInRepository() {
         // Arrange
         ManagerPointsConfiguration todayConfig = new ManagerPointsConfiguration();
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY))
+        when(managerPointConfigurationRepositoryMock.findByOwnerIdAndCreatedDateBetween(OWNER_ID, START_OF_DAY,
+                END_OF_DAY))
                 .thenReturn(List.of(todayConfig));
 
         // Act
-        ManagerPointsConfiguration result = managerPointsConfigurationService.getConfiguration();
+        ManagerPointsConfiguration result = managerPointsConfigurationService.getConfiguration(OWNER_ID);
 
         // Assert
         assertNotNull(result);
         assertEquals(todayConfig, result);
-        verify(managerPointConfigurationRepositoryMock).findByCreatedDateBetween(START_OF_DAY, END_OF_DAY);
-    }
-
-    @Test
-    public void shouldReturnPreviousConfigurationAndSaveNew_whenNoTodayConfigExists() {
-        // Arrange
-        ManagerPointsConfiguration previousConfig = new ManagerPointsConfiguration();
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY))
-                .thenReturn(List.of());  // Return empty list instead of null
-        when(managerPointConfigurationRepositoryMock.findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(START_OF_DAY))
-                .thenReturn(previousConfig);
-        when(managerPointConfigurationRepositoryMock.save(any(ManagerPointsConfiguration.class)))
-                .thenReturn(previousConfig);
-
-        // Act
-        ManagerPointsConfiguration result = managerPointsConfigurationService.getConfiguration();
-
-        // Assert
-        assertNotNull(result);
-        verify(managerPointConfigurationRepositoryMock).findByCreatedDateBetween(START_OF_DAY, END_OF_DAY);
-        verify(managerPointConfigurationRepositoryMock).findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(START_OF_DAY);
-        verify(managerPointConfigurationRepositoryMock).save(any(ManagerPointsConfiguration.class));
-    }
-
-    @Test
-    public void shouldCopyConfigurationForToday_whenSavingNewConfig() {
-        // Arrange
-        ManagerPointsConfiguration previousConfig = new ManagerPointsConfiguration();
-        previousConfig.setAllowedUserIds("1,2,3");
-        previousConfig.setDealStagesIds("10,11");
-        previousConfig.setManagerPointsNormative(100);
-        previousConfig.setManagerPointsCallCoefficient(2);
-        previousConfig.setManagerPointsTestPeriodCoefficient(3);
-        previousConfig.setManagerPointsBonusUnder3(10);
-        previousConfig.setManagerPointsBonusEqual3(20);
-        previousConfig.setManagerPointsBonusOver4(30);
-
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(START_OF_DAY, END_OF_DAY))
-                .thenReturn(List.of());  // Empty list instead of null
-        when(managerPointConfigurationRepositoryMock.findTop1ByCreatedDateLessThanEqualOrderByCreatedDateDesc(START_OF_DAY))
-                .thenReturn(previousConfig);
-
-        ArgumentCaptor<ManagerPointsConfiguration> configCaptor = ArgumentCaptor.forClass(ManagerPointsConfiguration.class);
-
-        // Act
-        managerPointsConfigurationService.getConfiguration();
-
-        // Assert
-        verify(managerPointConfigurationRepositoryMock).save(configCaptor.capture());
-        ManagerPointsConfiguration savedConfig = configCaptor.getValue();
-
-        assertEquals(previousConfig.getAllowedUserIds(), savedConfig.getAllowedUserIds());
-        assertEquals(previousConfig.getDealStagesIds(), savedConfig.getDealStagesIds());
-        assertEquals(previousConfig.getManagerPointsNormative(), savedConfig.getManagerPointsNormative());
-        assertEquals(previousConfig.getManagerPointsCallCoefficient(), savedConfig.getManagerPointsCallCoefficient());
-        assertEquals(previousConfig.getManagerPointsTestPeriodCoefficient(), savedConfig.getManagerPointsTestPeriodCoefficient());
-        assertEquals(previousConfig.getManagerPointsBonusUnder3(), savedConfig.getManagerPointsBonusUnder3());
-        assertEquals(previousConfig.getManagerPointsBonusEqual3(), savedConfig.getManagerPointsBonusEqual3());
-        assertEquals(previousConfig.getManagerPointsBonusOver4(), savedConfig.getManagerPointsBonusOver4());
+        verify(managerPointConfigurationRepositoryMock).findByOwnerIdAndCreatedDateBetween(OWNER_ID, START_OF_DAY,
+                END_OF_DAY);
     }
 
     @Test
@@ -129,15 +74,17 @@ class ManagerPointsConfigurationServiceImplTest {
         LocalDateTime endOfTargetDay = targetDate.atTime(LocalTime.MAX);
 
         ManagerPointsConfiguration config = new ManagerPointsConfiguration();
-        when(managerPointConfigurationRepositoryMock.findByCreatedDateBetween(startOfTargetDay, endOfTargetDay))
+        when(managerPointConfigurationRepositoryMock.findByOwnerIdAndCreatedDateBetween(OWNER_ID, startOfTargetDay,
+                endOfTargetDay))
                 .thenReturn(List.of(config));
 
         // Act
-        ManagerPointsConfiguration result = managerPointsConfigurationService.findByDate(targetDateTime);
+        ManagerPointsConfiguration result = managerPointsConfigurationService.getConfiguration(OWNER_ID);
 
         // Assert
         assertNotNull(result);
         assertEquals(config, result);
-        verify(managerPointConfigurationRepositoryMock).findByCreatedDateBetween(startOfTargetDay, endOfTargetDay);
+        verify(managerPointConfigurationRepositoryMock).findByOwnerIdAndCreatedDateBetween(OWNER_ID, startOfTargetDay,
+                endOfTargetDay);
     }
 }

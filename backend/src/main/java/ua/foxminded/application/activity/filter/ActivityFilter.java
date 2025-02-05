@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import ua.foxminded.common.filter.Filter;
 import ua.foxminded.domain.activity.model.webhook.WebhookActivityModel;
 import ua.foxminded.domain.pointsconfiguration.service.GlobalConfigurationService;
-import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 
 import java.util.Set;
 import java.util.stream.Collectors;
