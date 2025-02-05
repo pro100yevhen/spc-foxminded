@@ -1,10 +1,11 @@
-package ua.foxminded.domain.pointsconfiguration.model;
+package ua.foxminded.domain.pointsconfiguration.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import ua.foxminded.common.model.entity.BaseEntity;
 
@@ -17,10 +18,8 @@ public class ManagerPointsConfiguration extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "allowed_user_ids")
-    private String allowedUserIds;
-    @Column(name = "deal_stages_ids")
-    private String dealStagesIds;
+    @JoinColumn(name = "owner_id", nullable = false)
+    private Long ownerId;
     @Column(name = "manager_points_normative")
     private int managerPointsNormative;
     @Column(name = "manager_points_call_coefficient")
@@ -42,28 +41,20 @@ public class ManagerPointsConfiguration extends BaseEntity {
         this.id = id;
     }
 
-    public String getAllowedUserIds() {
-        return allowedUserIds;
-    }
-
-    public void setAllowedUserIds(final String allowedUserIds) {
-        this.allowedUserIds = allowedUserIds;
-    }
-
-    public String getDealStagesIds() {
-        return dealStagesIds;
-    }
-
-    public void setDealStagesIds(final String dealStagesIds) {
-        this.dealStagesIds = dealStagesIds;
-    }
-
     public int getManagerPointsNormative() {
         return managerPointsNormative;
     }
 
     public void setManagerPointsNormative(final int managerPointsNormative) {
         this.managerPointsNormative = managerPointsNormative;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(final Long owner) {
+        this.ownerId = owner;
     }
 
     public int getManagerPointsCallCoefficient() {
@@ -124,8 +115,6 @@ public class ManagerPointsConfiguration extends BaseEntity {
     public String toString() {
         return "AppConfig{" +
                 "id=" + id +
-                ", allowedUserIds='" + allowedUserIds + '\'' +
-                ", dealStagesIds='" + dealStagesIds + '\'' +
                 ", managerPointsNormative=" + managerPointsNormative +
                 ", managerPointsCallCoefficient=" + managerPointsCallCoefficient +
                 ", managerPointsTestPeriodCoefficient=" + managerPointsTestPeriodCoefficient +

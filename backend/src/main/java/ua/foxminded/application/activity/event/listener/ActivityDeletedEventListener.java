@@ -4,7 +4,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.event.AbstractEventListener;
 import ua.foxminded.domain.activity.model.event.ActivityDeletedEvent;
-import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.entity.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;
@@ -25,11 +25,13 @@ public class ActivityDeletedEventListener extends AbstractEventListener<Activity
 
     @Override
     protected void handleConcreteEvent(final ActivityDeletedEvent event) {
-        final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getCreatedDate());
+        final ManagerPointsConfiguration config = managerPointsConfigurationService.findByDate(event.getUserId(),
+                event.getCreatedDate());
         final Long managerId = event.getUserId();
 
         // Fetch existing points or create a new entry
-        final ManagerPoints managerPoints = managerPointsService.findByManagerIdAndDate(managerId, event.getCreatedDate());
+        final ManagerPoints managerPoints = managerPointsService.findByManagerIdAndDate(managerId,
+                event.getCreatedDate());
 
         // Decrease the activities count
         managerPoints.setActivitiesCount(managerPoints.getActivitiesCount() - 1);
