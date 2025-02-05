@@ -6,8 +6,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ua.foxminded.domain.deal.model.webhook.DealDataModel;
-import ua.foxminded.domain.deal.model.webhook.DealDetailsModel;
-import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.entity.GlobalConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.entity.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.service.GlobalConfigurationService;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
 
@@ -27,7 +28,7 @@ public class DealFilterTest {
     private final static Long NOT_ALLOWED_STAGE_ID = 13L;
 
     @Mock
-    private ManagerPointsConfigurationService managerPointsConfigurationServiceMock;
+    private GlobalConfigurationService managerPointsConfigurationServiceMock;
 
     @InjectMocks
     private DealFilter dealFilter;
@@ -35,7 +36,7 @@ public class DealFilterTest {
     @Test
     public void shouldReturnFalse_whenStageIdNotAllowed() {
         // Arrange
-        ManagerPointsConfiguration config = new ManagerPointsConfiguration();
+        GlobalConfiguration config = new GlobalConfiguration();
         config.setAllowedUserIds(ALLOWED_USER_IDS);
         config.setDealStagesIds(ALLOWED_DEAL_STAGE_IDS);
         when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);
@@ -53,7 +54,7 @@ public class DealFilterTest {
     public void shouldReturnFalse_whenUserIdNotAllowed() {
         // Arrange
         final String notAllowedUserIds = "4,5,6";
-        ManagerPointsConfiguration config = new ManagerPointsConfiguration();
+        GlobalConfiguration config = new GlobalConfiguration();
         config.setAllowedUserIds(notAllowedUserIds);
         config.setDealStagesIds(ALLOWED_DEAL_STAGE_IDS);
         when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);
@@ -70,7 +71,7 @@ public class DealFilterTest {
     @Test
     public void shouldReturnFalse_whenStatusIsNotOpen() {
         // Arrange
-        ManagerPointsConfiguration config = new ManagerPointsConfiguration();
+        GlobalConfiguration config = new GlobalConfiguration();
         config.setAllowedUserIds(ALLOWED_USER_IDS);
         config.setDealStagesIds(ALLOWED_DEAL_STAGE_IDS);
         when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);
@@ -87,7 +88,7 @@ public class DealFilterTest {
     @Test
     public void shouldReturnTrue_whenAllConditionsMet() {
         // Arrange
-        ManagerPointsConfiguration config = new ManagerPointsConfiguration();
+        GlobalConfiguration config = new GlobalConfiguration();
         config.setAllowedUserIds(ALLOWED_USER_IDS);
         config.setDealStagesIds(ALLOWED_DEAL_STAGE_IDS);
         when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);
@@ -104,7 +105,7 @@ public class DealFilterTest {
     @Test
     public void shouldParseIdsCorrectly_whenIdsStringContainsSpaces() {
         // Arrange
-        ManagerPointsConfiguration config = new ManagerPointsConfiguration();
+        GlobalConfiguration config = new GlobalConfiguration();
         config.setAllowedUserIds(ALLOWED_USER_IDS);
         config.setDealStagesIds(ALLOWED_DEAL_STAGE_IDS);
         when(managerPointsConfigurationServiceMock.getConfiguration()).thenReturn(config);

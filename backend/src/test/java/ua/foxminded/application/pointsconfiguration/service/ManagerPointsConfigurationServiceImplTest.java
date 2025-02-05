@@ -6,7 +6,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.entity.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.repository.ManagerPointConfigurationRepository;
 
 import java.time.LocalDate;

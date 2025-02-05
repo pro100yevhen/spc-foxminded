@@ -2,6 +2,7 @@ package ua.foxminded.application.deal.filter;
 
 import org.springframework.stereotype.Component;
 import ua.foxminded.common.filter.Filter;
+import ua.foxminded.domain.pointsconfiguration.service.GlobalConfigurationService;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.deal.model.webhook.WebhookDealModel;
 
@@ -12,17 +13,17 @@ import java.util.stream.Stream;
 @Component
 public class DealFilter implements Filter<WebhookDealModel> {
 
-    private final ManagerPointsConfigurationService managerPointsConfigurationService;
+    private final GlobalConfigurationService service;
     private final String status = "open";
 
-    public DealFilter(final ManagerPointsConfigurationService managerPointsConfigurationService) {
-        this.managerPointsConfigurationService = managerPointsConfigurationService;
+    public DealFilter(final GlobalConfigurationService service) {
+        this.service = service;
     }
 
     @Override
     public boolean apply(final WebhookDealModel eventModel) {
-        final Set<Long> allowedUserIds = parseIds(managerPointsConfigurationService.getConfiguration().getAllowedUserIds());
-        final Set<Long> allowedDealStages = parseIds(managerPointsConfigurationService.getConfiguration().getDealStagesIds());
+        final Set<Long> allowedUserIds = parseIds(service.getConfiguration().getAllowedUserIds());
+        final Set<Long> allowedDealStages = parseIds(service.getConfiguration().getDealStagesIds());
 
         return allowedDealStages.contains(eventModel.getData().getStageId()) &&
                 allowedUserIds.contains(eventModel.getData().getOwnerId()) &&

@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ua.foxminded.domain.activity.model.event.ActivitySavedEvent;
-import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.entity.ManagerPointsConfiguration;
 import ua.foxminded.domain.pointsconfiguration.service.ManagerPointsConfigurationService;
 import ua.foxminded.domain.manager.model.entity.ManagerPoints;
 import ua.foxminded.domain.manager.service.ManagerPointsService;

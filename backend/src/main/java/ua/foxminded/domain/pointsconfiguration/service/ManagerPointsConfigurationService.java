@@ -1,6 +1,6 @@
 package ua.foxminded.domain.pointsconfiguration.service;
 
-import ua.foxminded.domain.pointsconfiguration.model.ManagerPointsConfiguration;
+import ua.foxminded.domain.pointsconfiguration.model.entity.ManagerPointsConfiguration;
 
 import java.time.LocalDateTime;
 
@@ -8,7 +8,7 @@ public interface ManagerPointsConfigurationService {
 
     ManagerPointsConfiguration save(ManagerPointsConfiguration managerPointsConfiguration);
 
-    ManagerPointsConfiguration getConfiguration();
+    ManagerPointsConfiguration getConfiguration(Long ownerId);
 
-    ManagerPointsConfiguration findByDate(LocalDateTime dateTime);
+    ManagerPointsConfiguration findByDate(Long ownerId, LocalDateTime dateTime);
 }
