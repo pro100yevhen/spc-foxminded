@@ -38,7 +38,7 @@ services:
       - PIPEDRIVE_TOKEN=${PIPEDRIVE_TOKEN}
     volumes:
       - /home/docker/spc/app:/app
-    command: ['java', '-jar', '/app/backend.jar']
+    command: ['java', '-jar', '/app/sales-points-counter.jar']
     depends_on:
       - db
 
