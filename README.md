@@ -10,7 +10,7 @@ This application is designed for **FoxmindEd IT school** to **calculate sales ma
 ### Webhooks Setup
 The application now uses **Pipedrive webhook v2** for activity tracking. You can read more about webhook v2 here: [Pipedrive Webhook v2 Guide](https://pipedrive.readme.io/docs/guide-for-webhooks-v2).
 
-To get started, you need to create the following webhooks in the **Pipedrive CRM** system (URL: [Foxminded Pipedrive](https://foxminded.pipedrive.com/)):
+To get started, you need to create the following webhooks in the **Pipedrive CRM** system (URL: [YourURL Pipedrive](https://yoururl.pipedrive.com/)):
 
 1. **For updated activities:**
     - **Event action:** `changed`
@@ -39,9 +39,7 @@ This application was created for **FoxmindEd IT school** to calculate **daily ac
 
 ## Pipedrive API Token Setup
 
-The application now requires the **PIPEDRIVE_TOKEN** for accessing Pipedrive data. You can retrieve this token from your **Personal Preferences** page on the Pipedrive settings: [Pipedrive API Settings](https://foxminded.pipedrive.com/settings/api).
-
-In case you need the token updated on the server, please reach out to **Mykola Shornik**.
+The application now requires the **PIPEDRIVE_TOKEN** for accessing Pipedrive data. You can retrieve this token from your **Personal Preferences** page on the Pipedrive settings: [Pipedrive API Settings](https://yourURL.pipedrive.com/settings/api).
 
 ---
 
@@ -154,14 +152,6 @@ int intensity = activitiesCount * config.getManagerPointsCallCoefficient() +
 ```
 
 Here, the intensity of activity is calculated based on calls, test period activities, and any applicable bonuses.
-
----
-
-## Support Contacts
-
-For any questions or further assistance:
-- **Ivan Shvirid** (FoxmindEd Sales department)
-- **Mykola Shornik** (FoxmindEd IT department)
 
 ---
 
