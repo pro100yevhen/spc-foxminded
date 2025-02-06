@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{fragments/header :: header(title='Manager Configuration', activePage='config')}"></th:block>
+<body>
+<div class="container mt-5">
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="card border-gray">
+        <div class="card-header bg-light border-bottom-gray">
+            <h4 class="mb-0 text-dark">
+                Configuration for Manager ID: <span th:text="${ownerId}" class="fw-normal"></span>
+            </h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/managers/{ownerId}/config(ownerId=${ownerId})}"
+                  th:object="${config}"
+                  method="post">
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="text-secondary">Points Normative</label>
+                            <input type="number" th:field="*{managerPointsNormative}" class="form-control border-gray"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="text-secondary">Call Coefficient</label>
+                            <input type="number" th:field="*{managerPointsCallCoefficient}" class="form-control border-gray"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="text-secondary">Test Period Coefficient</label>
+                            <input type="number" th:field="*{managerPointsTestPeriodCoefficient}" class="form-control border-gray"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="text-secondary">Bonus &lt; 3</label>
+                            <input type="number" th:field="*{managerPointsBonusUnder3}" class="form-control border-gray"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="text-secondary">Bonus = 3</label>
+                            <input type="number" th:field="*{managerPointsBonusEqual3}" class="form-control border-gray"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="text-secondary">Bonus &gt; 4</label>
+                            <input type="number" th:field="*{managerPointsBonusOver4}" class="form-control border-gray"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-outline-dark">Save Settings</button>
+                    <a href="/config" class="btn btn-link text-secondary">Back to Global Config</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</body>
+</html>
