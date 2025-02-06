@@ -17,33 +17,33 @@ import java.util.stream.Collectors;
 @Service
 public class ManagerPointsFrontendServiceImpl implements ManagerPointsFrontendService {
 
-    private final ManagerPointsResource recourse;
+    private final ManagerPointsResource resource;
     private final OwnerRepository ownerRepository;
     private final TypeMapperFacade typeMapperFacade;
 
-    public ManagerPointsFrontendServiceImpl(final ManagerPointsResource recourse, final OwnerRepository ownerRepository,
+    public ManagerPointsFrontendServiceImpl(final ManagerPointsResource resource, final OwnerRepository ownerRepository,
                                             final TypeMapperFacade typeMapperFacade) {
-        this.recourse = recourse;
+        this.resource = resource;
         this.ownerRepository = ownerRepository;
         this.typeMapperFacade = typeMapperFacade;
     }
 
     @Override
     public List<ManagerPointsDto> findAllForToday() {
-        final List<ManagerPointsDto> points = recourse.getPointsForToday().getBody();
+        final List<ManagerPointsDto> points = resource.getPointsForToday().getBody();
         return setProgress(points);
     }
 
     @Override
     public List<ManagerPointsDto> getPointsByPeriod(final LocalDate startDate, final LocalDate endDate) {
-        final List<ManagerPointsDto> points = recourse.getAllPointsByPeriod(startDate, endDate).getBody();
+        final List<ManagerPointsDto> points = resource.getAllPointsByPeriod(startDate, endDate).getBody();
         return setProgress(points);
     }
 
     @Override
     public List<ManagerPointsDto> getPointsByManagerAndPeriod(final Long managerId, final LocalDate startDate,
                                                               final LocalDate endDate) {
-        final List<ManagerPointsDto> points = recourse.getPointsByManagerIdAndPeriod(managerId, startDate, endDate).getBody();
+        final List<ManagerPointsDto> points = resource.getPointsByManagerIdAndPeriod(managerId, startDate, endDate).getBody();
         return setProgress(points);
     }
 
@@ -62,7 +62,7 @@ public class ManagerPointsFrontendServiceImpl implements ManagerPointsFrontendSe
     }
 
     private List<ManagerPointsDto> fetchAndSetProgress(final LocalDate startDate, final LocalDate endDate) {
-        final List<ManagerPointsDto> points = recourse.getAllPointsByPeriod(startDate, endDate).getBody();
+        final List<ManagerPointsDto> points = resource.getAllPointsByPeriod(startDate, endDate).getBody();
         return setProgress(points);
     }
 
