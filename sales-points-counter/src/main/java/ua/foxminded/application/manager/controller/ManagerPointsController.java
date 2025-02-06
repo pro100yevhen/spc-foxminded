@@ -105,7 +105,12 @@ public class ManagerPointsController {
 
         final List<ManagerPointsDto> averageProgress = managerPointsService.getAverageProgressPerMonth(startDate,
                 endDate);
-        final List<OwnerDto> managers = managerPointsService.getAllManagers();
+
+        final List<OwnerDto> managers = managerPointsService.getAllManagers()
+                .stream()
+                .filter(manager -> averageProgress.stream()
+                        .anyMatch(progress -> progress.getManagerId().equals(manager.getId())))
+                .toList();
 
         model.addAttribute("averageProgress", averageProgress);
         model.addAttribute("managers", managers);
