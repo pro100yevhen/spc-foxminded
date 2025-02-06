@@ -8,7 +8,7 @@
     <div class="card-body">
       <h5 class="card-title text-center">Average Progress for <span th:text="${month}"></span></h5>
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table">
           <thead>
           <tr class="text-center">
             <th>Manager Name</th>
@@ -29,18 +29,25 @@
   </div>
 
   <!-- Buttons for Selecting Managers for Detailed View -->
+  <!-- Updated Buttons for Selecting Managers for Detailed View -->
   <div class="card mb-3">
     <div class="card-body">
       <h5 class="card-title">View Detailed Data by Manager</h5>
-      <div class="d-flex flex-wrap">
-        <div th:each="manager : ${managers}">
-          <a th:href="'/manager-period?managerId=' + ${manager.id} + '&startDate=' + ${month.atDay(1)} + '&endDate=' + ${month.atEndOfMonth()}"
-             class="btn btn-secondary mb-2 mr-2" th:text="${manager.name}"></a>
+      <div class="row g-3">
+        <div class="col-md-3" th:each="manager : ${managers}">
+          <div class="card border-gray h-100">
+            <div class="card-body text-center">
+              <h6 th:text="${manager.name}" class="card-title text-dark mb-3"></h6>
+              <a th:href="'/manager-period?managerId=' + ${manager.id} + '&startDate=' + ${month.atDay(1)} + '&endDate=' + ${month.atEndOfMonth()}"
+                 class="btn btn-outline-secondary btn-sm">
+                View Details
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 <th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>
