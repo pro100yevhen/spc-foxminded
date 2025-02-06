@@ -35,7 +35,7 @@ public class ManagerPointsFrontendServiceImplTest {
     private static final List<OwnerDto> EXPECTED_MANAGERS_DTO = Collections.singletonList(new OwnerDto());
 
     @Mock
-    private ManagerPointsResource recourse;
+    private ManagerPointsResource resource;
 
     @Mock
     private OwnerRepository ownerRepository;
@@ -50,42 +50,42 @@ public class ManagerPointsFrontendServiceImplTest {
     public void shouldFindAllForToday_whenPointsExist() {
         // Arrange
         ResponseEntity<List<ManagerPointsDto>> responseEntity = ResponseEntity.of(Optional.of(MANAGER_POINTS_LIST));
-        when(recourse.getPointsForToday()).thenReturn(responseEntity);
+        when(resource.getPointsForToday()).thenReturn(responseEntity);
 
         // Act
         List<ManagerPointsDto> result = managerPointsFrontendService.findAllForToday();
 
         // Assert
         assertEquals(MANAGER_POINTS_LIST, result);
-        verify(recourse).getPointsForToday();
+        verify(resource).getPointsForToday();
     }
 
     @Test
     public void shouldGetPointsByPeriod_whenPointsExist() {
         // Arrange
         ResponseEntity<List<ManagerPointsDto>> responseEntity = ResponseEntity.of(Optional.of(MANAGER_POINTS_LIST));
-        when(recourse.getAllPointsByPeriod(START_DATE, END_DATE)).thenReturn(responseEntity);
+        when(resource.getAllPointsByPeriod(START_DATE, END_DATE)).thenReturn(responseEntity);
 
         // Act
         List<ManagerPointsDto> result = managerPointsFrontendService.getPointsByPeriod(START_DATE, END_DATE);
 
         // Assert
         assertEquals(MANAGER_POINTS_LIST, result);
-        verify(recourse).getAllPointsByPeriod(START_DATE, END_DATE);
+        verify(resource).getAllPointsByPeriod(START_DATE, END_DATE);
     }
 
     @Test
     public void shouldGetPointsByManagerAndPeriod_whenPointsExist() {
         // Arrange
         ResponseEntity<List<ManagerPointsDto>> responseEntity = ResponseEntity.of(Optional.of(MANAGER_POINTS_LIST));
-        when(recourse.getPointsByManagerIdAndPeriod(MANAGER_ID, START_DATE, END_DATE)).thenReturn(responseEntity);
+        when(resource.getPointsByManagerIdAndPeriod(MANAGER_ID, START_DATE, END_DATE)).thenReturn(responseEntity);
 
         // Act
         List<ManagerPointsDto> result = managerPointsFrontendService.getPointsByManagerAndPeriod(MANAGER_ID, START_DATE, END_DATE);
 
         // Assert
         assertEquals(MANAGER_POINTS_LIST, result);
-        verify(recourse).getPointsByManagerIdAndPeriod(MANAGER_ID, START_DATE, END_DATE);
+        verify(resource).getPointsByManagerIdAndPeriod(MANAGER_ID, START_DATE, END_DATE);
     }
 
     @Test
